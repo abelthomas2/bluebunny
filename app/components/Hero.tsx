@@ -27,7 +27,7 @@ export default function Hero() {
           <p className="text-sm md:text-lg !text-[#F5F0DF] font-mono mb-3 border-1 border-[#F5F0DF] rounded-lg px-4 py-2 inline-block bg-white/10 backdrop-blur-md">
             LICENSED + INSURED + VETTED
           </p>
-          <p className="text-xl md:text-3xl !text-[#F5F0DF] font-mono mb-10 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl !text-[#F5F0DF] font-mono mb-10 max-w-3xl mx-auto">
             Your hassle-free solution for perfectly timed Airbnb turnovers.
           </p>
           

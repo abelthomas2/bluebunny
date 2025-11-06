@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -14,14 +14,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Blue Bunny Rental Cleaners | Professional Airbnb & STR Cleaning",
-  description: "Professional cleaning services specializing in Airbnb and short-term rental turnovers. Fast, reliable, and thorough cleaning to keep your guests happy.",
+  description:
+    "Professional cleaning services specializing in Airbnb and short-term rental turnovers. Fast, reliable, and thorough cleaning to keep your guests happy.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
   themeColor: "#5DAFD5",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    viewportFit: "cover",
-  },
 };
 
 export default function RootLayout({

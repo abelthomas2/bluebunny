@@ -21,7 +21,7 @@ export default function Hero() {
       {/* Content Container */}
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4 pt-35 pb-24 md:py-24">
         <div className="text-center md:-mt-[0px]">
-          <h1 className="text-5xl md:text-7xl font-bold !text-[#F5F0DF] mb-4">
+          <h1 className="text-5xl md:text-7xl font-semibold !text-[#F5F0DF] mb-4">
             Orlando's <span className="!text-[#5DAFD5]">#1</span><br />STR Turnover Service
           </h1>
           <p className="text-sm md:text-lg !text-[#F5F0DF] font-mono mb-3 border-1 border-[#F5F0DF] rounded-lg px-4 py-2 inline-block bg-white/10 backdrop-blur-md">

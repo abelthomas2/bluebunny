@@ -22,7 +22,7 @@ const screeningSteps = [
   {
     step: 'Step 1',
     title: 'Online Application',
-    blurb: 'Cleaners submit applications covering STR experience and hospitality background.',
+    blurb: 'Cleaners submit applications covering hospitality background and STR experience.',
   },
   {
     step: 'Step 2',

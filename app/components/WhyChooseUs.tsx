@@ -57,7 +57,7 @@ export default function WhyChooseUs() {
           <p className="text-base md:text-lg font-mono uppercase tracking-[0.3em] text-[#2978A5]">
             WHY CHOOSE US
           </p>
-          <h2 className="text-4xl md:text-6xl font-bold text-[#0C1014]">
+          <h2 className="text-4xl md:text-6xl font-semibold text-[#0C1014]">
             Turnovers that run themselves
           </h2>
           <p className="text-lg md:text-xl font-mono text-[#0C1014]/80 max-w-3xl mx-auto">

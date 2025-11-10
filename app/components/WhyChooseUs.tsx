@@ -58,7 +58,7 @@ export default function WhyChooseUs() {
             WHY CHOOSE US
           </p>
           <h2 className="text-4xl md:text-6xl font-semibold text-[#0C1014]">
-            Turnovers that run themselves
+            Turnovers on autopilot
           </h2>
           <p className="text-lg md:text-xl font-mono text-[#0C1014]/80 max-w-3xl mx-auto">
             From calendar syncing to instant reporting, we handle every detail so you can scale your portfolio without micromanaging cleaners.

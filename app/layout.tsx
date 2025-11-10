@@ -17,12 +17,9 @@ export const metadata: Metadata = {
   description:
     "Professional cleaning services specializing in Airbnb and short-term rental turnovers. Fast, reliable, and thorough cleaning to keep your guests happy.",
   icons: {
-    icon: {
-      url: "/favicon.png",
-      type: "image/png",
-    },
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 };
 

@@ -28,7 +28,7 @@ export default function Contact() {
             >
               904-930-7504
             </a>
-            <p className="text-sm md:text-base font-mono text-[#0C1014]">
+            <p className="text-base md:text-base font-mono text-[#0C1014]">
               Daily support from 8am to 8pm ET.
             </p>
           </div>
@@ -42,7 +42,7 @@ export default function Contact() {
             >
               hello@gobluebunny.com
             </a>
-            <p className="text-sm md:text-base font-mono text-[#0C1014]">
+            <p className="text-base md:text-base font-mono text-[#0C1014]">
               Same-day response from our STR specialists.
             </p>
           </div>

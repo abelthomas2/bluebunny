@@ -53,6 +53,7 @@ export default function Navbar() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 rounded-lg hover:bg-[#2978A5]/20 transition-colors"
             aria-label="Toggle menu"
+            data-modal-ignore-close
           >
             <div className="w-6 h-5 flex flex-col justify-between">
               <span

@@ -8,6 +8,13 @@
   --cerulean: #2978A5;
   --cadet-gray: #90A4AE;
   --rich-black: #0C1014;
+  --navbar-height: 4rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --navbar-height: 5rem;
+  }
 }
 
 @theme inline {

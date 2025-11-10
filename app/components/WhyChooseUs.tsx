@@ -75,7 +75,7 @@ export default function WhyChooseUs() {
                 <h3 className="text-2xl font-semibold text-[#0C1014]">
                   {item.title}
                 </h3>
-                <p className="text-sm md:text-base font-mono text-[#0C1014]/80 leading-relaxed">
+                <p className="text-base md:text-base font-mono text-[#0C1014]/80 leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -99,7 +99,7 @@ export default function WhyChooseUs() {
               Our 5-step cleaner screening process
             </h3>
             <p className="text-base md:text-lg font-mono text-[#0C1014]/80 max-w-3xl mx-auto">
-              Every cleaner clears five checkpoints before we trust them with your properties. It's how we maintain consistency—even when you're not there.
+              Every cleaner clears five checkpoints before we trust them with your properties. It's how we maintain consistency — even when you're not there.
             </p>
           </div>
 
@@ -119,7 +119,7 @@ export default function WhyChooseUs() {
                   <h4 className="text-xl md:text-l font-semibold text-[#0C1014] md:leading-tight md:whitespace-nowrap">
                     {step.title}
                   </h4>
-                  <p className="text-sm md:text-base font-mono text-[#0C1014]/80 leading-relaxed md:text-pretty">
+                  <p className="text-base md:text-base font-mono text-[#0C1014]/80 leading-relaxed md:text-pretty">
                     {step.blurb}
                   </p>
                 </div>
@@ -151,7 +151,7 @@ export default function WhyChooseUs() {
                   <h4 className="text-lg font-semibold text-[#0C1014]">
                     {step.title}
                   </h4>
-                  <p className="text-sm md:text-base font-mono text-[#0C1014]/80 leading-relaxed md:text-pretty">
+                  <p className="text-base md:text-base font-mono text-[#0C1014]/80 leading-relaxed md:text-pretty">
                     {step.blurb}
                   </p>
                 </div>
@@ -166,7 +166,7 @@ export default function WhyChooseUs() {
             <h4 className="mt-2 text-2xl font-semibold text-[#0C1014]">
               Only 2% of applicants make it through all five steps.
             </h4>
-            <p className="mt-3 text-sm md:text-base font-mono text-[#0C1014]/80">
+            <p className="mt-3 text-base md:text-base font-mono text-[#0C1014]/80">
               Those are the cleaners we trust with your turnovers, your guests, and your brand.
             </p>
           </div>

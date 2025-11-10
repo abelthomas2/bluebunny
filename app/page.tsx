@@ -1,8 +1,8 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import { Analytics } from "@vercel/analytics/next"; 
 import WhyChooseUs from './components/WhyChooseUs';
 import Contact from './components/Contact';
-import { Analytics } from "@vercel/analytics/next"
 
 export default function Home() {
   return (

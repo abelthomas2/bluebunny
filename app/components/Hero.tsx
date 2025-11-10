@@ -346,14 +346,11 @@ export default function Hero() {
         modalContent &&
         createPortal(
           <div
-            className="fixed left-0 right-0 bottom-0 z-40 flex min-h-screen min-h-[100dvh] items-center justify-center bg-black/70 px-4 pb-[calc(env(safe-area-inset-bottom,0px)+1rem)]"
-            style={{
-              top: 'calc(var(--navbar-height, 4rem) + env(safe-area-inset-top, 0px))',
-            }}
+            className="fixed inset-0 z-40 flex min-h-screen min-h-[100dvh] items-center justify-center bg-black/70 px-4 pt-[calc(env(safe-area-inset-top,0px)+1rem)] pb-[calc(env(safe-area-inset-bottom,0px)+1rem)]"
             role="dialog"
             aria-modal="true"
           >
-            <div className="w-full max-w-md rounded-lg bg-[#F5F0DF] p-6 text-center shadow-xl border border-[#5DAFD5] md:mx-0 mx-8">
+            <div className="w-full max-w-none rounded-lg bg-[#F5F0DF] p-6 text-center shadow-xl border border-[#5DAFD5] transform -translate-y-5 md:-translate-y-0 mx-4 md:mx-0 md:max-w-md">
               <h3 className="text-2xl font-semibold text-[#0C1014]">
                 {modalContent.title}
               </h3>

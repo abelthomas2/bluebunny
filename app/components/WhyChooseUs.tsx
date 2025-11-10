@@ -14,7 +14,7 @@ const highlightItems = [
   {
     title: 'Dedicated STR Specialists',
     description: "Our vacation-rental-only crew is trained on staging and guest-ready standards to keep every property consistently five-star.",
-    image: '/5p.png',
+    image: '/keurig.jpg',
   },
 ];
 
@@ -50,7 +50,7 @@ export default function WhyChooseUs() {
   return (
     <section
       id="why-choose-us"
-      className="bg-[#F5F0DF] py-20 px-4 scroll-mt-16 md:scroll-mt-20"
+      className="bg-[#F5F0DF] pt-15 md:pt-20 pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
     >
       <div className="max-w-6xl mx-auto space-y-16">
         <header className="text-center space-y-4">
@@ -65,7 +65,7 @@ export default function WhyChooseUs() {
           </p>
         </header>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-4 md:gap-6 md:grid-cols-3 -mt-6 md:mt-0">
           {highlightItems.map((item) => (
             <article
               key={item.title}
@@ -93,7 +93,7 @@ export default function WhyChooseUs() {
           ))}
         </div>
 
-        <div className="rounded-3xl border border-[#5DAFD5] bg-white/60 px-6 py-10 md:px-12 md:py-14">
+        <div className="rounded-3xl border border-[#5DAFD5] bg-white/60 px-6 py-10 md:px-12 md:py-14 -mt-6 md:mt-0">
           <div className="text-center space-y-4">
             <h3 className="text-3xl md:text-4xl font-semibold text-[#0C1014]">
               Our 5-step cleaner screening process

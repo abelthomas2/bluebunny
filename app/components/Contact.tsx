@@ -13,9 +13,7 @@ export default function Contact() {
             Talk with the Blue Bunny team
           </h2>
           <p className="text-lg md:text-xl font-mono text-[#0C1014]">
-            Share your turnover schedule and we will line up an on-brand clean
-            for every guest arrival. Reach out with the channel that works best
-            for you.
+            Feel free to reach out through phone or email and share your turnover schedule. Questions and concerns are welcome as well.
           </p>
         </div>
 
@@ -26,9 +24,9 @@ export default function Contact() {
             </p>
             <a
               href="tel:9049307504"
-              className="text-2xl font-semibold text-[#0C1014] hover:text-[#5DAFD5] transition-colors"
+              className="text-xl font-semibold text-[#0C1014] hover:text-[#5DAFD5] transition-colors"
             >
-              (904) 930-7504
+              904-930-7504
             </a>
             <p className="text-sm md:text-base font-mono text-[#0C1014]">
               Daily support from 8am to 8pm ET.
@@ -40,7 +38,7 @@ export default function Contact() {
             </p>
             <a
               href="mailto:hello@gobluebunny.com"
-              className="text-2xl font-semibold text-[#0C1014] hover:text-[#2978A5] transition-colors break-words"
+              className="text-xl md:text-2xl font-semibold text-[#0C1014] hover:text-[#2978A5] transition-colors break-words"
             >
               hello@gobluebunny.com
             </a>

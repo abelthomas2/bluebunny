@@ -27,7 +27,7 @@ export default function Hero() {
           <p className="text-sm md:text-lg !text-[#F5F0DF] font-mono mb-3 border-1 border-[#F5F0DF] rounded-lg px-4 py-2 inline-block bg-white/10 backdrop-blur-md">
             LICENSED + INSURED + VETTED
           </p>
-          <p className="text-xl md:text-2xl !text-[#F5F0DF] font-mono mb-10 max-w-3xl mx-auto">
+          <p className="text-lg md:text-2xl !text-[#F5F0DF] font-mono mb-10 max-w-3xl mx-auto">
             Your hassle-free solution for perfectly timed Airbnb turnovers.
           </p>
           
@@ -38,15 +38,15 @@ export default function Hero() {
                 <input
                   type="text"
                   placeholder="Zip Code"
-                  className="md:col-span-1 px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m w-full focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
+                  className="md:col-span-1 px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
                 />
-                <select className="md:col-span-1 px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m w-full appearance-none bg-[#F5F0DF] bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%230C1014' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E\")"}}>
+                <select className="md:col-span-1 px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full appearance-none bg-[#F5F0DF] bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%230C1014' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E\")"}}>
                   <option>1 bedroom</option>
                   <option>2 bedrooms</option>
                   <option>3 bedrooms</option>
                   <option>4+ bedrooms</option>
                 </select>
-                <select className="md:col-span-1 px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m w-full appearance-none bg-[#F5F0DF] bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%230C1014' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E\")"}}>
+                <select className="md:col-span-1 px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full appearance-none bg-[#F5F0DF] bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%230C1014' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E\")"}}>
                   <option>1 bathroom</option>
                   <option>2 bathrooms</option>
                   <option>3 bathrooms</option>

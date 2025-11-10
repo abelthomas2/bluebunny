@@ -11,6 +11,7 @@ export default function Home() {
       <Hero />
       <WhyChooseUs />
       <Contact />
+      <Analytics />
     </div>
   );
 }

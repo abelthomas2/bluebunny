@@ -9,7 +9,7 @@ export default function Contact() {
           <p className="text-base md:text-lg font-mono uppercase tracking-[0.35em] text-[#2978A5]">
             CONTACT
           </p>
-          <h2 className="text-4xl md:text-6xl font-semibold text-[#0C1014]">
+          <h2 className="text-4xl md:text-5xl font-semibold text-[#0C1014]">
             Talk with the Blue Bunny team
           </h2>
           <p className="text-base md:text-xl font-mono text-[#0C1014]">
@@ -23,10 +23,10 @@ export default function Contact() {
               Call or text
             </p>
             <a
-              href="tel:9049307504"
+              href="tel:6465049590"
               className="text-xl font-semibold text-[#0C1014] hover:text-[#5DAFD5] transition-colors"
             >
-              904-930-7504
+              646-504-9590
             </a>
             <p className="text-base md:text-base font-mono text-[#0C1014]">
               Daily support from 8am to 8pm ET.

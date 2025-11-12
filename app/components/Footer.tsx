@@ -40,8 +40,8 @@ export default function Footer() {
             <p className="font-mono text-xs uppercase tracking-[0.35em] text-[#5DAFD5]">
               SAY HELLO
             </p>
-            <a href="tel:9049307504" className="transition hover:text-[#5DAFD5]">
-              904-930-7504
+            <a href="tel:6465049590" className="transition hover:text-[#5DAFD5]">
+              646-504-9590
             </a>
             <a href="mailto:hello@gobluebunny.com" className="transition hover:text-[#5DAFD5]">
               hello@gobluebunny.com

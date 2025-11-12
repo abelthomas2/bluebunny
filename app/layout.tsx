@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from 'next/script'
@@ -68,7 +69,9 @@ export default function RootLayout({
         </noscript>
 
         {/* Track route changes */}
-        <FbPixelListener />
+        <Suspense fallback={null}>
+          <FbPixelListener />
+        </Suspense>
 
         {children}
       </body>

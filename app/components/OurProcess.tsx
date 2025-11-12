@@ -141,7 +141,7 @@ export default function OurProcess() {
                           <p className="font-mono text-xs md:text-sm uppercase tracking-[0.4em] text-[#2978A5]/80">
                             {step.step}
                           </p>
-                          <h4 className="text-2xl md:text-3xl font-semibold text-[#0C1014] leading-tight">
+                          <h4 className="text-2xl md:text-2xl font-semibold text-[#0C1014] leading-tight">
                             {step.title}
                           </h4>
                         </div>

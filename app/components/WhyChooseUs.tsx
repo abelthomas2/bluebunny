@@ -3,7 +3,7 @@ import Image from 'next/image';
 const highlightItems = [
   {
     title: 'Hands-Off Turnovers',
-    description: "Calendar sync, smart checklists, and stocked supplies ensure every turnover happens seamlessly—without you lifting a finger.",
+    description: "Calendar sync, smart checklists, and supply tracking ensure every turnover happens seamlessly — without you lifting a finger.",
     image: '/4p.png',
   },
   {
@@ -27,12 +27,12 @@ const screeningSteps = [
   {
     step: 'Step 2',
     title: 'Phone Screen',
-    blurb: 'We assess communication, reliability, and judgment through a structured call tailored to STR work.',
+    blurb: 'We conduct a structured call tailored to STR work.',
   },
   {
     step: 'Step 3',
     title: 'Video Interview',
-    blurb: 'Candidates walk us through real cleaning scenarios while we evaluate professionalism, attention to detail, and demeanor.',
+    blurb: 'Candidates walk us through real cleaning scenarios while we evaluate professionalism and attention to detail.',
   },
   {
     step: 'Step 4',
@@ -50,50 +50,51 @@ export default function WhyChooseUs() {
   return (
     <section
       id="why-choose-us"
-      className="bg-[#F5F0DF] pt-15 md:pt-20 pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
+      className="bg-[#F5F0DF] pt-15 md:pt-20 pb-15 md:pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
     >
       <div className="max-w-6xl mx-auto space-y-16">
         <header className="text-center space-y-4">
           <p className="text-base md:text-lg font-mono uppercase tracking-[0.3em] text-[#2978A5]">
             WHY CHOOSE US
           </p>
-          <h2 className="text-4xl md:text-6xl font-semibold text-[#0C1014]">
+          <h2 className="text-4xl md:text-5xl font-semibold text-[#0C1014]">
             Turnovers on autopilot
           </h2>
-          <p className="text-lg md:text-xl font-mono text-[#0C1014]/80 max-w-3xl mx-auto">
+          <p className="text-base md:text-xl font-mono text-[#0C1014]/80 max-w-3xl mx-auto">
             From calendar syncing to instant reporting, we handle every detail so you can scale your portfolio without micromanaging cleaners.
           </p>
         </header>
 
-        <div className="grid gap-4 md:gap-6 md:grid-cols-3 -mt-6 md:mt-0">
-          {highlightItems.map((item) => (
-            <article
-              key={item.title}
-              className="flex h-full flex-col overflow-hidden rounded-3xl border border-[#5DAFD5] bg-white/70 backdrop-blur-sm"
-            >
-              <div className="flex flex-1 flex-col gap-3 p-6">
-                <h3 className="text-2xl font-semibold text-[#0C1014]">
-                  {item.title}
-                </h3>
-                <p className="text-base md:text-base font-mono text-[#0C1014]/80 leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-              <div className="relative w-full aspect-[7/5] md:aspect-auto md:h-56">
-                <Image
-                  src={item.image ?? '/banner.png'}
-                  alt={`${item.title} visual`}
-                  fill
-                  sizes="(min-width: 768px) 320px, 100vw"
-                  className="object-cover"
-                  priority={item.title === 'Hands-Off Turnovers'}
-                />
-              </div>
-            </article>
-          ))}
-        </div>
+        <div className="space-y-4 md:space-y-10">
+          <div className="grid gap-4 md:gap-6 md:grid-cols-3 -mt-6 md:mt-0">
+            {highlightItems.map((item) => (
+              <article
+                key={item.title}
+                className="flex h-full flex-col overflow-hidden rounded-3xl border border-[#5DAFD5] bg-white/70 backdrop-blur-sm"
+              >
+                <div className="flex flex-1 flex-col gap-3 p-6">
+                  <h3 className="text-2xl font-semibold text-[#0C1014]">
+                    {item.title}
+                  </h3>
+                  <p className="text-base md:text-base font-mono text-[#0C1014]/80 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+                <div className="relative w-full aspect-[7/5] md:aspect-auto md:h-56">
+                  <Image
+                    src={item.image ?? '/banner.png'}
+                    alt={`${item.title} visual`}
+                    fill
+                    sizes="(min-width: 768px) 320px, 100vw"
+                    className="object-cover"
+                    priority={item.title === 'Hands-Off Turnovers'}
+                  />
+                </div>
+              </article>
+            ))}
+          </div>
 
-        <div className="rounded-3xl border border-[#5DAFD5] bg-white/60 px-6 py-10 md:px-12 md:py-14 -mt-6 md:mt-0">
+          <div className="rounded-3xl border border-[#5DAFD5] bg-white/60 px-6 py-10 md:px-12 md:py-14">
           <div className="text-center space-y-4">
             <h3 className="text-3xl md:text-4xl font-semibold text-[#0C1014]">
               Our 5-step cleaner screening process
@@ -151,7 +152,7 @@ export default function WhyChooseUs() {
                   <h4 className="text-lg font-semibold text-[#0C1014]">
                     {step.title}
                   </h4>
-                  <p className="text-base md:text-base font-mono text-[#0C1014]/80 leading-relaxed md:text-pretty">
+                  <p className="text-sm md:text-base font-mono text-[#0C1014]/80 leading-relaxed md:text-pretty">
                     {step.blurb}
                   </p>
                 </div>
@@ -170,6 +171,7 @@ export default function WhyChooseUs() {
               Those are the cleaners we trust with your turnovers, your guests, and your brand.
             </p>
           </div>
+        </div>
         </div>
       </div>
     </section>

@@ -1,21 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { FormEvent, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { FormEvent, useState } from 'react';
 
 const LEAD_ENDPOINT = '/api/leads';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 type FieldKey = 'zipCode' | 'phone' | 'email' | 'consent';
 type FormErrors = Partial<Record<FieldKey, string>>;
-
-const fieldLabels: Record<FieldKey, string> = {
-  zipCode: 'zip code',
-  phone: 'phone number',
-  email: 'email address',
-  consent: 'consent acknowledgement',
-};
 
 const ZIP_PATTERN = /^\d{5}(?:-\d{4})?$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -25,58 +17,6 @@ export default function Hero() {
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FormErrors>({});
-  const [modalContent, setModalContent] = useState<{
-    type: 'success' | 'error';
-    title: string;
-    message: string;
-  } | null>(null);
-  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    setPortalTarget(document.body ?? null);
-  }, []);
-
-  useEffect(() => {
-    if (!modalContent) return;
-
-    const handleClick = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      const actionable =
-        target.closest('a[href]:not([data-modal-ignore-close])') ||
-        target.closest('button:not([data-modal-ignore-close])') ||
-        target.closest('input[type="submit"]:not([data-modal-ignore-close])');
-
-      if (actionable) {
-        setModalContent(null);
-      }
-    };
-
-    document.addEventListener('click', handleClick, true);
-
-    return () => {
-      document.removeEventListener('click', handleClick, true);
-    };
-  }, [modalContent]);
-
-  useEffect(() => {
-    if (!modalContent) return;
-
-    const previousStyles = {
-      bodyOverflow: document.body.style.overflow,
-      bodyTouchAction: document.body.style.touchAction,
-      htmlOverflow: document.documentElement.style.overflow,
-    };
-
-    document.body.style.overflow = 'hidden';
-    document.body.style.touchAction = 'none';
-    document.documentElement.style.overflow = 'hidden';
-
-    return () => {
-      document.body.style.overflow = previousStyles.bodyOverflow;
-      document.body.style.touchAction = previousStyles.bodyTouchAction;
-      document.documentElement.style.overflow = previousStyles.htmlOverflow;
-    };
-  }, [modalContent]);
 
   const validateForm = (formData: FormData) => {
     const errors: FormErrors = {};
@@ -105,22 +45,11 @@ export default function Hero() {
     setFieldErrors(errors);
 
     if (Object.keys(errors).length > 0) {
-      const invalidFields = Object.keys(errors)
-        .map((key) => fieldLabels[key as FieldKey])
-        .join(', ');
-
-      setModalContent({
-        type: 'error',
-        title: 'Fix a few details',
-        message: `Please correct your ${invalidFields} before sending.`,
-      });
       return false;
     }
 
     return true;
   };
-
-  const closeModal = () => setModalContent(null);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -149,27 +78,25 @@ export default function Hero() {
       }
 
       formElement.reset();
+      setFieldErrors({});
       setFormStatus('success');
-      setModalContent({
-        type: 'success',
-        title: 'We received your info!',
-        message:
-          'A Blue Bunny specialist will reach out shortly to learn more about your property and turnover schedule.',
-      });
     } catch (error) {
       console.error(error);
       const message = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
       setErrorMessage(message);
       setFormStatus('error');
-      setModalContent({
-        type: 'error',
-        title: 'Submission failed',
-        message,
-      });
     }
   };
 
   const isSubmitting = formStatus === 'submitting';
+  const buttonLabel =
+    formStatus === 'success'
+      ? 'Submitted!'
+      : formStatus === 'error'
+        ? 'Try Again'
+        : isSubmitting
+          ? 'Sending...'
+          : 'Get a Quote';
 
   return (
     <section id="home" className="relative w-full min-h-screen">
@@ -189,8 +116,8 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/30"></div>
       
       {/* Content Container */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 pt-35 pb-24 md:py-24">
-        <div className="text-center md:-mt-[0px]">
+      <div className="relative z-10 flex min-h-screen w-full items-center justify-center px-4 pt-35 pb-24 md:mt-[var(--navbar-height)] md:min-h-[calc(100vh-var(--navbar-height))] md:flex-col md:pt-0 md:pb-0">
+        <div className="w-full text-center">
           <h1 className="text-5xl md:text-7xl font-semibold !text-[#F5F0DF] mb-4">
             Orlando's <span className="!text-[#5DAFD5]">#1</span><br />STR Turnover Service
           </h1>
@@ -305,7 +232,7 @@ export default function Hero() {
                     disabled={isSubmitting}
                     className="px-8 py-3 bg-[#2978A5] text-[#F5F0DF] font-mono text-m font-medium rounded w-full hover:bg-[#0C1014] transition-colors whitespace-nowrap flex items-center justify-center disabled:opacity-75"
                   >
-                    {isSubmitting ? 'Sending...' : 'Get a Quote'}
+                    {buttonLabel}
                   </button>
                 </div>
               </div>
@@ -341,37 +268,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      {portalTarget &&
-        modalContent &&
-        createPortal(
-          <div
-            className="fixed inset-0 z-40 flex min-h-screen min-h-[100dvh] items-center justify-center bg-black/70 px-4 pt-[calc(env(safe-area-inset-top,0px)+1rem)] pb-[calc(env(safe-area-inset-bottom,0px)+1rem)]"
-            role="dialog"
-            aria-modal="true"
-          >
-            <div className="w-full max-w-none rounded-lg bg-[#F5F0DF] p-6 text-center shadow-xl border border-[#5DAFD5] transform -translate-y-5 md:-translate-y-0 mx-4 md:mx-0 md:max-w-md">
-              <h3 className="text-2xl font-semibold text-[#0C1014]">
-                {modalContent.title}
-              </h3>
-              <p className="mt-3 text-base font-mono text-[#0C1014]">
-                {modalContent.message}
-              </p>
-              <button
-                type="button"
-                onClick={closeModal}
-                className={`mt-6 inline-flex items-center justify-center rounded-full px-6 py-2 text-base font-mono text-[#F5F0DF] transition-colors ${
-                  modalContent.type === 'success'
-                    ? 'bg-[#2978A5] hover:bg-[#0C1014]'
-                    : 'bg-[#0C1014] hover:bg-[#2978A5]'
-                }`}
-              >
-                {modalContent.type === 'success' ? 'Got it' : 'Close'}
-              </button>
-            </div>
-          </div>,
-          portalTarget
-        )}
     </section>
   );
 }

@@ -10,6 +10,7 @@ export default function Navbar() {
     { name: 'Home', href: '#home' },
     { name: 'Why Choose Us', href: '#why-choose-us' },
     { name: 'Our Process', href: '#our-process' },
+    { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#contact' },
   ];
 

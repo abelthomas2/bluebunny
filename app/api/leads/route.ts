@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 const FORM_ENDPOINT =
-  process.env.FORMSPREE_ENDPOINT ?? 'https://formspree.io/f/xovyaorz'; // Replace with your Formspree endpoint
+  process.env.FORMSPREE_ENDPOINT ?? 'https://formspree.io/f/xananqrz'; // Replace with your Formspree endpoint
 
 export async function POST(request: Request) {
   if (!FORM_ENDPOINT || FORM_ENDPOINT.endsWith('YOUR_FORM_ID')) {

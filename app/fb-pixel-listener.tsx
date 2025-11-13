@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 
-declare global { interface Window { fbq?: (...args: any[]) => void } }
+declare global { interface Window { fbq?: (...args: unknown[]) => void } }
 
 export default function FbPixelListener() {
   const pathname = usePathname()

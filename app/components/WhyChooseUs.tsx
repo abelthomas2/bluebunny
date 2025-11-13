@@ -100,7 +100,7 @@ export default function WhyChooseUs() {
               Our 5-step cleaner screening process
             </h3>
             <p className="text-base md:text-lg font-mono text-[#0C1014]/80 max-w-3xl mx-auto">
-              Every cleaner clears five checkpoints before we trust them with your properties. It's how we maintain consistency — even when you're not there.
+              Every cleaner clears five checkpoints before we trust them with your properties. It&rsquo;s how we maintain consistency — even when you&rsquo;re not there.
             </p>
           </div>
 

@@ -119,7 +119,7 @@ export default function Hero() {
       <div className="relative z-10 flex min-h-screen w-full items-center justify-center px-4 pt-35 pb-24 md:mt-[var(--navbar-height)] md:min-h-[calc(100vh-var(--navbar-height))] md:flex-col md:pt-0 md:pb-0">
         <div className="w-full text-center">
           <h1 className="text-5xl md:text-7xl font-semibold !text-[#F5F0DF] mb-4">
-            Orlando's <span className="!text-[#5DAFD5]">#1</span><br />STR Turnover Service
+            Orlando&rsquo;s <span className="!text-[#5DAFD5]">#1</span><br />STR Turnover Service
           </h1>
           <p className="text-base md:text-lg !text-[#F5F0DF] font-mono mb-3 border-1 border-[#F5F0DF] rounded-lg px-4 py-2 inline-block bg-white/10 backdrop-blur-md">
             LICENSED + INSURED + VETTED

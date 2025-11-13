@@ -87,6 +87,7 @@ export default function WhyChooseUs() {
                     fill
                     sizes="(min-width: 768px) 320px, 100vw"
                     className="object-cover"
+                    quality={100}
                     priority={item.title === 'Hands-Off Turnovers'}
                   />
                 </div>

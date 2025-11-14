@@ -17,18 +17,6 @@
   }
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-picton-blue: #5DAFD5;
-  --color-eggshell: #F5F0DF;
-  --color-cerulean: #2978A5;
-  --color-cadet-gray: #90A4AE;
-  --color-rich-black: #0C1014;
-}
-
 body {
   background: var(--rich-black);
   color: var(--foreground);
@@ -37,7 +25,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-geist-sans), sans-serif;
-  color: var(--rich-black);
+  color: inherit;
 }
 
 /* Custom scrollbar styling */

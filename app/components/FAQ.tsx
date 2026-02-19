@@ -70,7 +70,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="bg-[#F5F0DF] pt-15 md:pt-20 pb-15 md:pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
+      className="bg-gradient-to-b from-white via-[#F6FBFF] to-white pt-15 md:pt-20 pb-15 md:pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
     >
       <div className="max-w-5xl mx-auto space-y-12">
         <header className="text-center space-y-4">
@@ -91,7 +91,11 @@ export default function FAQ() {
             return (
               <article
                 key={faq.question}
-                className="rounded-3xl border border-[#2978A5]/25 bg-white/70 px-5 py-4 md:px-6 md:py-6 shadow-sm"
+                className={`rounded-3xl px-5 py-4 md:px-6 md:py-6 border transition-all duration-300 ${
+                  isOpen
+                    ? 'border-[#5DAFD5] bg-white shadow-[0_25px_65px_rgba(12,16,20,0.08)]'
+                    : 'border-[#2978A5]/15 bg-white/85 shadow-[0_15px_45px_rgba(12,16,20,0.05)]'
+                }`}
               >
                 <button
                   type="button"

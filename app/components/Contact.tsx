@@ -2,7 +2,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="bg-[#F5F0DF] pt-15 md:pt-20 pb-15 md:pb-20 px-4 text-[#0C1014] scroll-mt-16 md:scroll-mt-20"
+      className="bg-gradient-to-br from-white via-[#F5FBFF] to-[#FDF4EC] pt-15 md:pt-20 pb-15 md:pb-20 px-4 text-[#0C1014] scroll-mt-16 md:scroll-mt-20"
     >
       <div className="max-w-5xl mx-auto space-y-12">
         <div className="text-center space-y-4">
@@ -18,7 +18,7 @@ export default function Contact() {
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 md:gap-6">
-          <div className="rounded-3xl border border-[#5DAFD5] bg-[#fbf9f2] p-8 text-[#F5F0DF] space-y-4">
+          <div className="rounded-3xl border border-[#5DAFD5] bg-gradient-to-br from-white via-[#E7F5FF] to-white p-8 text-[#0C1014] space-y-4 shadow-[0_20px_60px_rgba(12,16,20,0.08)]">
             <p className="font-mono text-sm uppercase tracking-[0.35em] text-[#2978A5]">
               Call or text
             </p>
@@ -32,7 +32,7 @@ export default function Contact() {
               Daily support from 8am to 8pm ET.
             </p>
           </div>
-          <div className="rounded-3xl border border-[#5DAFD5] bg-[#fbf9f2] p-8 text-[#0C1014] space-y-4">
+          <div className="rounded-3xl border border-[#5DAFD5] bg-gradient-to-br from-white via-[#E7F5FF] to-white p-8 text-[#0C1014] space-y-4 shadow-[0_20px_60px_rgba(41,120,165,0.12)]">
             <p className="font-mono text-sm uppercase tracking-[0.35em] text-[#2978A5]">
               Email
             </p>

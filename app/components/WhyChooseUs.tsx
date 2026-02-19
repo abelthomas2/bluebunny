@@ -18,6 +18,12 @@ const highlightItems = [
   },
 ];
 
+const highlightCardSkins = [
+  'bg-white/85 shadow-[0_25px_70px_rgba(12,16,20,0.08)]',
+  'bg-white/85 shadow-[0_25px_70px_rgba(12,16,20,0.08)]',
+  'bg-white/85 shadow-[0_25px_70px_rgba(12,16,20,0.08)]',
+];
+
 const screeningSteps = [
   {
     step: 'Step 1',
@@ -50,7 +56,7 @@ export default function WhyChooseUs() {
   return (
     <section
       id="why-choose-us"
-      className="bg-[#F5F0DF] pt-15 md:pt-20 pb-15 md:pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
+      className="bg-gradient-to-b from-white via-[#F4FBFF] to-white pt-15 md:pt-20 pb-15 md:pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
     >
       <div className="max-w-6xl mx-auto space-y-16">
         <header className="text-center space-y-4">
@@ -67,10 +73,10 @@ export default function WhyChooseUs() {
 
         <div className="space-y-4 md:space-y-10">
           <div className="grid gap-4 md:gap-6 md:grid-cols-3 -mt-6 md:mt-0">
-            {highlightItems.map((item) => (
+            {highlightItems.map((item, index) => (
               <article
                 key={item.title}
-                className="flex h-full flex-col overflow-hidden rounded-3xl border border-[#5DAFD5] bg-white/70 backdrop-blur-sm"
+                className={`flex h-full flex-col overflow-hidden rounded-3xl border border-[#5DAFD5]/40 backdrop-blur-sm transition ${highlightCardSkins[index % highlightCardSkins.length]}`}
               >
                 <div className="flex flex-1 flex-col gap-3 p-6">
                   <h3 className="text-2xl font-semibold text-[#0C1014]">
@@ -95,7 +101,7 @@ export default function WhyChooseUs() {
             ))}
           </div>
 
-          <div className="rounded-3xl border border-[#5DAFD5] bg-white/60 px-6 py-10 md:px-12 md:py-14">
+          <div className="rounded-3xl border border-[#5DAFD5]/50 bg-gradient-to-b from-white/95 via-[#ECF6FF]/95 to-white/90 px-6 py-10 md:px-12 md:py-14 shadow-[0_30px_80px_rgba(12,16,20,0.08)]">
           <div className="text-center space-y-4">
             <h3 className="text-3xl md:text-4xl font-semibold text-[#0C1014]">
               Our 5-step cleaner screening process
@@ -161,7 +167,7 @@ export default function WhyChooseUs() {
             ))}
           </ol>
 
-          <div className="mt-12 mx-auto max-w-lg rounded-2xl border-2 border-[#5DAFD5] bg-[#FBF9F2] px-6 py-5 text-center">
+          <div className="mt-12 mx-auto max-w-lg rounded-2xl border-2 border-[#5DAFD5] bg-white px-6 py-5 text-center shadow-[0_18px_50px_rgba(41,120,165,0.12)]">
             <p className="text-sm font-mono uppercase tracking-[0.35em] text-[#2978A5]">
               TOP TALENT ONLY
             </p>

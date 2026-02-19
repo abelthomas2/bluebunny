@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 const cardClass =
-  "rounded-3xl border border-[#5DAFD5] bg-[#FBF9F2] p-8 md:p-10 space-y-4";
+  "rounded-3xl border border-[#5DAFD5] bg-white p-8 md:p-10 space-y-4";
 const sectionHeadingClass = "text-2xl font-semibold text-[#0C1014]";
 const subheadingClass = "text-lg font-semibold text-[#2978A5]";
 const bodyTextClass = "text-[#0C1014]/80 leading-relaxed";
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-[#F5F0DF] text-[#0C1014] px-6 py-16 md:px-12 md:py-24">
+    <main className="min-h-screen bg-white text-[#0C1014] px-6 py-16 md:px-12 md:py-24">
       <div className="max-w-4xl mx-auto space-y-4">
         <header className="space-y-5">
           <p className="text-xs font-mono uppercase tracking-[0.35em] text-[#2978A5]">

@@ -92,7 +92,7 @@ export default function OurProcess() {
   return (
     <section
       id="our-process"
-      className="bg-[#F5F0DF] pt-15 md:pt-20 pb-15 md:pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
+      className="bg-gradient-to-b from-white via-[#F2F8FF] to-white pt-15 md:pt-20 pb-15 md:pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
     >
       <div className="max-w-6xl mx-auto space-y-12">
         <header className="text-center space-y-4">
@@ -108,7 +108,7 @@ export default function OurProcess() {
         </header>
 
         <div className="space-y-4 md:space-y-10">
-          <div className="rounded-3xl border border-[#2978A5]/30 bg-white/70 px-5 py-8 md:px-10 md:py-12">
+          <div className="rounded-3xl border border-[#2978A5]/30 bg-gradient-to-br from-white via-[#F0F7FF] to-white px-5 py-8 md:px-10 md:py-12 shadow-[0_30px_90px_rgba(12,16,20,0.08)]">
           <div className="text-center space-y-3">
             <p className="text-sm md:text-sm font-mono uppercase tracking-[0.35em] text-[#2978A5]">
               THE BLUE BUNNY METHOD
@@ -122,7 +122,7 @@ export default function OurProcess() {
           </div>
 
           <div className="mt-10 relative">
-            <div className="overflow-hidden rounded-3xl border border-[#2978A5]/30 bg-[#FBF9F2]">
+            <div className="overflow-hidden rounded-3xl border border-[#2978A5]/30 bg-gradient-to-r from-white to-[#F5FAFF]">
               <div
                 className="flex transition-transform duration-500 ease-out"
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -225,7 +225,7 @@ export default function OurProcess() {
 
           </div>
 
-          <div className="rounded-3xl border border-[#2978A5]/30 bg-white/70 px-5 py-8 md:px-10 md:py-12 space-y-8">
+          <div className="rounded-3xl border border-[#2978A5]/30 bg-gradient-to-br from-white via-[#F7FAFF] to-[#EEF3FF] px-5 py-8 md:px-10 md:py-12 space-y-8 shadow-[0_30px_90px_rgba(12,16,20,0.08)]">
             <div className="text-center space-y-3">
               <p className="text-sm md:text-sm font-mono uppercase tracking-[0.35em] text-[#2978A5]">
                 PROOF IN THE DETAILS
@@ -242,7 +242,7 @@ export default function OurProcess() {
             </div>
 
             <div className="mx-auto flex max-w-4xl flex-col gap-6">
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-[#2978A5]/30 bg-[#FBF9F2]">
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-[#2978A5]/30 bg-[#F2F8FF]">
                 <Image
                   src="/notVraj-29.jpg"
                   alt="Living room after Blue Bunny deep clean"

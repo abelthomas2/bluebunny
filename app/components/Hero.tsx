@@ -118,18 +118,18 @@ export default function Hero() {
       {/* Content Container */}
       <div className="relative z-10 flex min-h-screen w-full items-center justify-center px-4 pt-35 pb-24 md:mt-[var(--navbar-height)] md:min-h-[calc(100vh-var(--navbar-height))] md:flex-col md:pt-0 md:pb-0">
         <div className="w-full text-center">
-          <h1 className="text-5xl md:text-7xl font-semibold !text-[#F5F0DF] mb-4">
+          <h1 className="text-5xl md:text-7xl font-semibold !text-white mb-4">
             Orlando&rsquo;s <span className="!text-[#5DAFD5]">#1</span><br />STR Turnover Service
           </h1>
-          <p className="text-base md:text-lg !text-[#F5F0DF] font-mono mb-3 border-1 border-[#F5F0DF] rounded-lg px-4 py-2 inline-block bg-white/10 backdrop-blur-md">
+          <p className="text-base md:text-lg !text-white font-mono mb-3 border-1 border-white rounded-lg px-4 py-2 inline-block bg-white/10 backdrop-blur-md">
             LICENSED + INSURED + VETTED
           </p>
-          <p className="text-lg md:text-2xl !text-[#F5F0DF] font-mono mb-10 max-w-3xl mx-auto">
+          <p className="text-lg md:text-2xl !text-white font-mono mb-10 max-w-3xl mx-auto">
             Your hassle-free solution for perfectly timed Airbnb turnovers.
           </p>
           
           {/* Lead Form */}
-          <div className="bg-[#F5F0DF] p-4 rounded-lg max-w-6xl mx-auto w-full">
+          <div className="bg-white p-4 rounded-lg max-w-6xl mx-auto w-full">
             <form className="flex flex-col gap-3" onSubmit={handleSubmit} noValidate>
               <div className="grid grid-cols-1 md:grid-cols-7 gap-3">
                 <div className="md:col-span-1 flex flex-col gap-1">
@@ -153,7 +153,7 @@ export default function Hero() {
                 <div className="md:col-span-1 flex flex-col gap-1">
                   <select
                     name="bedrooms"
-                    className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full appearance-none bg-[#F5F0DF] bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
+                    className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full appearance-none bg-white bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
                     style={{
                       backgroundImage:
                         "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%230C1014' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E\")",
@@ -169,7 +169,7 @@ export default function Hero() {
                 <div className="md:col-span-1 flex flex-col gap-1">
                   <select
                     name="bathrooms"
-                    className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full appearance-none bg-[#F5F0DF] bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
+                    className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full appearance-none bg-white bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
                     style={{
                       backgroundImage:
                         "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%230C1014' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E\")",
@@ -230,7 +230,7 @@ export default function Hero() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-8 py-3 bg-[#2978A5] text-[#F5F0DF] font-mono text-m font-medium rounded w-full hover:bg-[#0C1014] transition-colors whitespace-nowrap flex items-center justify-center disabled:opacity-75"
+                    className="px-8 py-3 bg-[#2978A5] text-white font-mono text-m font-medium rounded w-full hover:bg-[#0C1014] transition-colors whitespace-nowrap flex items-center justify-center disabled:opacity-75"
                   >
                     {buttonLabel}
                   </button>

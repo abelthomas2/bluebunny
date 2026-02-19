@@ -8,14 +8,14 @@ const quickLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-[#080B10] via-[#111720] to-[#06080C] text-white px-4 py-12">
+    <footer className="bg-gradient-to-b from-[#080B10] via-[#111720] to-[#06080C] text-white px-5 py-10 md:py-12">
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex flex-col gap-8 md:flex-row md:justify-between">
           <div className="space-y-3 md:max-w-md">
             <p className="font-mono text-xs uppercase tracking-[0.4em] text-[#5DAFD5]">
               BLUE BUNNY TURNOVER SERVICES
             </p>
-            <p className="text-xl font-semibold text-white">
+            <p className="text-lg md:text-xl font-semibold text-white">
               Orlando’s #1 STR Turnover Service.
             </p>
             <p className="text-sm font-mono text-white">
@@ -27,7 +27,7 @@ export default function Footer() {
             <p className="font-mono text-xs uppercase tracking-[0.35em] text-[#5DAFD5]">
               QUICK LINKS
             </p>
-            <div className="flex flex-col gap-2 text-sm font-mono text-white">
+            <div className="flex flex-col gap-2 text-xs md:text-sm font-mono text-white">
               {quickLinks.map((link) => (
                 <a key={link.label} href={link.href} className="transition hover:text-[#5DAFD5]">
                   {link.label}
@@ -36,7 +36,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 text-sm font-mono text-white">
+          <div className="flex flex-col gap-2 text-xs md:text-sm font-mono text-white">
             <p className="font-mono text-xs uppercase tracking-[0.35em] text-[#5DAFD5]">
               SAY HELLO
             </p>

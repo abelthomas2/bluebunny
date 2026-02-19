@@ -60,17 +60,17 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="bg-gradient-to-b from-white via-[#F6FBFF] to-white pt-15 md:pt-20 pb-15 md:pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
+      className="bg-gradient-to-b from-white via-[#F6FBFF] to-white pt-15 md:pt-20 pb-15 md:pb-20 px-5 scroll-mt-16 md:scroll-mt-20"
     >
-      <div className="max-w-5xl mx-auto space-y-12">
-        <header className="text-center space-y-4">
-          <p className="text-base md:text-lg font-mono uppercase tracking-[0.35em] text-[#2978A5]">
+      <div className="max-w-5xl mx-auto space-y-10 md:space-y-12">
+        <header className="text-center space-y-3 md:space-y-4">
+          <p className="text-sm md:text-lg font-mono uppercase tracking-[0.35em] text-[#2978A5]">
             FAQ
           </p>
-          <h2 className="text-4xl md:text-5xl font-semibold text-[#0C1014]">
+          <h2 className="text-3xl md:text-5xl font-semibold text-[#0C1014]">
             Answers before you even ask
           </h2>
-          <p className="text-base md:text-xl font-mono text-[#0C1014]/80 max-w-3xl mx-auto">
+          <p className="text-sm md:text-xl font-mono text-[#0C1014]/90 max-w-[23rem] sm:max-w-[24rem] md:max-w-3xl mx-auto">
             Everything you need to know about partnering with Blue Bunny for STR turnovers, from scheduling to reporting.
           </p>
         </header>
@@ -80,18 +80,18 @@ export default function FAQ() {
             <details
               key={faq.question}
               open={index === 0}
-              className="group rounded-3xl border border-[#2978A5]/15 bg-white/85 px-5 py-4 md:px-6 md:py-6 shadow-[0_15px_45px_rgba(12,16,20,0.05)] open:border-[#5DAFD5] open:bg-white open:shadow-[0_25px_65px_rgba(12,16,20,0.08)] transition-all duration-300"
+              className="group rounded-3xl border border-[#2978A5]/15 bg-white/85 px-4 py-3 md:px-6 md:py-6 shadow-[0_15px_45px_rgba(12,16,20,0.05)] open:border-[#5DAFD5] open:bg-white open:shadow-[0_25px_65px_rgba(12,16,20,0.08)] transition-all duration-300"
             >
               <summary className="flex w-full cursor-pointer items-center justify-between gap-4 text-left list-none [&::-webkit-details-marker]:hidden">
-                <span className="text-lg md:text-xl font-semibold text-[#0C1014] font-sans">
+                <span className="text-base md:text-xl font-semibold text-[#0C1014] font-sans">
                   {faq.question}
                 </span>
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#2978A5]/40 text-[#2978A5] text-lg font-semibold">
+                <span className="inline-flex h-8 w-8 md:h-9 md:w-9 items-center justify-center rounded-full border border-[#2978A5]/40 text-[#2978A5] text-base md:text-lg font-semibold">
                   <span className="group-open:hidden">+</span>
                   <span className="hidden group-open:inline">−</span>
                 </span>
               </summary>
-              <p className="mt-4 text-base md:text-lg font-mono text-[#0C1014]/80">
+              <p className="mt-3 md:mt-4 text-sm md:text-lg font-mono text-[#0C1014]/90">
                 {faq.answer}
               </p>
             </details>

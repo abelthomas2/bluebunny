@@ -19,7 +19,7 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 bg-[#5DAFD5] border-b border-[#2978A5]"
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo/Brand */}
           <div className="flex items-center">
@@ -31,7 +31,7 @@ export default function Navbar() {
                 height={300}
                 sizes="(min-width: 768px) 228px, 192px"
                 loading="eager"
-                className="h-16 md:h-19 w-auto"
+                className="h-[3.7rem] md:h-19 w-auto"
               />
             </a>
           </div>
@@ -82,13 +82,13 @@ export default function Navbar() {
             isMenuOpen ? 'max-h-96 pb-6' : 'max-h-0'
           }`}
         >
-          <div className="flex flex-col gap-4 pt-4">
+          <div className="flex flex-col gap-3 pt-3">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="text-[#0C1014] hover:text-[#F5F0DF] transition-colors font-sans text-base py-2 font-medium"
+                className="text-[#0C1014] hover:text-[#F5F0DF] transition-colors font-sans text-sm py-1.5 font-medium"
               >
                 {link.name}
               </a>

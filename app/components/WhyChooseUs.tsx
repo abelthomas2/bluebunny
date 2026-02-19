@@ -59,17 +59,17 @@ export default function WhyChooseUs() {
   return (
     <section
       id="why-choose-us"
-      className="bg-gradient-to-b from-white via-[#F4FBFF] to-white pt-15 md:pt-20 pb-15 md:pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
+      className="bg-gradient-to-b from-white via-[#F4FBFF] to-white pt-15 md:pt-20 pb-15 md:pb-20 px-5 scroll-mt-16 md:scroll-mt-20"
     >
-      <div className="max-w-6xl mx-auto space-y-16">
-        <header className="text-center space-y-4">
-          <p className="text-base md:text-lg font-mono uppercase tracking-[0.3em] text-[#2978A5]">
+      <div className="max-w-6xl mx-auto space-y-12 md:space-y-16">
+        <header className="text-center space-y-3 md:space-y-4">
+          <p className="text-sm md:text-lg font-mono uppercase tracking-[0.3em] text-[#2978A5]">
             WHY CHOOSE US
           </p>
-          <h2 className="text-4xl md:text-5xl font-semibold text-[#0C1014]">
+          <h2 className="text-3xl md:text-5xl font-semibold text-[#0C1014]">
             Turnovers on autopilot
           </h2>
-          <p className="text-base md:text-xl font-mono text-[#0C1014]/80 max-w-3xl mx-auto">
+          <p className="text-sm md:text-xl font-mono text-[#0C1014]/90 max-w-[23rem] sm:max-w-[24rem] md:max-w-3xl mx-auto">
             From calendar syncing to instant reporting, we handle every detail so you can scale your portfolio without micromanaging cleaners.
           </p>
         </header>
@@ -81,11 +81,11 @@ export default function WhyChooseUs() {
                 key={item.title}
                 className={`flex h-full flex-col overflow-hidden rounded-3xl border border-[#5DAFD5]/40 backdrop-blur-sm transition ${highlightCardSkins[index % highlightCardSkins.length]}`}
               >
-                <div className="flex flex-1 flex-col gap-3 p-6">
-                  <h3 className="text-2xl font-semibold text-[#0C1014]">
+                <div className="flex flex-1 flex-col gap-3 p-5 md:p-6">
+                  <h3 className="text-xl md:text-2xl font-semibold text-[#0C1014]">
                     {item.title}
                   </h3>
-                  <p className="text-base md:text-base font-mono text-[#0C1014]/80 leading-relaxed">
+                  <p className="text-sm md:text-base font-mono text-[#0C1014]/90 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -103,12 +103,12 @@ export default function WhyChooseUs() {
             ))}
           </div>
 
-          <div className="rounded-3xl border border-[#5DAFD5]/50 bg-gradient-to-b from-white/95 via-[#ECF6FF]/95 to-white/90 px-6 py-10 md:px-12 md:py-14 shadow-[0_30px_80px_rgba(12,16,20,0.08)]">
-          <div className="text-center space-y-4">
-            <h3 className="text-3xl md:text-4xl font-semibold text-[#0C1014]">
+          <div className="rounded-3xl border border-[#5DAFD5]/50 bg-gradient-to-b from-white/95 via-[#ECF6FF]/95 to-white/90 px-5 py-8 md:px-12 md:py-14 shadow-[0_30px_80px_rgba(12,16,20,0.08)]">
+          <div className="text-center space-y-3 md:space-y-4">
+            <h3 className="text-2xl md:text-4xl font-semibold text-[#0C1014]">
               Our 5-step cleaner screening process
             </h3>
-            <p className="text-base md:text-lg font-mono text-[#0C1014]/80 max-w-3xl mx-auto">
+            <p className="text-sm md:text-lg font-mono text-[#0C1014]/90 max-w-3xl mx-auto">
               Every cleaner clears five checkpoints before we trust them with your properties. It&rsquo;s how we maintain consistency — even when you&rsquo;re not there.
             </p>
           </div>
@@ -129,7 +129,7 @@ export default function WhyChooseUs() {
                   <h4 className="text-xl md:text-l font-semibold text-[#0C1014] md:leading-tight md:whitespace-nowrap">
                     {step.title}
                   </h4>
-                  <p className="text-base md:text-base font-mono text-[#0C1014]/80 leading-relaxed md:text-pretty">
+                  <p className="text-base md:text-base font-mono text-[#0C1014]/90 leading-relaxed md:text-pretty">
                     {step.blurb}
                   </p>
                 </div>
@@ -137,15 +137,15 @@ export default function WhyChooseUs() {
             ))}
           </div>
 
-          <ol className="mt-10 grid gap-6 md:hidden">
+          <ol className="mt-8 grid gap-5 md:hidden">
             {screeningSteps.map((step, index) => (
-              <li key={step.title} className="flex gap-4">
+              <li key={step.title} className="flex gap-3">
                 <div className="flex flex-col items-center">
                   <span
                     className={
                       step.step === 'Step 5'
-                        ? 'inline-flex h-9 min-w-[3.75rem] items-center justify-center rounded-full bg-[#2978A5] px-6 text-lg font-semibold text-[#FBF9F2]'
-                        : 'inline-flex h-12 px-6 items-center justify-center rounded-full bg-[#2978A5] text-lg font-semibold text-[#FBF9F2]'
+                        ? 'inline-flex h-8 min-w-[3.3rem] items-center justify-center rounded-full bg-[#2978A5] px-5 text-base font-semibold text-[#FBF9F2]'
+                        : 'inline-flex h-10 px-5 items-center justify-center rounded-full bg-[#2978A5] text-base font-semibold text-[#FBF9F2]'
                     }
                   >
                     {step.step.replace('Step ', '')}
@@ -158,10 +158,10 @@ export default function WhyChooseUs() {
                   <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#2978A5]">
                     {step.step}
                   </p>
-                  <h4 className="text-lg font-semibold text-[#0C1014]">
+                  <h4 className="text-base md:text-lg font-semibold text-[#0C1014]">
                     {step.title}
                   </h4>
-                  <p className="text-sm md:text-base font-mono text-[#0C1014]/80 leading-relaxed md:text-pretty">
+                  <p className="text-sm md:text-base font-mono text-[#0C1014]/90 leading-relaxed md:text-pretty">
                     {step.blurb}
                   </p>
                 </div>
@@ -169,14 +169,14 @@ export default function WhyChooseUs() {
             ))}
           </ol>
 
-          <div className="mt-12 mx-auto max-w-lg rounded-2xl border-2 border-[#5DAFD5] bg-white px-6 py-5 text-center shadow-[0_18px_50px_rgba(41,120,165,0.12)]">
+          <div className="mt-10 mx-auto max-w-lg rounded-2xl border-2 border-[#5DAFD5] bg-white px-5 py-4 md:px-6 md:py-5 text-center shadow-[0_18px_50px_rgba(41,120,165,0.12)]">
             <p className="text-sm font-mono uppercase tracking-[0.35em] text-[#2978A5]">
               TOP TALENT ONLY
             </p>
-            <h4 className="mt-2 text-2xl font-semibold text-[#0C1014]">
+            <h4 className="mt-2 text-xl md:text-2xl font-semibold text-[#0C1014]">
               Only 2% of applicants make it through all five steps.
             </h4>
-            <p className="mt-3 text-base md:text-base font-mono text-[#0C1014]/80">
+            <p className="mt-3 text-sm md:text-base font-mono text-[#0C1014]/90">
               Those are the cleaners we trust with your turnovers, your guests, and your brand.
             </p>
           </div>

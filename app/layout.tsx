@@ -22,7 +22,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#5DAFD5",
+  themeColor: "#06080C",
 };
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} antialiased bg-[#5DAFD5]`}>
+      <body className={`${geistSans.variable} antialiased bg-[#06080C]`}>
         {children}
       </body>
     </html>

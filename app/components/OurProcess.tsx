@@ -92,36 +92,36 @@ export default function OurProcess() {
   return (
     <section
       id="our-process"
-      className="bg-gradient-to-b from-white via-[#F2F8FF] to-white pt-15 md:pt-20 pb-15 md:pb-20 px-4 scroll-mt-16 md:scroll-mt-20"
+      className="bg-gradient-to-b from-white via-[#F2F8FF] to-white pt-15 md:pt-20 pb-15 md:pb-20 px-5 scroll-mt-16 md:scroll-mt-20"
     >
-      <div className="max-w-6xl mx-auto space-y-12">
-        <header className="text-center space-y-4">
-          <p className="text-base md:text-lg font-mono uppercase tracking-[0.3em] text-[#2978A5]">
+      <div className="max-w-6xl mx-auto space-y-10 md:space-y-12">
+        <header className="text-center space-y-3 md:space-y-4">
+          <p className="text-sm md:text-lg font-mono uppercase tracking-[0.3em] text-[#2978A5]">
             OUR PROCESS
           </p>
-          <h2 className="text-4xl md:text-5xl font-semibold text-[#0C1014]">
+          <h2 className="text-3xl md:text-5xl font-semibold text-[#0C1014]">
             From checkout to guest-ready
           </h2>
-          <p className="text-base md:text-xl font-mono text-[#0C1014]/80 max-w-3xl mx-auto">
+          <p className="text-sm md:text-xl font-mono text-[#0C1014]/90 max-w-[23rem] sm:max-w-[24rem] md:max-w-3xl mx-auto">
             We follow the same proven system for every turnover. No shortcuts, no guesswork. Just a methodical approach that keeps your properties consistently five-star, whether you have one listing or twenty.
           </p>
         </header>
 
         <div className="space-y-4 md:space-y-10">
-          <div className="rounded-3xl border border-[#2978A5]/30 bg-gradient-to-br from-white via-[#F0F7FF] to-white px-5 py-8 md:px-10 md:py-12 shadow-[0_30px_90px_rgba(12,16,20,0.08)]">
+          <div className="rounded-3xl border border-[#2978A5]/30 bg-gradient-to-br from-white via-[#F0F7FF] to-white px-4 py-7 md:px-10 md:py-12 shadow-[0_30px_90px_rgba(12,16,20,0.08)]">
           <div className="text-center space-y-3">
             <p className="text-sm md:text-sm font-mono uppercase tracking-[0.35em] text-[#2978A5]">
               THE BLUE BUNNY METHOD
             </p>
-            <h3 className="text-3xl md:text-4xl font-semibold text-[#0C1014]">
+            <h3 className="text-2xl md:text-4xl font-semibold text-[#0C1014]">
               Ten repeatable steps for flawless turnovers
             </h3>
-            <p className="text-base md:text-lg font-mono text-[#0C1014]/70 max-w-3xl mx-auto">
+            <p className="text-sm md:text-lg font-mono text-[#0C1014]/75 max-w-3xl mx-auto">
               Use the arrows to follow the process left to right — the same checklist our crews use in every single property.
             </p>
           </div>
 
-          <div className="mt-10 relative">
+          <div className="mt-8 md:mt-10 relative">
             <div className="overflow-hidden rounded-3xl border border-[#2978A5]/30 bg-gradient-to-r from-white to-[#F5FAFF]">
               <div
                 className="flex transition-transform duration-500 ease-out"
@@ -130,25 +130,25 @@ export default function OurProcess() {
                 {blueBunnySteps.map((step) => (
                   <article
                     key={step.title}
-                    className="w-full shrink-0 px-6 py-10 md:px-12 md:py-14 flex flex-col gap-6"
+                    className="w-full shrink-0 px-4 py-7 md:px-12 md:py-14 flex flex-col gap-5 md:gap-6"
                   >
                     <div className="flex flex-col gap-4">
                       <div className="flex items-center gap-4">
-                        <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#2978A5] text-2xl font-semibold text-[#FBF9F2] shadow-lg shadow-[#2978A5]/25">
+                        <span className="inline-flex h-11 w-11 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-[#2978A5] text-xl md:text-2xl font-semibold text-[#FBF9F2] shadow-lg shadow-[#2978A5]/25">
                           {step.step.replace('Step ', '')}
                         </span>
                         <div className="space-y-1">
                           <p className="font-mono text-xs md:text-sm uppercase tracking-[0.4em] text-[#2978A5]/80">
                             {step.step}
                           </p>
-                          <h4 className="text-2xl md:text-2xl font-semibold text-[#0C1014] leading-tight">
+                          <h4 className="text-xl md:text-2xl font-semibold text-[#0C1014] leading-tight">
                             {step.title}
                           </h4>
                         </div>
                       </div>
                       <div className="hidden md:block h-px w-full bg-gradient-to-r from-[#2978A5]/20 via-transparent to-transparent" />
                     </div>
-                    <p className="text-base md:text-lg font-mono text-[#0C1014]/85 leading-relaxed">
+                    <p className="text-sm md:text-lg font-mono text-[#0C1014]/90 leading-relaxed">
                       {step.description}
                     </p>
                   </article>
@@ -160,9 +160,9 @@ export default function OurProcess() {
               type="button"
               onClick={goToPrevious}
               aria-label="View previous step"
-              className="group absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full border border-[#0C1014]/15 bg-white p-2 md:p-3 shadow-lg transition hover:-translate-y-1/2 hover:-translate-x-1/2 hover:bg-[#2978A5] hover:text-[#FBF9F2]"
+              className="group absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full border border-[#0C1014]/15 bg-white p-1.5 md:p-3 shadow-lg transition hover:-translate-y-1/2 hover:-translate-x-1/2 hover:bg-[#2978A5] hover:text-[#FBF9F2]"
             >
-              <span className="inline-block text-lg md:text-xl font-semibold group-hover:translate-x-[-2px] transition-transform">
+              <span className="inline-block text-base md:text-xl font-semibold group-hover:translate-x-[-2px] transition-transform">
                 {'<'}
               </span>
             </button>
@@ -170,16 +170,16 @@ export default function OurProcess() {
               type="button"
               onClick={goToNext}
               aria-label="View next step"
-              className="group absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rounded-full border border-[#0C1014]/15 bg-white p-2 md:p-3 shadow-lg transition hover:-translate-y-1/2 hover:translate-x-1/2 hover:bg-[#2978A5] hover:text-[#FBF9F2]"
+              className="group absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rounded-full border border-[#0C1014]/15 bg-white p-1.5 md:p-3 shadow-lg transition hover:-translate-y-1/2 hover:translate-x-1/2 hover:bg-[#2978A5] hover:text-[#FBF9F2]"
             >
-              <span className="inline-block text-lg md:text-xl font-semibold group-hover:translate-x-[2px] transition-transform">
+              <span className="inline-block text-base md:text-xl font-semibold group-hover:translate-x-[2px] transition-transform">
                 {'>'}
               </span>
             </button>
           </div>
 
-          <div className="mt-8 flex flex-col items-center gap-4">
-            <p className="text-sm font-mono uppercase tracking-[0.35em] text-[#0C1014]/70">
+          <div className="mt-7 md:mt-8 flex flex-col items-center gap-3 md:gap-4">
+            <p className="text-xs md:text-sm font-mono uppercase tracking-[0.35em] text-[#0C1014]/75">
               Step {currentIndex + 1} of {totalSteps}
             </p>
             <div className="hidden md:flex flex-wrap justify-center gap-2">
@@ -202,17 +202,17 @@ export default function OurProcess() {
 
           </div>
 
-          <div className="rounded-3xl border border-[#2978A5]/30 bg-gradient-to-br from-white via-[#F7FAFF] to-[#EEF3FF] px-5 py-8 md:px-10 md:py-12 space-y-8 shadow-[0_30px_90px_rgba(12,16,20,0.08)]">
+          <div className="rounded-3xl border border-[#2978A5]/30 bg-gradient-to-br from-white via-[#F7FAFF] to-[#EEF3FF] px-4 py-7 md:px-10 md:py-12 space-y-7 md:space-y-8 shadow-[0_30px_90px_rgba(12,16,20,0.08)]">
             <div className="text-center space-y-3">
               <p className="text-sm md:text-sm font-mono uppercase tracking-[0.35em] text-[#2978A5]">
                 PROOF IN THE DETAILS
               </p>
-              <h3 className="text-3xl md:text-4xl font-semibold text-[#0C1014]">
+              <h3 className="text-2xl md:text-4xl font-semibold text-[#0C1014]">
                 Living room before & after
               </h3>
               <p
                 id="before-after-slider-description"
-                className="text-base md:text-lg font-mono text-[#0C1014]/70 max-w-3xl mx-auto"
+                className="text-sm md:text-lg font-mono text-[#0C1014]/75 max-w-3xl mx-auto"
               >
                 Drag the slider to see a real Blue Bunny living room turnover go from checkout condition to guest-ready shine.
               </p>

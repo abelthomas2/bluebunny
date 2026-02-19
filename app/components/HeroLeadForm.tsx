@@ -93,7 +93,7 @@ export default function HeroLeadForm() {
           : 'Get a Quote';
 
   return (
-    <div className="bg-white p-4 rounded-lg max-w-6xl mx-auto w-full">
+    <div className="bg-white p-3 md:p-4 rounded-lg max-w-6xl mx-auto w-full">
       <form className="flex flex-col gap-3" onSubmit={handleSubmit} noValidate>
         <div className="grid grid-cols-1 md:grid-cols-7 gap-3">
           <div className="md:col-span-1 flex flex-col gap-1">
@@ -105,7 +105,7 @@ export default function HeroLeadForm() {
               required
               aria-invalid={Boolean(fieldErrors.zipCode)}
               aria-describedby={fieldErrors.zipCode ? 'zipCode-error' : undefined}
-              className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
+              className="px-3 py-2.5 md:px-4 md:py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-sm md:text-base w-full focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
             />
             {fieldErrors.zipCode && (
               <p id="zipCode-error" className="text-xs text-red-600 font-mono text-left">
@@ -122,7 +122,7 @@ export default function HeroLeadForm() {
               id="bedrooms"
               name="bedrooms"
               aria-label="Bedrooms"
-              className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full appearance-none bg-white bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
+              className="px-3 py-2.5 md:px-4 md:py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-sm md:text-base w-full appearance-none bg-white bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
               style={{
                 backgroundImage:
                   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%230C1014' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E\")",
@@ -143,7 +143,7 @@ export default function HeroLeadForm() {
               id="bathrooms"
               name="bathrooms"
               aria-label="Bathrooms"
-              className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full appearance-none bg-white bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
+              className="px-3 py-2.5 md:px-4 md:py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-sm md:text-base w-full appearance-none bg-white bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
               style={{
                 backgroundImage:
                   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%230C1014' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E\")",
@@ -161,7 +161,7 @@ export default function HeroLeadForm() {
               type="text"
               placeholder="Name"
               name="name"
-              className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m w-full focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
+              className="px-3 py-2.5 md:px-4 md:py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-sm md:text-base w-full focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
             />
           </div>
 
@@ -174,7 +174,7 @@ export default function HeroLeadForm() {
               inputMode="tel"
               aria-invalid={Boolean(fieldErrors.phone)}
               aria-describedby={fieldErrors.phone ? 'phone-error' : undefined}
-              className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m w-full focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
+              className="px-3 py-2.5 md:px-4 md:py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-sm md:text-base w-full focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
             />
             {fieldErrors.phone && (
               <p id="phone-error" className="text-xs text-red-600 font-mono text-left">
@@ -191,7 +191,7 @@ export default function HeroLeadForm() {
               required
               aria-invalid={Boolean(fieldErrors.email)}
               aria-describedby={fieldErrors.email ? 'email-error' : undefined}
-              className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m w-full focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
+              className="px-3 py-2.5 md:px-4 md:py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-sm md:text-base w-full focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
             />
             {fieldErrors.email && (
               <p id="email-error" className="text-xs text-red-600 font-mono text-left">
@@ -204,7 +204,7 @@ export default function HeroLeadForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-8 py-3 bg-[#2978A5] text-white font-mono text-m font-medium rounded w-full hover:bg-[#0C1014] transition-colors whitespace-nowrap flex items-center justify-center disabled:opacity-75"
+              className="px-6 py-2.5 md:px-8 md:py-3 bg-[#2978A5] text-white font-mono text-sm md:text-base font-medium rounded w-full hover:bg-[#0C1014] transition-colors whitespace-nowrap flex items-center justify-center disabled:opacity-75"
             >
               {buttonLabel}
             </button>
@@ -222,7 +222,7 @@ export default function HeroLeadForm() {
               aria-describedby={fieldErrors.consent ? 'consent-error' : undefined}
               className="mt-1"
             />
-            <label htmlFor="consent" className="text-sm text-[#0C1014] font-mono text-left">
+            <label htmlFor="consent" className="text-xs md:text-sm text-[#0C1014] font-mono text-left">
               I consent to Blue Bunny Turnover Services collecting my phone number and potentially contacting me, in compliance with US regulations.
             </label>
           </div>

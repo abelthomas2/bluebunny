@@ -5,8 +5,8 @@ const cardClass =
   "rounded-3xl border border-[#5DAFD5] bg-white p-8 md:p-10 space-y-4";
 const sectionHeadingClass = "text-2xl font-semibold text-[#0C1014]";
 const subheadingClass = "text-lg font-semibold text-[#2978A5]";
-const bodyTextClass = "text-[#0C1014]/80 leading-relaxed";
-const listClass = "list-disc space-y-2 pl-6 text-[#0C1014]/80";
+const bodyTextClass = "text-[#0C1014]/90 leading-relaxed";
+const listClass = "list-disc space-y-2 pl-6 text-[#0C1014]/90";
 
 const infoProvideActions = [
   "Request a quote or service through our website",
@@ -103,11 +103,11 @@ export default function PrivacyPage() {
           <h1 className="text-4xl md:text-5xl font-semibold text-[#0C1014]">
             Privacy Policy
           </h1>
-          <div className="space-y-2 text-base md:text-lg text-[#0C1014]/70">
+          <div className="space-y-2 text-base md:text-lg text-[#0C1014]/75">
             <p>Effective Date: November 14, 2025</p>
             <p>Last Updated: November 14, 2025</p>
           </div>
-          <p className="text-base md:text-lg text-[#0C1014]/80 leading-relaxed">
+          <p className="text-base md:text-lg text-[#0C1014]/90 leading-relaxed">
             Blue Bunny Turnover Services (“we,” “us,” or “our”) is committed to protecting your
             privacy. This policy explains how we collect, use, disclose, and safeguard your
             information when you use our website, services, or interact with our team.
@@ -116,7 +116,7 @@ export default function PrivacyPage() {
 
         <section className={cardClass}>
           <h2 className={sectionHeadingClass}>Information We Collect</h2>
-          <div className="space-y-5 text-[#0C1014]/80 leading-relaxed">
+          <div className="space-y-5 text-[#0C1014]/90 leading-relaxed">
             <div className="space-y-3">
               <h3 className={subheadingClass}>Information You Provide to Us</h3>
               <p className={bodyTextClass}>We collect information that you voluntarily provide when you:</p>
@@ -177,7 +177,7 @@ export default function PrivacyPage() {
             We do not sell, rent, or trade your personal information. We may share it only under the
             circumstances below.
           </p>
-          <div className="space-y-4 text-[#0C1014]/80 leading-relaxed">
+          <div className="space-y-4 text-[#0C1014]/90 leading-relaxed">
             <div className="space-y-2">
               <h3 className={subheadingClass}>With Service Providers</h3>
               <p className={bodyTextClass}>
@@ -233,7 +233,7 @@ export default function PrivacyPage() {
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <p className="text-[#0C1014]/70">
+          <p className="text-[#0C1014]/75">
             However, no method of transmission over the internet or electronic storage is 100%
             secure. While we strive to protect your information, we cannot guarantee absolute
             security.
@@ -250,7 +250,7 @@ export default function PrivacyPage() {
             <li>Comply with legal, accounting, or reporting requirements</li>
             <li>Resolve disputes and enforce our agreements</li>
           </ul>
-          <p className="text-[#0C1014]/70">
+          <p className="text-[#0C1014]/75">
             Property access information is deleted within 30 days of service termination unless
             legally required to retain it longer. Turnover reports and photos are retained for up to
             2 years for quality assurance and dispute resolution.
@@ -259,7 +259,7 @@ export default function PrivacyPage() {
 
         <section className={cardClass}>
           <h2 className={sectionHeadingClass}>Your Rights and Choices</h2>
-          <div className="space-y-4 text-[#0C1014]/80 leading-relaxed">
+          <div className="space-y-4 text-[#0C1014]/90 leading-relaxed">
             <div>
               <h3 className={subheadingClass}>Access and Correction</h3>
               <p className={bodyTextClass}>
@@ -289,7 +289,7 @@ export default function PrivacyPage() {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <p className="text-[#0C1014]/70">
+              <p className="text-[#0C1014]/75">
                 Note that opting out of service-related communications (turnover confirmations,
                 damage reports) may affect our ability to provide services.
               </p>
@@ -314,7 +314,7 @@ export default function PrivacyPage() {
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <p className="text-[#0C1014]/70">
+          <p className="text-[#0C1014]/75">
             To exercise these rights, contact us at{" "}
             <a
               href="mailto:hello@gobluebunny.com"
@@ -362,7 +362,7 @@ export default function PrivacyPage() {
             <li>Sending an email to the address associated with your account</li>
             <li>Providing notice through our services</li>
           </ul>
-          <p className="text-[#0C1014]/70">
+          <p className="text-[#0C1014]/75">
             Your continued use of our services after changes take effect constitutes acceptance of
             the updated policy.
           </p>
@@ -395,7 +395,7 @@ export default function PrivacyPage() {
               </a>
             </p>
             <p>Hours: Daily support from 8am to 8pm ET</p>
-            <p className="text-[#0C1014]/70">
+            <p className="text-[#0C1014]/75">
               For privacy-specific inquiries, please include “Privacy Request” in your email subject
               line. We will respond within 30 days of receiving your request.
             </p>
@@ -413,7 +413,7 @@ export default function PrivacyPage() {
 
         <section className="rounded-3xl border border-[#2978A5] bg-white/80 p-8 space-y-4">
           <h2 className="text-2xl font-semibold text-[#0C1014]">Need to talk to a human?</h2>
-          <p className="text-[#0C1014]/80 leading-relaxed">
+          <p className="text-[#0C1014]/90 leading-relaxed">
             Reach out any time if you want us to update, export, or delete the information we have on
             file.
           </p>

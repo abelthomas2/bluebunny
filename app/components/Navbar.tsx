@@ -26,7 +26,7 @@ export default function Navbar() {
             <a href="#home" className="flex items-center gap-3">
               <Image
                 src="/banner-logo.png"
-                alt="Blue Bunny Rental Cleaners Logo"
+                alt="Blue Bunny Turnover Services Logo"
                 width={15000}
                 height={5000}
                 className="h-16 md:h-19 w-auto"

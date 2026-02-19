@@ -87,9 +87,9 @@ const ccpaRights = [
 ];
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Blue Bunny Rental Cleaners",
+  title: "Privacy Policy | Blue Bunny Turnover Services",
   description:
-    "Learn how Blue Bunny Rental Cleaners collects, uses, and protects your information when you request short-term rental cleaning services.",
+    "Learn how Blue Bunny Turnover Services collects, uses, and protects your information when you request short-term rental cleaning services.",
 };
 
 export default function PrivacyPage() {
@@ -108,7 +108,7 @@ export default function PrivacyPage() {
             <p>Last Updated: November 14, 2025</p>
           </div>
           <p className="text-base md:text-lg text-[#0C1014]/80 leading-relaxed">
-            Blue Bunny Rental Cleaners (“we,” “us,” or “our”) is committed to protecting your
+            Blue Bunny Turnover Services (“we,” “us,” or “our”) is committed to protecting your
             privacy. This policy explains how we collect, use, disclose, and safeguard your
             information when you use our website, services, or interact with our team.
           </p>
@@ -214,7 +214,7 @@ export default function PrivacyPage() {
             <div className="space-y-2">
               <h3 className={subheadingClass}>Business Transfers</h3>
               <p className={bodyTextClass}>
-                If Blue Bunny Rental Cleaners is involved in a merger, acquisition, or sale of
+                If Blue Bunny Turnover Services is involved in a merger, acquisition, or sale of
                 assets, your information may be transferred as part of that transaction. We will
                 notify you of any such change and any choices you may have.
               </p>
@@ -375,7 +375,7 @@ export default function PrivacyPage() {
             practices, please contact us:
           </p>
           <div className="space-y-2 text-[#0C1014]">
-            <p className="font-semibold">Blue Bunny Rental Cleaners</p>
+            <p className="font-semibold">Blue Bunny Turnover Services</p>
             <p>
               Email:{" "}
               <a

@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Blue Bunny Rental Cleaners | Professional Airbnb & STR Cleaning",
+  title: "Blue Bunny Turnover Services | Professional Airbnb & STR Cleaning",
   description:
     "Professional cleaning services specializing in Airbnb and short-term rental turnovers. Fast, reliable, and thorough cleaning to keep your guests happy.",
   icons: {

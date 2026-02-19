@@ -104,7 +104,7 @@ export default function Hero() {
       <div className="absolute inset-0">
         <Image
           src="/banner4.png"
-          alt="Blue Bunny Rental Cleaners"
+          alt="Blue Bunny Turnover Services"
           fill
           priority
           quality={100}
@@ -249,7 +249,7 @@ export default function Hero() {
                     className="mt-1"
                   />
                   <label htmlFor="consent" className="text-sm text-[#0C1014] font-mono text-left">
-                    I consent to Blue Bunny Rental Cleaners collecting my phone number and potentially contacting me, in compliance with US regulations.
+                    I consent to Blue Bunny Turnover Services collecting my phone number and potentially contacting me, in compliance with US regulations.
                   </label>
                 </div>
                 {fieldErrors.consent && (

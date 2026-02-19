@@ -2,18 +2,18 @@ import Image from 'next/image';
 
 const highlightItems = [
   {
-    title: 'Hands-Off Turnovers',
-    description: "Calendar sync, smart checklists, and supply tracking ensure every turnover happens seamlessly — without you lifting a finger.",
-    image: '/4p.png',
-  },
-  {
     title: 'Detailed Turnover Reports',
     description: "Within 30 minutes, you'll receive damage checks, inventory counts, before-and-after photos, and any action items for your team.",
     image: '/3p.jpg',
   },
   {
-    title: 'Dedicated STR Specialists',
-    description: "Our vacation-rental-only crew is trained on staging and guest-ready standards to keep every property consistently five-star.",
+    title: 'Hands-Off Turnovers',
+    description: "Calendar sync, smart checklists, and supply tracking ensure every turnover happens seamlessly — without you lifting a finger.",
+    image: '/4p.png',
+  },
+  {
+    title: 'Speedy Service',
+    description: "Your vacation rental will always be reset and ready by check-in — even on tight same-day turns.",
     image: '/keurig.jpg',
   },
 ];

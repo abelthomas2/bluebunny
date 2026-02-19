@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="flex flex-col gap-8 md:flex-row md:justify-between">
           <div className="space-y-3 md:max-w-md">
             <p className="font-mono text-xs uppercase tracking-[0.4em] text-[#5DAFD5]">
-              BLUE BUNNY RENTAL CLEANERS
+              BLUE BUNNY TURNOVER SERVICES
             </p>
             <p className="text-xl font-semibold text-white">
               Orlando’s #1 STR Turnover Service.
@@ -56,7 +56,7 @@ export default function Footer() {
             <a href="https://www.facebook.com/people/Blue-Bunny-Rental-Cleaners/61583323305953/" className="transition hover:text-white">Facebook</a>
           </div>
           <p className="text-[#F5F0DF]">
-            © {currentYear} Blue Bunny Rental Cleaners. All rights reserved.
+            © {currentYear} Blue Bunny Turnover Services. All rights reserved.
           </p>
         </div>
       </div>

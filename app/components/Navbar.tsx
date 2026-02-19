@@ -27,11 +27,11 @@ export default function Navbar() {
               <Image
                 src="/banner-logo.png"
                 alt="Blue Bunny Turnover Services Logo"
-                width={15000}
-                height={5000}
+                width={900}
+                height={300}
+                sizes="(min-width: 768px) 228px, 192px"
+                loading="eager"
                 className="h-16 md:h-19 w-auto"
-                quality={100}
-                priority
               />
             </a>
           </div>

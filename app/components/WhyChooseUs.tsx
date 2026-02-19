@@ -9,7 +9,7 @@ const highlightItems = [
   {
     title: 'Hands-Off Turnovers',
     description: "Calendar sync, smart checklists, and supply tracking ensure every turnover happens seamlessly — without you lifting a finger.",
-    image: '/4p.png',
+    image: '/4p.jpg',
   },
   {
     title: 'Speedy Service',
@@ -91,10 +91,9 @@ export default function WhyChooseUs() {
                     src={item.image ?? '/banner.png'}
                     alt={`${item.title} visual`}
                     fill
-                    sizes="(min-width: 768px) 320px, 100vw"
+                    sizes="(min-width: 1280px) 380px, (min-width: 768px) 32vw, 100vw"
                     className="object-cover"
-                    quality={100}
-                    priority={item.title === 'Hands-Off Turnovers'}
+                    quality={70}
                   />
                 </div>
               </article>

@@ -1,6 +1,5 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import { Analytics } from "@vercel/analytics/next"; 
 import WhyChooseUs from './components/WhyChooseUs';
 import OurProcess from './components/OurProcess';
 import FAQ from './components/FAQ';
@@ -23,7 +22,6 @@ export default function Home() {
         <Contact />
       </div>
       <Footer />
-      <Analytics />
     </div>
   );
 }

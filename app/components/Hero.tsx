@@ -103,11 +103,12 @@ export default function Hero() {
       {/* Hero Image */}
       <div className="absolute inset-0">
         <Image
-          src="/banner4.png"
+          src="/banner4.jpg"
           alt="Blue Bunny Turnover Services"
           fill
+          sizes="100vw"
           priority
-          quality={100}
+          quality={70}
           className="object-cover object-[75%_50%]"
         />
       </div>
@@ -151,8 +152,13 @@ export default function Hero() {
                 </div>
 
                 <div className="md:col-span-1 flex flex-col gap-1">
+                  <label htmlFor="bedrooms" className="sr-only">
+                    Bedrooms
+                  </label>
                   <select
+                    id="bedrooms"
                     name="bedrooms"
+                    aria-label="Bedrooms"
                     className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full appearance-none bg-white bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
                     style={{
                       backgroundImage:
@@ -167,8 +173,13 @@ export default function Hero() {
                 </div>
 
                 <div className="md:col-span-1 flex flex-col gap-1">
+                  <label htmlFor="bathrooms" className="sr-only">
+                    Bathrooms
+                  </label>
                   <select
+                    id="bathrooms"
                     name="bathrooms"
+                    aria-label="Bathrooms"
                     className="px-4 py-3 border border-[#90A4AE] rounded text-[#0C1014] font-mono text-m md:text-m w-full appearance-none bg-white bg-[length:16px_16px] bg-[right_0.6rem_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-[#5DAFD5] focus:border-[#5DAFD5]"
                     style={{
                       backgroundImage:

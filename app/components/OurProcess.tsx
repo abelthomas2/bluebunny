@@ -249,7 +249,7 @@ export default function OurProcess() {
                   fill
                   sizes="(min-width: 1280px) 768px, (min-width: 768px) 75vw, 100vw"
                   className="object-cover"
-                  quality={100}
+                  quality={70}
                 />
 
                 <div
@@ -262,7 +262,7 @@ export default function OurProcess() {
                     fill
                     sizes="(min-width: 1280px) 768px, (min-width: 768px) 75vw, 100vw"
                     className="object-cover"
-                    quality={100}
+                    quality={70}
                   />
                 </div>
 

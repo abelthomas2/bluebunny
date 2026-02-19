@@ -200,29 +200,6 @@ export default function OurProcess() {
             </div>
           </div>
 
-          <div className="mt-10 overflow-x-auto md:overflow-visible">
-            <ol className="flex min-w-max items-center gap-3 text-sm font-mono text-[#0C1014]/70 md:min-w-0 md:justify-center md:gap-2.5 md:text-[0.65rem]">
-              {blueBunnySteps.map((step, index) => (
-                <li key={`${step.step}-rail`} className="flex items-center gap-3 md:gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setCurrentIndex(index)}
-                    className={`inline-flex h-10 min-w-[3.5rem] items-center justify-center rounded-full border px-4 text-xs uppercase tracking-[0.3em] transition md:h-9 md:min-w-[3rem] md:px-3 md:tracking-[0.25em] ${
-                      index === currentIndex
-                        ? 'border-[#2978A5] bg-[#2978A5] text-[#FBF9F2]'
-                        : 'border-[#2978A5]/30 bg-white text-[#2978A5]'
-                    }`}
-                  >
-                    {index + 1}
-                  </button>
-                  {index < blueBunnySteps.length - 1 && (
-                    <span className="hidden md:block h-px w-9 border-t border-dashed border-[#2978A5]/40" />
-                  )}
-                </li>
-              ))}
-            </ol>
-          </div>
-
           </div>
 
           <div className="rounded-3xl border border-[#2978A5]/30 bg-gradient-to-br from-white via-[#F7FAFF] to-[#EEF3FF] px-5 py-8 md:px-10 md:py-12 space-y-8 shadow-[0_30px_90px_rgba(12,16,20,0.08)]">
@@ -284,7 +261,11 @@ export default function OurProcess() {
                 </span>
               </div>
 
+              <label htmlFor="before-after-slider" className="sr-only">
+                Before and after comparison
+              </label>
               <input
+                id="before-after-slider"
                 type="range"
                 min={0}
                 max={100}

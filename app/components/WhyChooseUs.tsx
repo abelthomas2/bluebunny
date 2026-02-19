@@ -5,16 +5,19 @@ const highlightItems = [
     title: 'Detailed Turnover Reports',
     description: "Within 30 minutes, you'll receive damage checks, inventory counts, before-and-after photos, and any action items for your team.",
     image: '/3p.jpg',
+    quality: 70,
   },
   {
     title: 'Hands-Off Turnovers',
     description: "Calendar sync, smart checklists, and supply tracking ensure every turnover happens seamlessly — without you lifting a finger.",
     image: '/4p.jpg',
+    quality: 58,
   },
   {
     title: 'Speedy Service',
     description: "Your vacation rental will always be reset and ready by check-in — even on tight same-day turns.",
     image: '/keurig.jpg',
+    quality: 70,
   },
 ];
 
@@ -93,7 +96,7 @@ export default function WhyChooseUs() {
                     fill
                     sizes="(min-width: 1280px) 380px, (min-width: 768px) 32vw, 100vw"
                     className="object-cover"
-                    quality={70}
+                    quality={item.quality}
                   />
                 </div>
               </article>

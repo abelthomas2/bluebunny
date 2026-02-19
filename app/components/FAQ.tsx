@@ -1,7 +1,3 @@
-'use client';
-
-import { useState } from 'react';
-
 type FAQItem = {
   question: string;
   answer: string;
@@ -21,22 +17,22 @@ const faqItems: FAQItem[] = [
   {
     question: 'Do I need to provide cleaning supplies?',
     answer:
-      'No. Our team brings all professional-grade cleaning solutions, tools, and equipment. You only need to keep guest consumables stocked on-site (toilet paper, paper towels, dish soap, laundry pods, coffee, etc.). We’ll alert you when inventory runs low.',
+      'No. Our team brings all professional-grade cleaning solutions, tools, and equipment. You only need to keep guest consumables stocked on-site (toilet paper, paper towels, dish soap, laundry pods, coffee, etc.). We will alert you when inventory runs low.',
   },
   {
     question: 'What if something breaks or goes missing during a turnover?',
     answer:
-      'Every clean starts with “as-found” photos before we touch anything. If we discover damage or missing items, it’s documented with timestamps and reported within 30 minutes of completing the turnover. This protects both you and your guests.',
+      'Every clean starts with "as-found" photos before we touch anything. If we discover damage or missing items, it is documented with timestamps and reported within 30 minutes of completing the turnover. This protects both you and your guests.',
   },
   {
     question: 'Can you handle same-day turnovers?',
     answer:
-      'Yes. Same-day turnovers are our specialty. As long as there’s enough time between checkout and check-in (typically 3–4 hours minimum for a standard property), we’ll have it guest-ready on schedule.',
+      'Yes. Same-day turnovers are our specialty. As long as there is enough time between checkout and check-in (typically 3–4 hours minimum for a standard property), we will have it guest-ready on schedule.',
   },
   {
     question: 'How do I know the cleaning is actually done?',
     answer:
-      'You’ll receive a detailed turnover report with timestamped photos of every room within 30 minutes of lockup. The report includes before and after shots, inventory status, any maintenance notes, and confirmation that all systems are set for guest arrival.',
+      'You will receive a detailed turnover report with timestamped photos of every room within 30 minutes of lockup. The report includes before and after shots, inventory status, any maintenance notes, and confirmation that all systems are set for guest arrival.',
   },
   {
     question: 'What areas are covered in a standard turnover?',
@@ -51,7 +47,7 @@ const faqItems: FAQItem[] = [
   {
     question: 'What if a guest leaves the place trashed?',
     answer:
-      'If our cleaner arrives and finds evidence of a party, excessive damage, or biohazard conditions, they’ll document everything and contact you immediately before proceeding. We’ll provide a damage estimate and can coordinate additional cleaning time if needed, billed separately from your standard turnover rate.',
+      'If our cleaner arrives and finds evidence of a party, excessive damage, or biohazard conditions, they will document everything and contact you immediately before proceeding. We will provide a damage estimate and can coordinate additional cleaning time if needed, billed separately from your standard turnover rate.',
   },
   {
     question: 'Are your cleaners insured and background checked?',
@@ -61,12 +57,6 @@ const faqItems: FAQItem[] = [
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const toggleIndex = (index: number) => {
-    setOpenIndex((current) => (current === index ? null : index));
-  };
-
   return (
     <section
       id="faq"
@@ -86,42 +76,26 @@ export default function FAQ() {
         </header>
 
         <div className="space-y-4">
-          {faqItems.map((faq, index) => {
-            const isOpen = openIndex === index;
-            return (
-              <article
-                key={faq.question}
-                className={`rounded-3xl px-5 py-4 md:px-6 md:py-6 border transition-all duration-300 ${
-                  isOpen
-                    ? 'border-[#5DAFD5] bg-white shadow-[0_25px_65px_rgba(12,16,20,0.08)]'
-                    : 'border-[#2978A5]/15 bg-white/85 shadow-[0_15px_45px_rgba(12,16,20,0.05)]'
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleIndex(index)}
-                  className="flex w-full items-center justify-between gap-4 text-left"
-                  aria-expanded={isOpen}
-                >
-                  <span className="text-lg md:text-xl font-semibold text-[#0C1014] font-sans">
-                    {faq.question}
-                  </span>
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#2978A5]/40 text-[#2978A5] text-lg font-semibold">
-                    {isOpen ? '−' : '+'}
-                  </span>
-                </button>
-                <div
-                  className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${
-                    isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <p className="mt-4 text-base md:text-lg font-mono text-[#0C1014]/80">
-                    {faq.answer}
-                  </p>
-                </div>
-              </article>
-            );
-          })}
+          {faqItems.map((faq, index) => (
+            <details
+              key={faq.question}
+              open={index === 0}
+              className="group rounded-3xl border border-[#2978A5]/15 bg-white/85 px-5 py-4 md:px-6 md:py-6 shadow-[0_15px_45px_rgba(12,16,20,0.05)] open:border-[#5DAFD5] open:bg-white open:shadow-[0_25px_65px_rgba(12,16,20,0.08)] transition-all duration-300"
+            >
+              <summary className="flex w-full cursor-pointer items-center justify-between gap-4 text-left list-none [&::-webkit-details-marker]:hidden">
+                <span className="text-lg md:text-xl font-semibold text-[#0C1014] font-sans">
+                  {faq.question}
+                </span>
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#2978A5]/40 text-[#2978A5] text-lg font-semibold">
+                  <span className="group-open:hidden">+</span>
+                  <span className="hidden group-open:inline">−</span>
+                </span>
+              </summary>
+              <p className="mt-4 text-base md:text-lg font-mono text-[#0C1014]/80">
+                {faq.answer}
+              </p>
+            </details>
+          ))}
         </div>
       </div>
     </section>

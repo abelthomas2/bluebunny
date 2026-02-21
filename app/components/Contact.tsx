@@ -12,7 +12,7 @@ export default function Contact() {
           <h2 className="text-3xl md:text-5xl font-semibold text-[#0C1014]">
             Talk with the Blue Bunny team
           </h2>
-          <p className="text-sm md:text-xl font-mono text-[#0C1014] max-w-[23rem] sm:max-w-[24rem] md:max-w-3xl mx-auto">
+          <p className="text-m md:text-xl font-mono text-[#0C1014] max-w-[23rem] sm:max-w-[24rem] md:max-w-3xl mx-auto">
             Feel free to reach out through phone or email and share your turnover schedule. Questions and concerns are welcome as well.
           </p>
         </div>

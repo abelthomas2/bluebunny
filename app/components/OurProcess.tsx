@@ -102,7 +102,7 @@ export default function OurProcess() {
           <h2 className="text-3xl md:text-5xl font-semibold text-[#0C1014]">
             From checkout to guest-ready
           </h2>
-          <p className="text-sm md:text-xl font-mono text-[#0C1014]/90 max-w-[23rem] sm:max-w-[24rem] md:max-w-3xl mx-auto">
+          <p className="text-m md:text-xl font-mono text-[#0C1014]/90 max-w-[23rem] sm:max-w-[24rem] md:max-w-3xl mx-auto">
             We follow the same proven system for every turnover. No shortcuts, no guesswork. Just a methodical approach that keeps your properties consistently five-star, whether you have one listing or twenty.
           </p>
         </header>

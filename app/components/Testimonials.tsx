@@ -373,7 +373,7 @@ export default async function Testimonials() {
           <h2 className="text-3xl md:text-5xl font-semibold text-[#0C1014]">
             What hosts say about Blue Bunny
           </h2>
-          <p className="text-sm md:text-xl font-mono text-[#0C1014]/90 max-w-[23rem] sm:max-w-[24rem] md:max-w-3xl mx-auto">
+          <p className="text-m md:text-xl font-mono text-[#0C1014]/90 max-w-[23rem] sm:max-w-[24rem] md:max-w-3xl mx-auto">
             Live reviews from our Google Business Profile.
           </p>
         </header>

@@ -1,6 +1,7 @@
 const currentYear = new Date().getFullYear();
 
 const quickLinks = [
+  { label: 'Testimonials', href: '#testimonials' },
   { label: 'Our Process', href: '#our-process' },
   { label: 'Why Choose Us', href: '#why-choose-us' },
   { label: 'Contact', href: '#contact' },

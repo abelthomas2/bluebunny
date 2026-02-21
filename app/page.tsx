@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Testimonials from './components/Testimonials';
 import WhyChooseUs from './components/WhyChooseUs';
 import OurProcess from './components/OurProcess';
 import FAQ from './components/FAQ';
@@ -13,6 +14,8 @@ export default function Home() {
       <div className="bg-[#5DAFD5]">
         <Navbar />
         <Hero />
+        <Testimonials />
+        <SectionDivider />
         <WhyChooseUs />
         <SectionDivider />
         <OurProcess />

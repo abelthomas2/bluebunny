@@ -1,18 +1,63 @@
 'use client';
 
-import { useState } from 'react';
+import { type MouseEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  useEffect(() => {
+    let touchStartY = 0;
+
+    const handleTouchStart = (event: TouchEvent) => {
+      if (event.touches.length > 0) {
+        touchStartY = event.touches[0].clientY;
+      }
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      if (event.touches.length === 0) return;
+
+      const isPullingDown = event.touches[0].clientY > touchStartY;
+      if (window.scrollY <= 0 && isPullingDown) {
+        event.preventDefault();
+      }
+    };
+
+    const handleWheel = (event: WheelEvent) => {
+      if (window.scrollY <= 0 && event.deltaY < 0) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
   const navLinks = [
     { name: 'Home', href: '#home' },
+    { name: 'Testimonials', href: '#testimonials' },
     { name: 'Why Choose Us', href: '#why-choose-us' },
     { name: 'Our Process', href: '#our-process' },
     { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#contact' },
   ];
+
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    setIsMenuOpen(false);
+
+    if (href === '#home') {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav
@@ -42,7 +87,8 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-[#0C1014] hover:text-[#F5F0DF] transition-colors font-sans text-base font-medium"
+                onClick={(event) => handleNavClick(event, link.href)}
+                className="text-[#0C1014] hover:text-white transition-colors font-sans text-base font-medium"
               >
                 {link.name}
               </a>
@@ -87,8 +133,8 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-[#0C1014] hover:text-[#F5F0DF] transition-colors font-sans text-sm py-1.5 font-medium"
+                onClick={(event) => handleNavClick(event, link.href)}
+                className="text-[#0C1014] hover:text-white transition-colors font-sans text-sm py-1.5 font-medium"
               >
                 {link.name}
               </a>

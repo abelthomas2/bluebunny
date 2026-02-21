@@ -90,6 +90,14 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Blue Bunny Turnover Services",
   description:
     "Learn how Blue Bunny Turnover Services collects, uses, and protects your information when you request short-term rental cleaning services.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function PrivacyPage() {

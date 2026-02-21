@@ -54,6 +54,7 @@ export default function Footer() {
             <a href="https://www.instagram.com/bluebunnyrentalcleaners" className="transition hover:text-white">Instagram</a>
             <a href="https://www.tiktok.com/@bluebunnyrentalcleaners" className="transition hover:text-white">TikTok</a>
             <a href="https://www.facebook.com/people/Blue-Bunny-Rental-Cleaners/61583323305953/" className="transition hover:text-white">Facebook</a>
+            <a href="/privacy" className="transition hover:text-white">Privacy Policy</a>
           </div>
           <p className="text-white">
             © {currentYear} Blue Bunny Turnover Services. All rights reserved.

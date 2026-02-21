@@ -2,10 +2,10 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="bg-gradient-to-br from-white via-[#F5FBFF] to-[#FDF4EC] pt-15 md:pt-20 pb-15 md:pb-20 px-5 text-[#0C1014] scroll-mt-16 md:scroll-mt-20"
+      className="section-shell section-anchor bg-gradient-to-br from-white via-[#F5FBFF] to-[#FDF4EC] text-[#0C1014]"
     >
-      <div className="max-w-5xl mx-auto space-y-10 md:space-y-12">
-        <div className="text-center space-y-3 md:space-y-4">
+      <div className="section-stack max-w-5xl mx-auto">
+        <div className="section-header-stack text-center">
           <p className="text-sm md:text-lg font-mono uppercase tracking-[0.35em] text-[#2978A5]">
             CONTACT
           </p>

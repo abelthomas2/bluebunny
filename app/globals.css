@@ -34,6 +34,45 @@ h1, h2, h3, h4, h5, h6 {
   color: inherit;
 }
 
+/* Shared layout rhythm for all major sections/pages */
+.section-shell {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 3.75rem;
+  padding-bottom: 3.75rem;
+}
+
+.section-anchor {
+  scroll-margin-top: 4rem;
+}
+
+.section-stack > * + * {
+  margin-top: 2.5rem;
+}
+
+.section-header-stack > * + * {
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .section-shell {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .section-anchor {
+    scroll-margin-top: 5rem;
+  }
+
+  .section-stack > * + * {
+    margin-top: 3rem;
+  }
+
+  .section-header-stack > * + * {
+    margin-top: 1rem;
+  }
+}
+
 /* Custom scrollbar styling */
 ::-webkit-scrollbar {
   width: 0px;

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import PmOnboardingForm from '@/app/components/PmOnboardingForm';
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/app/lib/siteMetadata';
 
 type GooglePlacesV1SearchResponse = {
   places?: Array<{
@@ -82,7 +83,7 @@ const pmValueCards = [
   {
     title: 'Reporting + proof',
     description:
-      'Timestamped photos + turnover report fast after lockup-so your team can act before check-in.',
+      'Timestamped photos + turnover report fast after lockup — so your team can act before check-in.',
   },
   {
     title: 'Scheduling reliability',
@@ -94,7 +95,7 @@ const pmValueCards = [
   },
   {
     title: 'Scale support',
-    description: 'Works whether you manage one listing or twenty-without adding ops overhead.',
+    description: 'Works whether you manage one listing or twenty — without adding ops overhead.',
   },
 ];
 
@@ -314,9 +315,8 @@ function StarRow({ rating }: { rating: number }) {
 }
 
 export const metadata: Metadata = {
-  title: 'Turnover Cleaning for Property Managers | Blue Bunny',
-  description:
-    'Turnover cleaning built for Orlando property managers with calendar-synced scheduling, fast reporting, and same-day turnover support.',
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
 };
 
 export default async function TurnoverCleaningPage() {
@@ -397,14 +397,14 @@ export default async function TurnoverCleaningPage() {
                   Turnover Cleaning Built for Orlando Property Managers
                 </h1>
                 <p className="mt-4 text-sm md:text-lg font-mono text-white/90 max-w-3xl">
-                  Calendar-synced scheduling, consistent checklists, and fast reporting-so your
+                  Calendar-synced scheduling, consistent checklists, and fast reporting — so your
                   portfolio runs without cleaner chaos.
                 </p>
 
                 <ul className="mt-6 grid gap-3">
                   <li className="rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-sm md:text-base font-mono">
                     <strong className="font-bold text-white">
-                      Detailed Turnover Reports (within 30 minutes):
+                      Detailed Turnover Reports:
                     </strong>{' '}
                     damage checks, inventory counts, before/after photos, action items
                   </li>

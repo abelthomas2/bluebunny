@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/app/lib/siteMetadata";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -8,9 +9,8 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Blue Bunny Turnover Services | Professional Airbnb & STR Cleaning",
-  description:
-    "Professional cleaning services specializing in Airbnb and short-term rental turnovers. Fast, reliable, and thorough cleaning to keep your guests happy.",
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",

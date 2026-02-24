@@ -118,7 +118,7 @@ export default function PmOnboardingForm() {
           PM Intake Form
         </p>
         <h3 className="mt-1 text-2xl md:text-3xl font-semibold text-[#0C1014]">
-          Request PM Onboarding
+          Request Onboarding
         </h3>
       </div>
 

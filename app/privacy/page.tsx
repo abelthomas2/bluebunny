@@ -111,7 +111,7 @@ export default function PrivacyPage() {
           <h1 className="text-4xl md:text-5xl font-semibold text-[#0C1014]">
             Privacy Policy
           </h1>
-          <div className="space-y-2 text-base md:text-lg text-[#0C1014]/75">
+          <div className="space-y-2 text-base md:text-lg text-[#0C1014]/85">
             <p>Effective Date: November 14, 2025</p>
             <p>Last Updated: November 14, 2025</p>
           </div>
@@ -241,7 +241,7 @@ export default function PrivacyPage() {
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <p className="text-[#0C1014]/75">
+          <p className="text-[#0C1014]/85">
             However, no method of transmission over the internet or electronic storage is 100%
             secure. While we strive to protect your information, we cannot guarantee absolute
             security.
@@ -258,7 +258,7 @@ export default function PrivacyPage() {
             <li>Comply with legal, accounting, or reporting requirements</li>
             <li>Resolve disputes and enforce our agreements</li>
           </ul>
-          <p className="text-[#0C1014]/75">
+          <p className="text-[#0C1014]/85">
             Property access information is deleted within 30 days of service termination unless
             legally required to retain it longer. Turnover reports and photos are retained for up to
             2 years for quality assurance and dispute resolution.
@@ -297,7 +297,7 @@ export default function PrivacyPage() {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <p className="text-[#0C1014]/75">
+              <p className="text-[#0C1014]/85">
                 Note that opting out of service-related communications (turnover confirmations,
                 damage reports) may affect our ability to provide services.
               </p>
@@ -322,7 +322,7 @@ export default function PrivacyPage() {
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <p className="text-[#0C1014]/75">
+          <p className="text-[#0C1014]/85">
             To exercise these rights, contact us at{" "}
             <a
               href="mailto:hello@gobluebunny.com"
@@ -370,7 +370,7 @@ export default function PrivacyPage() {
             <li>Sending an email to the address associated with your account</li>
             <li>Providing notice through our services</li>
           </ul>
-          <p className="text-[#0C1014]/75">
+          <p className="text-[#0C1014]/85">
             Your continued use of our services after changes take effect constitutes acceptance of
             the updated policy.
           </p>
@@ -403,7 +403,7 @@ export default function PrivacyPage() {
               </a>
             </p>
             <p>Hours: Daily support from 8am to 8pm ET</p>
-            <p className="text-[#0C1014]/75">
+            <p className="text-[#0C1014]/85">
               For privacy-specific inquiries, please include “Privacy Request” in your email subject
               line. We will respond within 30 days of receiving your request.
             </p>

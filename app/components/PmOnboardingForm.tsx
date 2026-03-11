@@ -5,13 +5,7 @@ import { FormEvent, useState } from 'react';
 const LEAD_ENDPOINT = '/api/leads';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
-type FieldKey =
-  | 'phone'
-  | 'email'
-  | 'serviceArea'
-  | 'portfolioSize'
-  | 'pmsType'
-  | 'consent';
+type FieldKey = 'phone' | 'email' | 'portfolioSize' | 'consent';
 type FormErrors = Partial<Record<FieldKey, string>>;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,9 +20,7 @@ export default function PmOnboardingForm() {
     const errors: FormErrors = {};
     const phone = (formData.get('phone') as string | null)?.trim() ?? '';
     const email = (formData.get('email') as string | null)?.trim() ?? '';
-    const serviceArea = (formData.get('serviceArea') as string | null)?.trim() ?? '';
     const portfolioSize = (formData.get('portfolioSize') as string | null)?.trim() ?? '';
-    const pmsType = (formData.get('pmsType') as string | null)?.trim() ?? '';
     const consent = formData.get('consent');
     const phoneDigits = phone.replace(/\D/g, '');
 
@@ -40,16 +32,8 @@ export default function PmOnboardingForm() {
       errors.email = 'Enter a valid email address.';
     }
 
-    if (!serviceArea) {
-      errors.serviceArea = 'Enter a service area or zip code.';
-    }
-
     if (!portfolioSize) {
       errors.portfolioSize = 'Select your portfolio size.';
-    }
-
-    if (!pmsType) {
-      errors.pmsType = 'Select your PMS or calendar type.';
     }
 
     if (!consent) {
@@ -99,231 +83,172 @@ export default function PmOnboardingForm() {
   };
 
   const isSubmitting = formStatus === 'submitting';
-  const buttonLabel =
-    formStatus === 'success'
-      ? 'Submitted!'
-      : formStatus === 'error'
-        ? 'Try Again'
-        : isSubmitting
-          ? 'Sending...'
-          : 'Get Availability + Onboarding Steps';
+  const buttonLabel = isSubmitting ? 'Sending...' : formStatus === 'error' ? 'Try Again' : 'Get Started';
 
   return (
     <div
       id="pm-onboarding-form"
-      className="scroll-mt-43 rounded-3xl border border-[#5DAFD5]/40 bg-white p-5 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:scroll-mt-30 md:p-8"
+      className="relative scroll-mt-[5rem] md:scroll-mt-[7.5rem] rounded-3xl border border-[#E2EEF5] bg-white p-5 pb-4 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:self-center md:p-8 md:pb-6"
     >
-      <div className="mb-4 md:mb-5">
-        <p className="text-xs md:text-sm font-mono uppercase tracking-[0.28em] text-[#2978A5]">
-          PM Intake Form
+      {/* Form content — always rendered to lock card height; hidden on success */}
+      <div className={formStatus === 'success' ? 'invisible' : ''}>
+        <div className="mb-4 md:mb-5">
+          <p className="text-xs md:text-sm font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5]">
+            PM Intake Form
+          </p>
+          <h3 className="mt-2 text-3xl md:text-4xl font-semibold text-[#0C1014]">
+            Request Onboarding
+          </h3>
+        </div>
+
+        <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+          <input type="hidden" name="leadType" value="PM Onboarding - Turnover Cleaning Page" />
+
+          <div className="grid gap-3 md:grid-cols-2">
+            <div className="md:col-span-2">
+              <label htmlFor="name" className="mb-1 block text-sm font-mono text-[#0C1014]">
+                Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                placeholder="Your name"
+                className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email" className="mb-1 block text-sm font-mono text-[#0C1014]">
+                Email <span className="text-[#2978A5]">*</span>
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                required
+                aria-invalid={Boolean(fieldErrors.email)}
+                aria-describedby={fieldErrors.email ? 'email-error' : undefined}
+                placeholder="you@company.com"
+                className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
+              />
+              {fieldErrors.email && (
+                <p id="email-error" className="mt-1 text-xs font-mono text-red-600">
+                  {fieldErrors.email}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="phone" className="mb-1 block text-sm font-mono text-[#0C1014]">
+                Phone <span className="text-[#2978A5]">*</span>
+              </label>
+              <input
+                id="phone"
+                type="tel"
+                name="phone"
+                inputMode="tel"
+                required
+                aria-invalid={Boolean(fieldErrors.phone)}
+                aria-describedby={fieldErrors.phone ? 'phone-error' : undefined}
+                placeholder="(555) 555-5555"
+                className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
+              />
+              {fieldErrors.phone && (
+                <p id="phone-error" className="mt-1 text-xs font-mono text-red-600">
+                  {fieldErrors.phone}
+                </p>
+              )}
+            </div>
+
+            <div className="md:col-span-2">
+              <label htmlFor="portfolioSize" className="mb-1 block text-sm font-mono text-[#0C1014]">
+                Portfolio size <span className="text-[#2978A5]">*</span>
+              </label>
+              <select
+                id="portfolioSize"
+                name="portfolioSize"
+                required
+                defaultValue=""
+                aria-invalid={Boolean(fieldErrors.portfolioSize)}
+                aria-describedby={fieldErrors.portfolioSize ? 'portfolio-size-error' : undefined}
+                className="h-10 w-full rounded-xl border border-[#90A4AE] bg-white px-3 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
+              >
+                <option value="" disabled>
+                  Select one
+                </option>
+                <option value="1-10 doors">1–10 doors</option>
+                <option value="11-25">11–25</option>
+                <option value="26-50">26–50</option>
+                <option value="51-100">51–100</option>
+                <option value="100+">100+</option>
+              </select>
+              {fieldErrors.portfolioSize && (
+                <p id="portfolio-size-error" className="mt-1 text-xs font-mono text-red-600">
+                  {fieldErrors.portfolioSize}
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div className="space-y-1">
+            <div className="flex items-start gap-2">
+              <input
+                type="checkbox"
+                id="consent"
+                name="consent"
+                required
+                aria-invalid={Boolean(fieldErrors.consent)}
+                aria-describedby={fieldErrors.consent ? 'consent-error' : undefined}
+                className="mt-1"
+              />
+              <label htmlFor="consent" className="text-xs md:text-sm text-[#0C1014] font-mono text-left">
+                I agree to be contacted by Blue Bunny.
+              </label>
+            </div>
+            {fieldErrors.consent && (
+              <p id="consent-error" className="text-xs font-mono text-red-600">
+                {fieldErrors.consent}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] disabled:cursor-not-allowed disabled:opacity-75"
+          >
+            {buttonLabel}
+          </button>
+
+          {errorMessage && <p className="text-sm font-mono text-red-600">{errorMessage}</p>}
+        </form>
+
+        <p className="mt-3 text-center text-xs font-mono text-[#0C1014]">
+          Rated 5.0 on Google&nbsp;<span className="text-base text-[#F4B400]">★★★★★</span>
         </p>
-        <h3 className="mt-1 text-2xl md:text-3xl font-semibold text-[#0C1014]">
-          Request Onboarding
-        </h3>
       </div>
 
-      <form className="space-y-4" onSubmit={handleSubmit} noValidate>
-        <input type="hidden" name="leadType" value="PM Onboarding - Turnover Cleaning Page" />
-
-        <div className="grid gap-3 md:grid-cols-2">
-          <div>
-            <label htmlFor="name" className="mb-1 block text-sm font-mono text-[#0C1014]">
-              Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              placeholder="Your name"
-              className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
-            />
+      {/* Success overlay — sits on top of invisible form, centered within the same card */}
+      {formStatus === 'success' && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-3xl bg-white p-5 text-center md:p-8">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#EEF6FB]">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden>
+              <path
+                d="M5 14L11 20L23 8"
+                stroke="#2978A5"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
-
-          <div>
-            <label htmlFor="company" className="mb-1 block text-sm font-mono text-[#0C1014]">
-              Company
-            </label>
-            <input
-              id="company"
-              type="text"
-              name="company"
-              placeholder="Company name"
-              className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="phone" className="mb-1 block text-sm font-mono text-[#0C1014]">
-              Phone <span className="text-[#2978A5]">*</span>
-            </label>
-            <input
-              id="phone"
-              type="tel"
-              name="phone"
-              inputMode="tel"
-              required
-              aria-invalid={Boolean(fieldErrors.phone)}
-              aria-describedby={fieldErrors.phone ? 'phone-error' : undefined}
-              placeholder="(555) 555-5555"
-              className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
-            />
-            {fieldErrors.phone && (
-              <p id="phone-error" className="mt-1 text-xs font-mono text-red-600">
-                {fieldErrors.phone}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-mono text-[#0C1014]">
-              Email <span className="text-[#2978A5]">*</span>
-            </label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              required
-              aria-invalid={Boolean(fieldErrors.email)}
-              aria-describedby={fieldErrors.email ? 'email-error' : undefined}
-              placeholder="you@company.com"
-              className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
-            />
-            {fieldErrors.email && (
-              <p id="email-error" className="mt-1 text-xs font-mono text-red-600">
-                {fieldErrors.email}
-              </p>
-            )}
-          </div>
-
-          <div className="md:col-span-2">
-            <label htmlFor="serviceArea" className="mb-1 block text-sm font-mono text-[#0C1014]">
-              Primary service area or zip code <span className="text-[#2978A5]">*</span>
-            </label>
-            <input
-              id="serviceArea"
-              type="text"
-              name="serviceArea"
-              required
-              aria-invalid={Boolean(fieldErrors.serviceArea)}
-              aria-describedby={fieldErrors.serviceArea ? 'service-area-error' : undefined}
-              placeholder="Example: Lake Buena Vista / 32830"
-              className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
-            />
-            {fieldErrors.serviceArea && (
-              <p id="service-area-error" className="mt-1 text-xs font-mono text-red-600">
-                {fieldErrors.serviceArea}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="portfolioSize" className="mb-1 block text-sm font-mono text-[#0C1014]">
-              Portfolio size <span className="text-[#2978A5]">*</span>
-            </label>
-            <select
-              id="portfolioSize"
-              name="portfolioSize"
-              required
-              defaultValue=""
-              aria-invalid={Boolean(fieldErrors.portfolioSize)}
-              aria-describedby={fieldErrors.portfolioSize ? 'portfolio-size-error' : undefined}
-              className="w-full rounded-xl border border-[#90A4AE] bg-white px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
-            >
-              <option value="" disabled>
-                Select one
-              </option>
-              <option value="1-2">1-2</option>
-              <option value="3-10">3-10</option>
-              <option value="11-25">11-25</option>
-              <option value="25+">25+</option>
-            </select>
-            {fieldErrors.portfolioSize && (
-              <p id="portfolio-size-error" className="mt-1 text-xs font-mono text-red-600">
-                {fieldErrors.portfolioSize}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="pmsType" className="mb-1 block text-sm font-mono text-[#0C1014]">
-              PMS / calendar type <span className="text-[#2978A5]">*</span>
-            </label>
-            <select
-              id="pmsType"
-              name="pmsType"
-              required
-              defaultValue=""
-              aria-invalid={Boolean(fieldErrors.pmsType)}
-              aria-describedby={fieldErrors.pmsType ? 'pms-type-error' : undefined}
-              className="w-full rounded-xl border border-[#90A4AE] bg-white px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
-            >
-              <option value="" disabled>
-                Select one
-              </option>
-              <option value="Guesty">Guesty</option>
-              <option value="Hostaway">Hostaway</option>
-              <option value="OwnerRez">OwnerRez</option>
-              <option value="iCal">iCal</option>
-              <option value="Other">Other</option>
-            </select>
-            {fieldErrors.pmsType && (
-              <p id="pms-type-error" className="mt-1 text-xs font-mono text-red-600">
-                {fieldErrors.pmsType}
-              </p>
-            )}
-          </div>
-
-          <div className="md:col-span-2">
-            <label htmlFor="notes" className="mb-1 block text-sm font-mono text-[#0C1014]">
-              Notes (optional)
-            </label>
-            <textarea
-              id="notes"
-              name="notes"
-              rows={3}
-              placeholder="Anything special about your standards/checklists?"
-              className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
-            />
-          </div>
+          <h3 className="mt-5 text-2xl font-semibold text-[#0C1014]">Thanks!</h3>
+          <p className="mt-2 max-w-sm text-sm font-mono text-[#0C1014]">
+            We&apos;ll reach out as soon as possible.
+          </p>
         </div>
-
-        <div className="space-y-1">
-          <div className="flex items-start gap-2">
-            <input
-              type="checkbox"
-              id="consent"
-              name="consent"
-              required
-              aria-invalid={Boolean(fieldErrors.consent)}
-              aria-describedby={fieldErrors.consent ? 'consent-error' : undefined}
-              className="mt-1"
-            />
-            <label htmlFor="consent" className="text-xs md:text-sm text-[#0C1014] font-mono text-left">
-              I consent to Blue Bunny Turnover Services collecting my phone number and potentially
-              contacting me, in compliance with US regulations.
-            </label>
-          </div>
-          {fieldErrors.consent && (
-            <p id="consent-error" className="text-xs font-mono text-red-600">
-              {fieldErrors.consent}
-            </p>
-          )}
-        </div>
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full rounded-xl bg-[#2978A5] px-4 py-3 text-sm md:text-base font-semibold text-white transition hover:bg-[#0C1014] disabled:cursor-not-allowed disabled:opacity-75"
-        >
-          {buttonLabel}
-        </button>
-
-        {errorMessage && <p className="text-sm font-mono text-red-600">{errorMessage}</p>}
-      </form>
-
-      <p className="mt-4 text-xs md:text-sm font-mono text-[#0C1014]/80">
-        Licensed • Insured • Vetted cleaners • STR-focused
-      </p>
+      )}
     </div>
   );
 }

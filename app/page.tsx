@@ -67,6 +67,7 @@ const SEARCH_QUERIES = [
 ];
 const REVIEWS_REVALIDATE_SECONDS = 60 * 60 * 6;
 const REVIEWS_TO_SHOW = 3;
+const BABYSITTING_IMAGE_POSITION = '50% 42%';
 
 const fallbackReviews: Review[] = [
   {
@@ -510,8 +511,8 @@ export default async function TurnoverCleaningPage() {
         <section id="pm-hero" className="section-anchor relative overflow-hidden pt-[5rem] md:pt-[6.5rem]">
           <div className="absolute inset-0">
             <Image
-              src="/banner4.webp"
-              alt="Turnover cleaning team preparing a property"
+              src="/babysitting.webp"
+              alt="Freshly turned over living room ready for guests"
               fill
               priority
               sizes="100vw"
@@ -625,16 +626,17 @@ export default async function TurnoverCleaningPage() {
 
             <div className="mt-12 overflow-hidden rounded-2xl shadow-md">
               <Image
-                src="/babysitting.webp"
-                alt="Freshly turned over living room ready for guests"
+                src="/banner4.webp"
+                alt="Turnover cleaning team preparing a property"
                 width={1200}
                 height={500}
-                className="h-56 w-full object-cover object-[center_63%] md:h-72"
+                className="h-56 w-full object-cover md:h-72"
+                style={{ objectPosition: BABYSITTING_IMAGE_POSITION }}
                 unoptimized
               />
             </div>
 
-            <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
               {pmValueCards.map((card) => (
                 <article
                   key={card.title}
@@ -758,7 +760,7 @@ export default async function TurnoverCleaningPage() {
                     className="flex flex-col rounded-xl border border-[#E2EEF5] bg-[#F4F9FD] px-5 py-4"
                   >
                     <span className="text-xs font-mono text-[#0C1014] leading-snug">{row.component}</span>
-                    <span className="mt-2 text-2xl font-bold text-[#2978A5]">{row.price}</span>
+                    <span className="mt-2 text-xl font-bold text-[#2978A5] md:text-2xl">{row.price}</span>
                   </div>
                 ))}
               </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import type { CSSProperties } from 'react';
 import NavBar from '@/app/components/NavBar';
 import PmOnboardingForm from '@/app/components/PmOnboardingForm';
 import FaqAccordion from '@/app/components/FaqAccordion';
@@ -68,6 +69,8 @@ const SEARCH_QUERIES = [
 const REVIEWS_REVALIDATE_SECONDS = 60 * 60 * 6;
 const REVIEWS_TO_SHOW = 3;
 const BABYSITTING_IMAGE_POSITION = '50% 42%';
+const HERO_CARD_IMAGE_HEIGHT_MOBILE_PX = 150;
+const HERO_CARD_IMAGE_HEIGHT_DESKTOP_PX = 180;
 
 const fallbackReviews: Review[] = [
   {
@@ -149,7 +152,7 @@ const pmValueCards = [
     ),
     title: 'Consistent Quality',
     description:
-      'Our cleaners follow the same standardized checklist on every property, every time. Consistency is key.',
+      'Our cleaners follow the same standardized checklist on every property, every time.',
   },
   {
     icon: (
@@ -174,7 +177,7 @@ const pmValueCards = [
     ),
     title: 'Scales With You',
     description:
-      'Works whether you manage 5 doors or 50. Add properties without adding ops overhead: we manage the bench, the dispatch, and the QA.',
+      'Works whether you manage 5 doors or 50. Add properties without adding to your workload.',
   },
 ];
 
@@ -231,34 +234,24 @@ const onboardingSteps = [
   {
     title: 'Pilot Turnovers',
     description:
-      "We start with a few doors so you can review quality and reporting side by side with your current setup. Scale up when you\u2019re ready \u2014 no pressure, no commitment.",
+      "We start with a few doors so you can review quality and reporting side by side with your current setup. Scale up when you\u2019re ready.",
   },
 ];
 
 const cleanerVettingSteps = [
   {
-    step: 'Application',
+    step: 'STR Experience Required',
     detail: 'STR and hospitality experience required. We screen for relevant background before anything else.',
   },
   {
-    step: 'Phone Screen',
+    step: 'Background Checked and Verified',
     detail:
-      "Communication skills, reliability signals, and professionalism; we\u2019re listening for how they\u2019d represent your brand.",
+      'Criminal history, identity verification, and driving record. Not a one-time check — we audit continuously.',
   },
   {
-    step: 'Scenario Interview',
-    detail:
-      'Real scenarios: late checkouts, guest encounters, damage discovery. We see how they think under pressure.',
-  },
-  {
-    step: 'Orientation + Shadow',
+    step: 'Shadow-Trained on Our Checklist',
     detail:
       "Hands-on training with our standardized checklist, reporting tools, and property access protocols. Nobody cleans solo until they\u2019ve been observed.",
-  },
-  {
-    step: 'Background Check + Ongoing Audits',
-    detail:
-      'Criminal history, identity verification, and driving record. Not a one-time check. We audit continuously.',
   },
 ];
 
@@ -271,12 +264,7 @@ const faqItems = [
   {
     question: 'Do you integrate with PMS platforms?',
     answer:
-      "We work with any platform that supports iCal export, including Guesty, Hostaway, Hospitable, Lodgify, OwnerRez, and direct Airbnb/VRBO calendars. During setup, we\u2019ll walk through the integration with your specific system. The goal is zero manual scheduling on your end.",
-  },
-  {
-    question: 'Is there a minimum number of doors or a long-term contract?',
-    answer:
-      "No minimum and no long-term contract. Most clients start with a pilot on a few doors to compare quality and reporting side by side with their current setup. Scale up when you're ready.",
+      "We work with any platform that supports iCal export, including Guesty, Hostaway, Hospitable, Lodgify, OwnerRez, and direct Airbnb/VRBO calendars. During setup, we\u2019ll walk through the integration with your specific system.",
   },
   {
     question: 'How far in advance do I need to schedule?',
@@ -286,7 +274,7 @@ const faqItems = [
   {
     question: 'Can you handle same-day turnovers?',
     answer:
-      'Yes. Same-day cleans are completed within 3.5 hours of checkout. For larger properties (4+ bedrooms), we dispatch a two-cleaner team to ensure the unit is guest-ready by check-in. Calendar integration means we typically know about same-day resets well in advance, and the short-notice fee only applies when there was no prior calendar visibility.',
+      'Yes. Same-day cleans are completed within 3.5 hours of checkout. For larger properties (4+ bedrooms), we dispatch a two-cleaner team to ensure the unit is guest-ready by check-in.',
   },
   {
     question: 'What happens if a guest checks out late or checks in early?',
@@ -296,7 +284,7 @@ const faqItems = [
   {
     question: 'Do you bring supplies?',
     answer:
-      "Yes. Our cleaners bring all their own tools and cleaning products. If you\u2019d like us to restock guest consumables (soaps, paper goods, coffee, etc.), we offer an optional consumables program at $7 + $4 per bathroom per turn, or we\u2019ll work with supplies you provide at no extra charge. Either way, we report inventory levels on every service so you\u2019re never caught off guard.",
+      "Yes. Our cleaners bring all their own tools and cleaning products. If you\u2019d like us to restock guest consumables (soaps, paper goods, coffee, etc.), we offer an optional consumables program at $7 + $4 per bathroom per turn.",
   },
   {
     question: 'Do you handle linens?',
@@ -306,7 +294,7 @@ const faqItems = [
   {
     question: 'How do you document damage or missing items?',
     answer:
-      'Every service includes a structured photo, damage, and inventory report. Cleaners document the condition of each room with timestamped before/after photos. Any damage, maintenance issues, or missing inventory is flagged with photos and notes. You receive the completed report as a branded PDF the same day, giving you a timestamped paper trail for every single clean.',
+      'Every service includes a structured photo, damage, and inventory report with timestamped before/after photos. You receive a branded PDF the same day — a complete paper trail for every clean.',
   },
   {
     question: 'How do I know the turnover is done?',
@@ -316,7 +304,7 @@ const faqItems = [
   {
     question: "What if I\u2019m not happy with a clean?",
     answer:
-      'We offer a free reclean within 5 hours of completion. All we need is photo documentation showing the issue. Our reclean rate is under 2%, but when it happens, we want to make it right immediately.',
+      'We offer a free reclean within 5 hours of completion. Photo documentation helps us act fast.',
   },
 ];
 
@@ -511,8 +499,8 @@ export default async function TurnoverCleaningPage() {
         <section id="pm-hero" className="section-anchor relative overflow-hidden pt-[5rem] md:pt-[6.5rem]">
           <div className="absolute inset-0">
             <Image
-              src="/babysitting.webp"
-              alt="Freshly turned over living room ready for guests"
+              src="/banner4.webp"
+              alt="Turnover cleaning team preparing a property"
               fill
               priority
               sizes="100vw"
@@ -522,43 +510,62 @@ export default async function TurnoverCleaningPage() {
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-[#0C1014]/75 via-[#0C1014]/65 to-[#0C1014]/80" />
 
-          <div className="relative px-5 pb-12 pt-5 md:pb-22 md:pt-20">
+          <div className="relative px-5 pb-12 pt-5 md:pb-24 md:pt-20">
             <div className="mx-auto grid max-w-6xl gap-8 md:gap-12 md:grid-cols-[1.1fr_1fr]">
               {/* Left: headline */}
-              <div className="flex flex-col rounded-3xl border border-[#E2EEF5] bg-white p-5 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:p-8">
+              <div className="flex flex-col rounded-3xl border border-[#E2EEF5] bg-white p-5 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:px-8 md:pt-5 md:pb-5">
                 <p className="text-xs md:text-sm font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5]">
                   SERVING ORLANDO / DISNEY CORRIDOR
                 </p>
                 <h1 className="mt-2 text-3xl md:text-4xl font-semibold leading-tight text-[#0C1014]">
                   Orlando&rsquo;s Turnover Cleaning Partner for Vacation Rental Managers
                 </h1>
+                <div
+                  className="relative mt-4 h-[var(--hero-card-image-height-mobile)] overflow-hidden rounded-xl md:h-[var(--hero-card-image-height-desktop)]"
+                  style={
+                    {
+                      ['--hero-card-image-height-mobile' as string]: `${HERO_CARD_IMAGE_HEIGHT_MOBILE_PX}px`,
+                      ['--hero-card-image-height-desktop' as string]: `${HERO_CARD_IMAGE_HEIGHT_DESKTOP_PX}px`,
+                    } as CSSProperties
+                  }
+                >
+                  <Image
+                    src="/banner4.webp"
+                    alt="Turnover cleaning team preparing a property"
+                    fill
+                    sizes="(min-width: 768px) 44rem, 100vw"
+                    className="object-cover"
+                    style={{ objectPosition: '50% 42%', transform: 'scale(1.12)' }}
+                    unoptimized
+                  />
+                </div>
                 <p className="mt-4 text-sm md:text-base font-mono text-[#0C1014] max-w-3xl">
                   Guest-ready properties, same-day reports, and zero no-shows &mdash; without you
                   managing a single cleaner.
                 </p>
 
-                <ul className="mt-6 space-y-3">
+                <ul className="mt-4 space-y-3">
                   <li className="flex items-start gap-3 text-sm md:text-base font-mono text-[#0C1014]">
-                    <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2978A5" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0">
+                    <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-[#2978A5]">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span><strong className="font-bold text-[#0C1014]">Detailed Turnover Reports:</strong> damage checks, inventory counts, before/after photos, action items</span>
+                    <span><strong className="font-bold text-[#0C1014]">Detailed Reporting &amp; Photo Documentation</strong></span>
                   </li>
                   <li className="flex items-start gap-3 text-sm md:text-base font-mono text-[#0C1014]">
-                    <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2978A5" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0">
+                    <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-[#2978A5]">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span><strong className="font-bold text-[#0C1014]">Hands-Off Cleans:</strong> calendar sync, smart checklists, supply tracking</span>
+                    <span><strong className="font-bold text-[#0C1014]">Hands-Off Scheduling</strong></span>
                   </li>
                   <li className="flex items-start gap-3 text-sm md:text-base font-mono text-[#0C1014]">
-                    <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2978A5" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0">
+                    <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-[#2978A5]">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span><strong className="font-bold text-[#0C1014]">Same-Day Services Supported:</strong> guest-ready by check-in every time, even on tight same-day resets</span>
+                    <span><strong className="font-bold text-[#0C1014]">Same-Day Turnovers Supported</strong></span>
                   </li>
                 </ul>
-                <p className="mt-6 text-sm md:text-base font-mono text-[#0C1014]">
-                  Insured • Bonded • Vetted Cleaners
+                <p className="mt-4 text-center text-xs font-mono text-[#0C1014]">
+                  Insured <span className="text-[#2978A5]">•</span> Bonded <span className="text-[#2978A5]">•</span> Vetted Cleaners
                 </p>
               </div>
 
@@ -581,7 +588,7 @@ export default async function TurnoverCleaningPage() {
               </h2>
             </header>
 
-            <div className="mt-12 grid gap-5 md:grid-cols-2">
+            <div className="mt-8 md:mt-12 grid gap-5 md:grid-cols-2">
               {painPoints.map((item) => (
                 <article
                   key={item.text}
@@ -599,13 +606,13 @@ export default async function TurnoverCleaningPage() {
 
             <div className="mt-5 rounded-2xl border border-[#E2EEF5] bg-white px-6 py-5 text-center shadow-sm">
               <p className="text-sm font-mono leading-relaxed text-[#0C1014]">
-                The average PM spends <strong className="font-bold text-[#0C1014]">8+ hours/week</strong> coordinating cleaners across their portfolio.
+                You&rsquo;re spending hours every week coordinating cleaners across your portfolio.
               </p>
             </div>
 
-            <div className="mt-8 rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] px-6 py-5 text-center shadow-sm">
+            <div className="mt-5 md:mt-8 rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] px-6 py-5 text-center shadow-sm">
               <p className="text-sm font-mono font-semibold leading-relaxed text-[#2978A5]">
-                Blue Bunny handles the entire clean, documentation, and reporting &mdash; so you can stay focused on growth.
+                Blue Bunny handles the entire clean, documentation, and reporting &mdash; so you can stop managing cleaners.
               </p>
             </div>
           </div>
@@ -624,10 +631,10 @@ export default async function TurnoverCleaningPage() {
               </h2>
             </header>
 
-            <div className="mt-12 overflow-hidden rounded-2xl shadow-md">
+            <div className="mt-8 md:mt-12 overflow-hidden rounded-2xl shadow-md">
               <Image
-                src="/banner4.webp"
-                alt="Turnover cleaning team preparing a property"
+                src="/babysitting.webp"
+                alt="Freshly turned over living room ready for guests"
                 width={1200}
                 height={500}
                 className="h-56 w-full object-cover md:h-72"
@@ -636,7 +643,7 @@ export default async function TurnoverCleaningPage() {
               />
             </div>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-6 md:mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
               {pmValueCards.map((card) => (
                 <article
                   key={card.title}
@@ -672,7 +679,7 @@ export default async function TurnoverCleaningPage() {
               </p>
             </header>
 
-            <div className="mt-12 grid gap-5 md:grid-cols-2">
+            <div className="mt-8 md:mt-12 grid gap-5 md:grid-cols-2">
               {/* Mock report visual */}
               <div className="rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm">
                 <div className="rounded-xl border border-[#E2EEF5] bg-[#F4F9FD] p-4">
@@ -721,8 +728,14 @@ export default async function TurnoverCleaningPage() {
                   Delivered 30 minutes post-turn.
                 </p>
                 <a
+                  href="#pm-onboarding-form"
+                  className="mt-5 inline-flex w-fit items-center rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:hidden"
+                >
+                  Request Onboarding
+                </a>
+                <a
                   href="#pm-hero"
-                  className="mt-5 inline-flex w-fit items-center rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014]"
+                  className="mt-5 hidden w-fit items-center rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
                 >
                   Request Onboarding
                 </a>
@@ -749,7 +762,7 @@ export default async function TurnoverCleaningPage() {
             </header>
 
             {/* Base Turnover Pricing — full width */}
-            <div className="mt-12 rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm">
+            <div className="mt-8 md:mt-12 rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm">
               <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
                 Base Turnover Pricing
               </p>
@@ -784,22 +797,27 @@ export default async function TurnoverCleaningPage() {
             <PriceCalculator />
 
             {/* Quality Guarantee */}
-            <div className="mt-6 flex items-center gap-5 rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] px-6 py-5 shadow-sm">
+            <div className="mt-5 md:mt-6 flex items-center gap-5 rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] px-6 py-5 shadow-sm">
               <span aria-hidden className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2978A5] text-white">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </span>
               <p className="text-sm font-mono font-semibold leading-relaxed text-[#2978A5]">
-                Free reclean within 5 hours of completion if the property doesn&rsquo;t meet
-                guest-ready standards. All we need is photo documentation.
+                Free reclean within 5 hours if the property doesn&rsquo;t meet guest-ready standards.
               </p>
             </div>
 
-            <div className="mt-8 flex justify-center">
+            <div className="mt-6 md:mt-8 flex justify-center">
+              <a
+                href="#pm-onboarding-form"
+                className="rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:hidden"
+              >
+                Request Onboarding
+              </a>
               <a
                 href="#pm-hero"
-                className="rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014]"
+                className="hidden rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
               >
                 Request Onboarding
               </a>
@@ -819,11 +837,11 @@ export default async function TurnoverCleaningPage() {
                 Onboard in days — not weeks
               </h2>
               <p className="mx-auto mt-5 max-w-3xl text-sm font-mono leading-relaxed text-[#0C1014] md:text-base">
-                Most accounts are cleaning within 72 hours of their first call.
+                Start cleaning within 72 hours of your first call.
               </p>
             </header>
 
-            <div className="mt-12 grid gap-5 md:grid-cols-3">
+            <div className="mt-8 md:mt-12 grid gap-5 md:grid-cols-3">
               {onboardingSteps.map((step, index) => (
                 <article
                   key={step.title}
@@ -840,24 +858,16 @@ export default async function TurnoverCleaningPage() {
               ))}
             </div>
 
-            {/* Already have cleaners callout */}
-            <div className="mt-6 overflow-hidden rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] shadow-sm">
-              <div className="p-6 md:p-8">
-                <h3 className="text-lg font-bold text-[#0C1014]">
-                  Already have cleaners?
-                </h3>
-                <p className="mt-2 text-sm font-mono leading-relaxed text-[#0C1014]">
-                  Most of our clients did too. We start with a pilot on a few doors so you can
-                  compare quality and reporting side by side, with no disruption to your current
-                  operations and no long-term commitment.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <div className="mt-6 md:mt-8 flex flex-wrap justify-center gap-3">
+              <a
+                href="#pm-onboarding-form"
+                className="rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:hidden"
+              >
+                Request Onboarding
+              </a>
               <a
                 href="#pm-hero"
-                className="rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014]"
+                className="hidden rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
               >
                 Request Onboarding
               </a>
@@ -885,12 +895,11 @@ export default async function TurnoverCleaningPage() {
               </h2>
               <p className="mx-auto mt-5 max-w-3xl text-sm font-mono leading-relaxed text-[#0C1014] md:text-base">
                 Your cleaners have access to your properties, your guests&rsquo; belongings, and
-                your reputation. We take that seriously. We back it up with general liability
-                insurance, a janitorial bond, and a COI available on request.
+                your reputation. We carry general liability insurance and a janitorial bond.
               </p>
             </header>
 
-            <div className="mt-12 overflow-hidden rounded-2xl shadow-md">
+            <div className="mt-8 md:mt-12 overflow-hidden rounded-2xl shadow-md">
               <Image
                 src="/vetting.webp"
                 alt="Blue Bunny vetted cleaning team at work"
@@ -901,8 +910,8 @@ export default async function TurnoverCleaningPage() {
               />
             </div>
 
-            <p className="mt-10 text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
-              Applicant Steps:
+            <p className="mt-6 md:mt-10 pl-2 text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
+              Our standards:
             </p>
 
             <ol className="mt-4 flex flex-col gap-5">
@@ -924,7 +933,7 @@ export default async function TurnoverCleaningPage() {
               ))}
             </ol>
 
-            <div className="mt-8 flex items-center gap-5 rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] px-6 py-5 shadow-sm">
+            <div className="mt-5 md:mt-8 flex items-center gap-5 rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] px-6 py-5 shadow-sm">
               <span aria-hidden className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2978A5] text-white">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="20" x2="18" y2="10" />
@@ -934,15 +943,20 @@ export default async function TurnoverCleaningPage() {
                 </svg>
               </span>
               <p className="text-sm font-mono font-semibold leading-relaxed text-[#2978A5]">
-                We maintain a bench 20–30% above current demand and remove underperformers before
-                issues ever reach your guests.
+                We keep backup cleaners ready and remove underperformers before issues reach your guests.
               </p>
             </div>
 
-            <div className="mt-8 flex justify-center">
+            <div className="mt-6 md:mt-8 flex justify-center">
+              <a
+                href="#pm-onboarding-form"
+                className="rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:hidden"
+              >
+                Request Onboarding
+              </a>
               <a
                 href="#pm-hero"
-                className="rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014]"
+                className="hidden rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
               >
                 Request Onboarding
               </a>
@@ -959,12 +973,12 @@ export default async function TurnoverCleaningPage() {
             <header className="px-4 text-center md:px-0">
               <SectionAccent />
               <h2 className="text-3xl font-bold tracking-tight text-[#0C1014] md:text-5xl">
-                Trusted by Orlando property managers
+                What our clients are saying
               </h2>
             </header>
 
             {/* Rating bar */}
-            <div className="mt-12 flex flex-col gap-5 rounded-2xl border border-[#E2EEF5] bg-white p-5 shadow-sm md:flex-row md:items-center md:justify-between md:px-8 md:py-6">
+            <div className="mt-8 md:mt-12 flex flex-col gap-5 rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm md:flex-row md:items-center md:justify-between md:px-8 md:py-6">
               <div className="space-y-1.5">
                 {reviewsData.rating !== null ? (
                   <>
@@ -995,7 +1009,7 @@ export default async function TurnoverCleaningPage() {
               </a>
             </div>
 
-            <p className="mt-8 text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
+            <p className="mt-5 md:mt-8 pl-2 text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
               Recent Reviews:
             </p>
 
@@ -1003,7 +1017,7 @@ export default async function TurnoverCleaningPage() {
               {reviews.slice(0, 3).map((review, index) => (
                 <article
                   key={`${review.author}-${index}`}
-                  className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-5 shadow-sm"
+                  className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
@@ -1053,7 +1067,7 @@ export default async function TurnoverCleaningPage() {
             <h2 className="px-4 text-3xl font-bold tracking-tight md:px-0 md:text-5xl">
               Ready for turnovers you don&rsquo;t have to think about?
             </h2>
-            <ul className="mt-8 flex flex-wrap justify-center gap-3">
+            <ul className="mt-6 md:mt-8 flex flex-wrap justify-center gap-3">
               {['Reporting after every clean', 'Calendar-synced scheduling', 'Same-day turns supported'].map((pill) => (
                 <li
                   key={pill}
@@ -1065,13 +1079,19 @@ export default async function TurnoverCleaningPage() {
             </ul>
 
             <p className="mx-auto mt-5 max-w-3xl px-4 text-sm font-mono leading-relaxed text-white/90 md:px-0">
-              We onboard 2&ndash;3 new accounts per month to maintain quality. Check if we have availability.
+              Check if we have availability in your area.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <a
+                href="#pm-onboarding-form"
+                className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#5DAFD5] shadow-sm transition hover:bg-[#0C1014] hover:text-white md:hidden"
+              >
+                Request Onboarding
+              </a>
+              <a
                 href="#pm-hero"
-                className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#5DAFD5] shadow-sm transition hover:bg-[#0C1014] hover:text-white"
+                className="hidden rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#5DAFD5] shadow-sm transition hover:bg-[#0C1014] hover:text-white md:inline-flex"
               >
                 Request Onboarding
               </a>
@@ -1084,11 +1104,8 @@ export default async function TurnoverCleaningPage() {
               </a>
             </div>
 
-            <p className="mt-7 text-xs font-mono text-white">
-              <span className="md:hidden">8 AM–7 PM ET | Orlando / Disney corridor</span>
-              <span className="hidden md:inline">
-                Daily support 8 AM – 7 PM ET | Orlando / Disney corridor
-              </span>
+            <p className="mt-6 text-xs font-mono text-white">
+              Orlando / Disney corridor
             </p>
           </div>
         </section>
@@ -1104,7 +1121,7 @@ export default async function TurnoverCleaningPage() {
             <p className="mt-3 text-sm font-mono text-white/90">
               Vacation Rental Cleaning for Property Managers
             </p>
-            <p className="text-sm font-mono text-white/75">
+            <p className="mt-1 text-sm font-mono text-white/75">
               Orlando / Disney Corridor
             </p>
             <p className="mt-2 max-w-xs text-xs font-mono text-white/50">

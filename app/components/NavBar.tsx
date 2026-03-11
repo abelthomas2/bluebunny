@@ -130,7 +130,7 @@ export default function NavBar() {
                 </a>
               </div>
               <p className="absolute bottom-[0.75rem] right-1 text-right text-xs font-mono font-semibold text-[#0C1014]">
-                Daily support 8 AM – 7 PM ET | Same-day response
+                Daily support 8 AM – 7 PM ET
               </p>
             </div>
 
@@ -189,7 +189,7 @@ export default function NavBar() {
                   Call/Text: (646) 504-9590
                 </a>
                 <a
-                  href="#pm-hero"
+                  href="#pm-onboarding-form"
                   onClick={() => setIsOpen(false)}
                   className="mt-1 rounded-full border border-[#0C1014] bg-[#2978A5] px-4 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-[#0C1014]"
                 >
@@ -197,7 +197,7 @@ export default function NavBar() {
                 </a>
               </nav>
               <p className="mt-3 text-center text-xs font-mono font-semibold text-[#0C1014]">
-                Daily support 8 AM - 7 PM ET | Same-day response
+                Daily support 8 AM - 7 PM ET
               </p>
             </div>
           </div>

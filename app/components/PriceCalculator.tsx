@@ -168,7 +168,7 @@ export default function PriceCalculator() {
       </div>
 
       {/* Result */}
-      <div className="mt-6 flex flex-col gap-1 rounded-xl border border-[#E2EEF5] bg-white px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-6 flex flex-col gap-2 rounded-xl border border-[#E2EEF5] bg-white px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
             Estimated cost / turn

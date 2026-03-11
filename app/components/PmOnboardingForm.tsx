@@ -88,13 +88,13 @@ export default function PmOnboardingForm() {
   return (
     <div
       id="pm-onboarding-form"
-      className="relative scroll-mt-[5rem] md:scroll-mt-[7.5rem] rounded-3xl border border-[#E2EEF5] bg-white p-5 pb-4 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:self-center md:p-8 md:pb-6"
+      className="relative scroll-mt-[6rem] md:scroll-mt-[7.5rem] rounded-3xl border border-[#E2EEF5] bg-white p-5 pb-4 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:self-center md:px-8 md:pt-5 md:pb-5"
     >
       {/* Form content — always rendered to lock card height; hidden on success */}
       <div className={formStatus === 'success' ? 'invisible' : ''}>
         <div className="mb-4 md:mb-5">
           <p className="text-xs md:text-sm font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5]">
-            PM Intake Form
+            Get Started
           </p>
           <h3 className="mt-2 text-3xl md:text-4xl font-semibold text-[#0C1014]">
             Request Onboarding
@@ -106,7 +106,7 @@ export default function PmOnboardingForm() {
 
           <div className="grid gap-3 md:grid-cols-2">
             <div className="md:col-span-2">
-              <label htmlFor="name" className="mb-1 block text-sm font-mono text-[#0C1014]">
+              <label htmlFor="name" className="mb-1 block text-sm md:text-base font-mono text-[#0C1014]">
                 Name
               </label>
               <input
@@ -119,7 +119,7 @@ export default function PmOnboardingForm() {
             </div>
 
             <div>
-              <label htmlFor="email" className="mb-1 block text-sm font-mono text-[#0C1014]">
+              <label htmlFor="email" className="mb-1 block text-sm md:text-base font-mono text-[#0C1014]">
                 Email <span className="text-[#2978A5]">*</span>
               </label>
               <input
@@ -140,7 +140,7 @@ export default function PmOnboardingForm() {
             </div>
 
             <div>
-              <label htmlFor="phone" className="mb-1 block text-sm font-mono text-[#0C1014]">
+              <label htmlFor="phone" className="mb-1 block text-sm md:text-base font-mono text-[#0C1014]">
                 Phone <span className="text-[#2978A5]">*</span>
               </label>
               <input
@@ -162,7 +162,7 @@ export default function PmOnboardingForm() {
             </div>
 
             <div className="md:col-span-2">
-              <label htmlFor="portfolioSize" className="mb-1 block text-sm font-mono text-[#0C1014]">
+              <label htmlFor="portfolioSize" className="mb-1 block text-sm md:text-base font-mono text-[#0C1014]">
                 Portfolio size <span className="text-[#2978A5]">*</span>
               </label>
               <select
@@ -200,9 +200,9 @@ export default function PmOnboardingForm() {
                 required
                 aria-invalid={Boolean(fieldErrors.consent)}
                 aria-describedby={fieldErrors.consent ? 'consent-error' : undefined}
-                className="mt-1"
+                className="mt-[0px] h-[18px] w-[18px] shrink-0 md:mt-[2px] md:h-[14px] md:w-[14px]"
               />
-              <label htmlFor="consent" className="text-xs md:text-sm text-[#0C1014] font-mono text-left">
+              <label htmlFor="consent" className="text-xs md:text-sm text-[#0C1014] font-mono text-left leading-[1.2]">
                 I agree to be contacted by Blue Bunny.
               </label>
             </div>
@@ -216,7 +216,7 @@ export default function PmOnboardingForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] disabled:cursor-not-allowed disabled:opacity-75"
+            className="w-full rounded-xl bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] disabled:cursor-not-allowed disabled:opacity-75"
           >
             {buttonLabel}
           </button>
@@ -224,7 +224,7 @@ export default function PmOnboardingForm() {
           {errorMessage && <p className="text-sm font-mono text-red-600">{errorMessage}</p>}
         </form>
 
-        <p className="mt-3 text-center text-xs font-mono text-[#0C1014]">
+        <p className="mt-3 md:mt-4 text-center text-xs font-mono text-[#0C1014]">
           Rated 5.0 on Google&nbsp;<span className="text-base text-[#F4B400]">★★★★★</span>
         </p>
       </div>

@@ -1119,7 +1119,7 @@ export default async function TurnoverCleaningPage() {
               BLUE BUNNY TURNOVER SERVICES
             </p>
             <p className="mt-3 text-sm font-mono text-white/90">
-              Vacation Rental Cleaning for Property Managers
+              Vacation Rental Turnover Cleaning
             </p>
             <p className="mt-1 text-sm font-mono text-white/75">
               Orlando / Disney Corridor

@@ -68,7 +68,7 @@ const SEARCH_QUERIES = [
 ];
 const REVIEWS_REVALIDATE_SECONDS = 60 * 60 * 6;
 const REVIEWS_TO_SHOW = 3;
-const BABYSITTING_IMAGE_POSITION = '50% 42%';
+const BABYSITTING_IMAGE_POSITION = '50% 65%';
 const HERO_CARD_IMAGE_HEIGHT_MOBILE_PX = 150;
 const HERO_CARD_IMAGE_HEIGHT_DESKTOP_PX = 180;
 
@@ -496,7 +496,7 @@ export default async function TurnoverCleaningPage() {
       <main className="bg-white">
 
         {/* ── Section 02: Hero ── */}
-        <section id="pm-hero" className="section-anchor relative overflow-hidden pt-[5rem] md:pt-[6.5rem]">
+        <section id="pm-hero" className="section-anchor relative overflow-hidden pt-[5.8rem] md:pt-[6.5rem]">
           <div className="absolute inset-0">
             <Image
               src="/banner4.webp"
@@ -518,7 +518,7 @@ export default async function TurnoverCleaningPage() {
                   SERVING ORLANDO / DISNEY CORRIDOR
                 </p>
                 <h1 className="mt-2 text-3xl md:text-4xl font-semibold leading-tight text-[#0C1014]">
-                  Orlando&rsquo;s Turnover Cleaning Partner for Vacation Rental Managers
+                  Turnover Cleaning Partner for Vacation Rental Managers
                 </h1>
                 <div
                   className="relative mt-4 h-[var(--hero-card-image-height-mobile)] overflow-hidden rounded-xl md:h-[var(--hero-card-image-height-desktop)]"
@@ -540,7 +540,7 @@ export default async function TurnoverCleaningPage() {
                   />
                 </div>
                 <p className="mt-4 text-sm md:text-base font-mono text-[#0C1014] max-w-3xl">
-                  Guest-ready properties, same-day reports, and zero no-shows &mdash; without you
+                  Guest-ready properties, on-time same-day turns, and a standardized process &mdash; all without you
                   managing a single cleaner.
                 </p>
 
@@ -549,19 +549,19 @@ export default async function TurnoverCleaningPage() {
                     <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-[#2978A5]">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span><strong className="font-bold text-[#0C1014]">Detailed Reporting &amp; Photo Documentation</strong></span>
+                    <span><strong className="font-bold text-[#0C1014]">Photo &amp; Damage Report Every Turn</strong></span>
                   </li>
                   <li className="flex items-start gap-3 text-sm md:text-base font-mono text-[#0C1014]">
                     <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-[#2978A5]">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span><strong className="font-bold text-[#0C1014]">Hands-Off Scheduling</strong></span>
+                    <span><strong className="font-bold text-[#0C1014]">Cleaning, Linens, Restock &mdash; One Partner</strong></span>
                   </li>
                   <li className="flex items-start gap-3 text-sm md:text-base font-mono text-[#0C1014]">
                     <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-[#2978A5]">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span><strong className="font-bold text-[#0C1014]">Same-Day Turnovers Supported</strong></span>
+                    <span><strong className="font-bold text-[#0C1014]">Free Reclean Guarantee, Same Day</strong></span>
                   </li>
                 </ul>
                 <p className="mt-4 text-center text-xs font-mono text-[#0C1014]">
@@ -637,7 +637,7 @@ export default async function TurnoverCleaningPage() {
                 alt="Freshly turned over living room ready for guests"
                 width={1200}
                 height={500}
-                className="h-56 w-full object-cover md:h-72"
+                className="aspect-[2/1] w-full object-cover md:aspect-auto md:h-72"
                 style={{ objectPosition: BABYSITTING_IMAGE_POSITION }}
                 unoptimized
               />
@@ -905,7 +905,7 @@ export default async function TurnoverCleaningPage() {
                 alt="Blue Bunny vetted cleaning team at work"
                 width={1200}
                 height={500}
-                className="h-56 w-full object-cover object-[center_47%] md:h-72"
+                className="aspect-[2/1] w-full object-cover object-[center_47%] md:aspect-auto md:h-72"
                 unoptimized
               />
             </div>
@@ -1125,7 +1125,7 @@ export default async function TurnoverCleaningPage() {
               Orlando / Disney Corridor
             </p>
             <p className="mt-2 max-w-xs text-xs font-mono text-white/50">
-              Serving Kissimmee, Davenport, ChampionsGate, Four Corners, International Drive, and the greater Orlando/Disney corridor.
+              Serving Kissimmee, Davenport, ChampionsGate, Four Corners, International Drive, and the greater Orlando area.
             </p>
           </div>
 

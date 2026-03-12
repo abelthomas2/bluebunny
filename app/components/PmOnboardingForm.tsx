@@ -88,7 +88,7 @@ export default function PmOnboardingForm() {
   return (
     <div
       id="pm-onboarding-form"
-      className="relative scroll-mt-[6rem] md:scroll-mt-[7.5rem] rounded-3xl border border-[#E2EEF5] bg-white p-5 pb-4 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:self-center md:px-8 md:pt-5 md:pb-5"
+      className="relative scroll-mt-[7rem] md:scroll-mt-[7.5rem] rounded-3xl border border-[#E2EEF5] bg-white p-5 pb-4 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:self-center md:px-8 md:pt-5 md:pb-5"
     >
       {/* Form content — always rendered to lock card height; hidden on success */}
       <div className={formStatus === 'success' ? 'invisible' : ''}>
@@ -192,7 +192,7 @@ export default function PmOnboardingForm() {
           </div>
 
           <div className="space-y-1">
-            <div className="flex items-start gap-2">
+            <div className="flex items-center gap-2.5">
               <input
                 type="checkbox"
                 id="consent"
@@ -200,9 +200,9 @@ export default function PmOnboardingForm() {
                 required
                 aria-invalid={Boolean(fieldErrors.consent)}
                 aria-describedby={fieldErrors.consent ? 'consent-error' : undefined}
-                className="mt-[0px] h-[18px] w-[18px] shrink-0 md:mt-[2px] md:h-[14px] md:w-[14px]"
+                className="h-4 w-4 shrink-0 accent-[#2978A5]"
               />
-              <label htmlFor="consent" className="text-xs md:text-sm text-[#0C1014] font-mono text-left leading-[1.2]">
+              <label htmlFor="consent" className="text-xs md:text-sm font-mono text-[#0C1014]">
                 I agree to be contacted by Blue Bunny.
               </label>
             </div>

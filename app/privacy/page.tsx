@@ -34,7 +34,7 @@ const infoAutomaticDetails = [
 const thirdPartySources = [
   "Property management platforms (Airbnb, VRBO, direct booking systems) when you authorize integration",
   "Payment processors for billing purposes",
-  "Background check services for employee screening",
+  "Background check services for contractor screening",
   "Public records for property verification",
 ];
 
@@ -402,7 +402,7 @@ export default function PrivacyPage() {
                 407-773-1724
               </a>
             </p>
-            <p>Hours: Daily support from 8am to 8pm ET</p>
+            <p>Hours: Daily support from 8am to 7pm ET</p>
             <p className="text-[#0C1014]/85">
               For privacy-specific inquiries, please include “Privacy Request” in your email subject
               line. We will respond within 30 days of receiving your request.

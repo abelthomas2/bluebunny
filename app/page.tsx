@@ -249,9 +249,9 @@ const cleanerVettingSteps = [
       'Criminal history, identity verification, and driving record. Not a one-time check — we audit continuously.',
   },
   {
-    step: 'Shadow-Trained on Our Checklist',
+    step: 'Quality-Verified on Our Standards',
     detail:
-      "Hands-on training with our standardized checklist, reporting tools, and property access protocols. Nobody cleans solo until they\u2019ve been observed.",
+      "Every cleaner orients to our checklist, reporting tools, and property access protocols. No solo cleans until quality is verified on-site.",
   },
 ];
 
@@ -274,7 +274,7 @@ const faqItems = [
   {
     question: 'Can you handle same-day turnovers?',
     answer:
-      'Yes. Same-day cleans are completed within 3.5 hours of checkout. For larger properties (4+ bedrooms), we dispatch a two-cleaner team to ensure the unit is guest-ready by check-in.',
+      'Yes. Same-day cleans are completed within 3.5 hours of checkout. For same-day turnovers on properties with more than 3 bedrooms, we dispatch a two-cleaner team to ensure the unit is guest-ready by check-in.',
   },
   {
     question: 'What happens if a guest checks out late or checks in early?',
@@ -510,7 +510,7 @@ export default async function TurnoverCleaningPage() {
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-[#0C1014]/75 via-[#0C1014]/65 to-[#0C1014]/80" />
 
-          <div className="relative px-5 pb-12 pt-5 md:pb-24 md:pt-20">
+          <div className="relative px-5 pt-5 pb-12 md:pt-20 md:pb-24">
             <div className="mx-auto grid max-w-6xl gap-8 md:gap-12 md:grid-cols-[1.1fr_1fr]">
               {/* Left: headline */}
               <div className="flex flex-col rounded-3xl border border-[#E2EEF5] bg-white p-5 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:px-8 md:pt-5 md:pb-5">

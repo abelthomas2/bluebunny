@@ -117,10 +117,10 @@ export default function NavBar() {
             <div className="relative hidden md:flex md:self-stretch md:flex-col md:items-end">
               <div className="flex flex-1 items-center gap-2">
                 <a
-                  href="tel:6465049590"
+                  href="tel:4077731724"
                   className="whitespace-nowrap rounded-full border border-[#0C1014]/20 bg-white px-4 py-2 text-sm font-semibold text-[#0C1014] transition hover:bg-[#0C1014] hover:text-white"
                 >
-                  Call/Text: (646) 504-9590
+                  Call/Text: (407) 773-1724
                 </a>
                 <a
                   href="#pm-hero"
@@ -183,10 +183,10 @@ export default function NavBar() {
                   </a>
                 ))}
                 <a
-                  href="tel:6465049590"
+                  href="tel:4077731724"
                   className="mt-2 rounded-full border border-[#0C1014]/20 bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#0C1014] transition hover:bg-[#0C1014] hover:text-white"
                 >
-                  Call/Text: (646) 504-9590
+                  Call/Text: (407) 773-1724
                 </a>
                 <a
                   href="#pm-onboarding-form"

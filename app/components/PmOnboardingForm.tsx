@@ -114,7 +114,7 @@ export default function PmOnboardingForm() {
                 type="text"
                 name="name"
                 placeholder="Your name"
-                className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
+                className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-sm md:text-base text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
               />
             </div>
 
@@ -130,7 +130,7 @@ export default function PmOnboardingForm() {
                 aria-invalid={Boolean(fieldErrors.email)}
                 aria-describedby={fieldErrors.email ? 'email-error' : undefined}
                 placeholder="you@company.com"
-                className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
+                className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-sm md:text-base text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
               />
               {fieldErrors.email && (
                 <p id="email-error" className="mt-1 text-xs font-mono text-red-600">
@@ -152,7 +152,7 @@ export default function PmOnboardingForm() {
                 aria-invalid={Boolean(fieldErrors.phone)}
                 aria-describedby={fieldErrors.phone ? 'phone-error' : undefined}
                 placeholder="(555) 555-5555"
-                className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
+                className="w-full rounded-xl border border-[#90A4AE] px-3 py-2.5 text-sm md:text-base text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
               />
               {fieldErrors.phone && (
                 <p id="phone-error" className="mt-1 text-xs font-mono text-red-600">
@@ -172,7 +172,7 @@ export default function PmOnboardingForm() {
                 defaultValue=""
                 aria-invalid={Boolean(fieldErrors.portfolioSize)}
                 aria-describedby={fieldErrors.portfolioSize ? 'portfolio-size-error' : undefined}
-                className="h-10 w-full rounded-xl border border-[#90A4AE] bg-white px-3 text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
+                className="h-10 w-full rounded-xl border border-[#90A4AE] bg-white px-3 text-sm md:text-base text-[#0C1014] font-mono focus:border-[#5DAFD5] focus:outline-none focus:ring-2 focus:ring-[#5DAFD5]"
               >
                 <option value="" disabled>
                   Select one

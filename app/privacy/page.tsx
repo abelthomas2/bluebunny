@@ -332,10 +332,10 @@ export default function PrivacyPage() {
             </a>{" "}
             or call{" "}
             <a
-              href="tel:6465049590"
+              href="tel:4077731724"
               className="text-[#2978A5] underline decoration-dotted underline-offset-4 hover:text-[#0C1014] transition-colors"
             >
-              646-504-9590
+              407-773-1724
             </a>
             .
           </p>
@@ -396,10 +396,10 @@ export default function PrivacyPage() {
             <p>
               Phone:{" "}
               <a
-                href="tel:6465049590"
+                href="tel:4077731724"
                 className="text-[#2978A5] underline decoration-dotted underline-offset-4 hover:text-[#0C1014] transition-colors"
               >
-                646-504-9590
+                407-773-1724
               </a>
             </p>
             <p>Hours: Daily support from 8am to 8pm ET</p>
@@ -433,10 +433,10 @@ export default function PrivacyPage() {
               hello@gobluebunny.com
             </a>
             <a
-              href="tel:6465049590"
+              href="tel:4077731724"
               className="block text-lg font-semibold text-[#2978A5] hover:text-[#0C1014] transition-colors"
             >
-              646-504-9590
+              407-773-1724
             </a>
           </div>
           <Link

@@ -1,4 +1,4 @@
-export const SITE_TITLE = "Vacation Rental Turnover Cleaning in Orlando | Blue Bunny";
+export const SITE_TITLE = "Vacation Rental Cleaning for Property Managers | Blue Bunny";
 
 export const SITE_DESCRIPTION =
-  "Blue Bunny handles turnover cleaning, documentation, and reporting for Orlando-area STR property managers. Calendar-synced scheduling, same-day turns, branded reports. Request onboarding today.";
+  "Vacation rental cleaning for Orlando property managers—guest-ready rentals, on-time same-day turns, and photo reporting.";

@@ -170,7 +170,7 @@ export default function NavBar() {
         {/* Mobile expanded menu */}
         {isOpen && (
           <div className="md:hidden">
-            <div className="mx-auto max-w-6xl px-5 pb-5">
+            <div className="mx-auto max-w-6xl px-5 pb-4">
               <nav className="flex flex-col gap-1 pt-3" aria-label="Mobile navigation">
                 {allLinks.map((link) => (
                   <a
@@ -196,7 +196,7 @@ export default function NavBar() {
                   Request Onboarding
                 </a>
               </nav>
-              <p className="mt-3 text-center text-xs font-mono font-semibold text-[#0C1014]">
+              <p className="mt-4 text-center text-xs font-mono font-semibold text-[#0C1014]">
                 Daily support 8 AM - 7 PM ET
               </p>
             </div>

@@ -496,7 +496,7 @@ export default async function TurnoverCleaningPage() {
       <main className="bg-white">
 
         {/* ── Section 02: Hero ── */}
-        <section id="pm-hero" className="section-anchor relative overflow-hidden pt-[5.8rem] md:pt-[6.5rem]">
+        <section id="pm-hero" className="section-anchor relative overflow-hidden pt-[5.8rem] md:pt-[7rem]">
           <div className="absolute inset-0">
             <Image
               src="/banner4.webp"
@@ -510,7 +510,7 @@ export default async function TurnoverCleaningPage() {
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-[#0C1014]/75 via-[#0C1014]/65 to-[#0C1014]/80" />
 
-          <div className="relative px-5 pt-5 pb-12 md:pt-20 md:pb-24">
+          <div className="relative px-5 pt-5 pb-12 md:pt-28 md:pb-28">
             <div className="mx-auto grid max-w-6xl gap-8 md:gap-12 md:grid-cols-[1.1fr_1fr]">
               {/* Left: headline */}
               <div className="flex flex-col rounded-3xl border border-[#E2EEF5] bg-white p-5 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:px-8 md:pt-5 md:pb-5">
@@ -518,7 +518,7 @@ export default async function TurnoverCleaningPage() {
                   SERVING ORLANDO / DISNEY CORRIDOR
                 </p>
                 <h1 className="mt-2 text-3xl md:text-4xl font-semibold leading-tight text-[#0C1014]">
-                  Turnover Cleaning Partner for Vacation Rental Managers
+                  Vacation Rental Cleaning for Property Managers
                 </h1>
                 <div
                   className="relative mt-4 h-[var(--hero-card-image-height-mobile)] overflow-hidden rounded-xl md:h-[var(--hero-card-image-height-desktop)]"

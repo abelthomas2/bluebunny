@@ -540,8 +540,7 @@ export default async function TurnoverCleaningPage() {
                   />
                 </div>
                 <p className="mt-4 text-sm md:text-base font-mono text-[#0C1014] max-w-3xl">
-                  Five-star cleanliness your guests notice &mdash; without you
-                  managing a single cleaner.
+                  Five-star cleanliness your guests notice &mdash; thanks to a cleaning crew you never will.
                 </p>
 
                 <ul className="mt-4 space-y-3">

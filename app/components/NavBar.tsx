@@ -117,10 +117,10 @@ export default function NavBar() {
             <div className="relative hidden md:flex md:self-stretch md:flex-col md:items-end">
               <div className="flex flex-1 items-center gap-2">
                 <a
-                  href="tel:4077731724"
+                  href="tel:9047385631"
                   className="whitespace-nowrap rounded-full border border-[#0C1014]/20 bg-white px-4 py-2 text-sm font-semibold text-[#0C1014] transition hover:bg-[#0C1014] hover:text-white"
                 >
-                  Call/Text: (407) 773-1724
+                  Call/Text: (904) 738-5631
                 </a>
                 <a
                   href="#pm-hero"
@@ -170,7 +170,7 @@ export default function NavBar() {
         {/* Mobile expanded menu */}
         {isOpen && (
           <div className="md:hidden">
-            <div className="mx-auto max-w-6xl px-5 pb-4">
+            <div className="mx-auto max-w-6xl px-5 pb-6">
               <nav className="flex flex-col gap-1 pt-3" aria-label="Mobile navigation">
                 {allLinks.map((link) => (
                   <a
@@ -183,10 +183,10 @@ export default function NavBar() {
                   </a>
                 ))}
                 <a
-                  href="tel:4077731724"
+                  href="tel:9047385631"
                   className="mt-2 rounded-full border border-[#0C1014]/20 bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#0C1014] transition hover:bg-[#0C1014] hover:text-white"
                 >
-                  Call/Text: (407) 773-1724
+                  Call/Text: (904) 738-5631
                 </a>
                 <a
                   href="#pm-onboarding-form"

@@ -216,7 +216,7 @@ const situationalFees = [
   {
     label: 'Offsite laundry handling: $10',
     detail:
-      'When in-unit appliances are broken or for 4+ bedroom properties. We bag, label, and transport linens to a nearby facility.',
+      'When in-unit appliances are broken or for same-day turnovers on 4+ bedroom properties. We bag, label, and transport linens to a nearby facility.',
   },
 ];
 
@@ -521,7 +521,7 @@ export default async function TurnoverCleaningPage() {
                   Vacation Rental Cleaning for Property Managers
                 </h1>
                 <div
-                  className="relative mt-4 h-[var(--hero-card-image-height-mobile)] overflow-hidden rounded-xl md:h-[var(--hero-card-image-height-desktop)]"
+                  className="relative mt-4 h-[var(--hero-card-image-height-mobile)] overflow-hidden rounded-xl shadow-md md:h-[var(--hero-card-image-height-desktop)]"
                   style={
                     {
                       ['--hero-card-image-height-mobile' as string]: `${HERO_CARD_IMAGE_HEIGHT_MOBILE_PX}px`,
@@ -540,7 +540,7 @@ export default async function TurnoverCleaningPage() {
                   />
                 </div>
                 <p className="mt-4 text-sm md:text-base font-mono text-[#0C1014] max-w-3xl">
-                  Guest-ready properties, on-time same-day turns, and a standardized process &mdash; all without you
+                  Five-star cleanliness your guests notice &mdash; without you
                   managing a single cleaner.
                 </p>
 
@@ -872,11 +872,11 @@ export default async function TurnoverCleaningPage() {
                 Request Onboarding
               </a>
               <a
-                href="tel:4077731724"
+                href="tel:9047385631"
                 className="rounded-full border border-[#0C1014]/20 bg-white px-6 py-3 text-sm font-semibold text-[#0C1014] shadow-sm transition hover:bg-[#0C1014] hover:text-white"
               >
-                <span className="min-[376px]:hidden">Call: (407) 773-1724</span>
-                <span className="hidden min-[376px]:inline">Call/Text: (407) 773-1724</span>
+                <span className="min-[376px]:hidden">Call: (904) 738-5631</span>
+                <span className="hidden min-[376px]:inline">Call/Text: (904) 738-5631</span>
               </a>
             </div>
           </div>
@@ -1096,11 +1096,11 @@ export default async function TurnoverCleaningPage() {
                 Request Onboarding
               </a>
               <a
-                href="tel:4077731724"
+                href="tel:9047385631"
                 className="rounded-full border border-[#0C1014] bg-[#0C1014] px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-[#0C1014]"
               >
-                <span className="min-[376px]:hidden">Call: (407) 773-1724</span>
-                <span className="hidden min-[376px]:inline">Call/Text: (407) 773-1724</span>
+                <span className="min-[376px]:hidden">Call: (904) 738-5631</span>
+                <span className="hidden min-[376px]:inline">Call/Text: (904) 738-5631</span>
               </a>
             </div>
 
@@ -1130,7 +1130,7 @@ export default async function TurnoverCleaningPage() {
           </div>
 
           <div className="flex flex-col gap-2 text-sm font-mono text-white/75">
-            <a href="tel:4077731724" className="transition hover:text-[#5DAFD5]">
+            <a href="tel:9047385631" className="transition hover:text-[#5DAFD5]">
               407-773-1724
             </a>
             <a href="mailto:hello@gobluebunny.com" className="transition hover:text-[#5DAFD5]">

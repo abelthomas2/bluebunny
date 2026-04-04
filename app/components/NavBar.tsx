@@ -196,7 +196,7 @@ export default function NavBar() {
                   Request Onboarding
                 </a>
               </nav>
-              <p className="mt-4 text-center text-xs font-mono font-semibold text-[#0C1014]">
+              <p className="mt-2 text-center text-xs font-mono font-semibold text-[#0C1014]">
                 Daily support 8 AM - 7 PM ET
               </p>
             </div>

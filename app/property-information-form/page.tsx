@@ -35,9 +35,9 @@ export default function PropertyInformationFormPage() {
         </div>
       </header>
 
-      <main className="min-h-screen bg-[#F4F9FD] px-5 pt-10 pb-20 md:pt-14 md:pb-24">
+      <main className="min-h-screen bg-[#F4F9FD] px-5 pt-10 pb-12 md:pt-14 md:pb-16">
         <div className="mx-auto max-w-4xl">
-          <div className="mb-8 px-4 text-center md:mb-10 md:px-0">
+          <div className="mb-8 px-4 text-center md:mb-12 md:px-0">
             <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5]">
               Onboarding
             </p>
@@ -53,6 +53,37 @@ export default function PropertyInformationFormPage() {
           <PropertyInformationForm />
         </div>
       </main>
+
+      <footer className="border-t border-white/5 bg-[#0C1014] px-5 py-12 text-white">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#5DAFD5] md:text-sm">
+              BLUE BUNNY TURNOVER SERVICES
+            </p>
+            <p className="mt-3 text-sm font-mono text-white/90">
+              Vacation Rental Cleaning
+            </p>
+            <p className="mt-1 text-sm font-mono text-white/75">
+              Orlando / Disney Corridor
+            </p>
+            <p className="mt-2 max-w-xs text-xs font-mono text-white/50">
+              Serving Kissimmee, Davenport, ChampionsGate, Four Corners, International Drive, and the greater Orlando area.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-2 text-sm font-mono text-white/75">
+            <a href="tel:9047385631" className="transition hover:text-[#5DAFD5]">
+              (904) 738-5631
+            </a>
+            <a href="mailto:hello@gobluebunny.com" className="transition hover:text-[#5DAFD5]">
+              hello@gobluebunny.com
+            </a>
+            <a href="/privacy" className="transition hover:text-[#5DAFD5]">
+              Privacy Policy
+            </a>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }

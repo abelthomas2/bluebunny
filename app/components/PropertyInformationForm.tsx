@@ -225,7 +225,7 @@ export default function PropertyInformationForm() {
   const fe = fieldErrors;
 
   return (
-    <form key={formKey} onSubmit={handleSubmit} noValidate className="space-y-5">
+    <form key={formKey} onSubmit={handleSubmit} noValidate className="space-y-6 md:space-y-8">
       <input type="hidden" name="leadType" value="Property Information Form" />
 
       {/* ── Client Information ── */}
@@ -399,7 +399,7 @@ export default function PropertyInformationForm() {
               aria-invalid={Boolean(fe.accessInstructions)}
               aria-describedby={fe.accessInstructions ? 'access-instructions-error' : undefined}
               className={ta}
-              placeholder="e.g., Lockbox on front door handle, code 4821. Gate code for community entrance: #1234"
+              placeholder="e.g., Lockbox on front door handle, code 4821."
             />
             <Err id="access-instructions-error" msg={fe.accessInstructions} />
           </div>

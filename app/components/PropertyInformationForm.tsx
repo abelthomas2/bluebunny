@@ -9,6 +9,7 @@ type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 type FieldKey =
   | 'name' | 'email' | 'phone'
   | 'propertyAddress' | 'city' | 'state' | 'zip' | 'bedrooms' | 'fullBaths'
+  | 'checkinTime' | 'checkoutTime'
   | 'primaryAccess' | 'accessInstructions' | 'gatedCommunity' | 'gateCode'
   | 'washer' | 'dryer' | 'appliancesFunctioning' | 'linenStorage'
   | 'hasPool' | 'poolCleaning' | 'hasGrill' | 'grillCleaning' | 'grillType'
@@ -22,6 +23,7 @@ type FieldKey =
 type FormErrors = Partial<Record<FieldKey, string>>;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const TIME_PATTERN = /^(1[0-2]|0?[1-9]):[0-5][0-9]\s?(AM|PM)$/i;
 const ZIP_PATTERN = /^\d{5}$/;
 const STATE_PATTERN = /^[A-Za-z]{2}$/;
 const URL_PATTERN = /^https?:\/\/.+/;
@@ -81,6 +83,12 @@ export default function PropertyInformationForm() {
     if (!EMAIL_PATTERN.test(str(formData, 'email'))) errors.email = 'Enter a valid email address.';
     if (str(formData, 'phone').replace(/\D/g, '').length < 10)
       errors.phone = 'Phone number must include at least 10 digits.';
+
+    // ── Check-in & Checkout ──
+    if (!TIME_PATTERN.test(str(formData, 'checkinTime')))
+      errors.checkinTime = 'Enter a valid check-in time (e.g., 3:00 PM).';
+    if (!TIME_PATTERN.test(str(formData, 'checkoutTime')))
+      errors.checkoutTime = 'Enter a valid checkout time (e.g., 11:00 AM).';
 
     // ── Property Details ──
     if (!str(formData, 'propertyAddress')) errors.propertyAddress = 'Property address is required.';
@@ -341,12 +349,24 @@ export default function PropertyInformationForm() {
         <SectionTitle>Check-in & Checkout</SectionTitle>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
-            <label htmlFor="checkinTime" className={lbl}>Guest check-in time</label>
-            <input id="checkinTime" name="checkinTime" type="time" defaultValue="15:00" className={inp} />
+            <label htmlFor="checkinTime" className={lbl}>Guest check-in time{req}</label>
+            <input
+              id="checkinTime" name="checkinTime" type="text" defaultValue="3:00 PM" placeholder="e.g., 3:00 PM"
+              aria-invalid={Boolean(fe.checkinTime)}
+              aria-describedby={fe.checkinTime ? 'checkin-time-error' : undefined}
+              className={inp}
+            />
+            <Err id="checkin-time-error" msg={fe.checkinTime} />
           </div>
           <div>
-            <label htmlFor="checkoutTime" className={lbl}>Guest checkout time</label>
-            <input id="checkoutTime" name="checkoutTime" type="time" defaultValue="11:00" className={inp} />
+            <label htmlFor="checkoutTime" className={lbl}>Guest checkout time{req}</label>
+            <input
+              id="checkoutTime" name="checkoutTime" type="text" defaultValue="11:00 AM" placeholder="e.g., 11:00 AM"
+              aria-invalid={Boolean(fe.checkoutTime)}
+              aria-describedby={fe.checkoutTime ? 'checkout-time-error' : undefined}
+              className={inp}
+            />
+            <Err id="checkout-time-error" msg={fe.checkoutTime} />
           </div>
         </div>
       </div>

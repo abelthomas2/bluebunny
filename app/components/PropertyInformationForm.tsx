@@ -319,7 +319,7 @@ export default function PropertyInformationForm() {
               <Err id="bedrooms-error" msg={fe.bedrooms} />
             </div>
             <div>
-              <label htmlFor="fullBaths" className={lbl}>Full baths{req}</label>
+              <label htmlFor="fullBaths" className={lbl}>Bathrooms{req}</label>
               <input
                 id="fullBaths" name="fullBaths" type="number" min="1"
                 aria-invalid={Boolean(fe.fullBaths)}

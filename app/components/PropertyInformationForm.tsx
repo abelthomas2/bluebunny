@@ -351,7 +351,7 @@ export default function PropertyInformationForm() {
           <div>
             <label htmlFor="checkinTime" className={lbl}>Guest check-in time{req}</label>
             <input
-              id="checkinTime" name="checkinTime" type="text" defaultValue="3:00 PM" placeholder="e.g., 3:00 PM"
+              id="checkinTime" name="checkinTime" type="text" placeholder="e.g., 3:00 PM"
               aria-invalid={Boolean(fe.checkinTime)}
               aria-describedby={fe.checkinTime ? 'checkin-time-error' : undefined}
               className={inp}
@@ -361,7 +361,7 @@ export default function PropertyInformationForm() {
           <div>
             <label htmlFor="checkoutTime" className={lbl}>Guest checkout time{req}</label>
             <input
-              id="checkoutTime" name="checkoutTime" type="text" defaultValue="11:00 AM" placeholder="e.g., 11:00 AM"
+              id="checkoutTime" name="checkoutTime" type="text" placeholder="e.g., 11:00 AM"
               aria-invalid={Boolean(fe.checkoutTime)}
               aria-describedby={fe.checkoutTime ? 'checkout-time-error' : undefined}
               className={inp}

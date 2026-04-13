@@ -141,7 +141,7 @@ const pmValueCards = [
     ),
     title: 'Automatic Scheduling',
     description:
-      'We sync with your PMS so turnovers are scheduled the moment a guest books \u2014 no more last-minute cleaner headaches.',
+      'We sync with your PMS so turnovers are scheduled the moment a guest books. No more last-minute cleaner headaches.',
   },
   {
     icon: (
@@ -166,7 +166,7 @@ const pmValueCards = [
     ),
     title: 'Actionable Reporting',
     description:
-      'A PDF report detailing damage flags, inventory, and action items is delivered to your inbox 30 minutes post-clean. Timestamped before/after photos included.',
+      'A photo report detailing damage flags, inventory, and action items is delivered to your inbox 30 minutes post-turn.',
   },
   {
     icon: (
@@ -204,7 +204,7 @@ const addOnServices = [
 
 const situationalFees = [
   {
-    label: 'Same-day short-notice fee: $25',
+    label: 'Short-notice fee: $25',
     detail:
       'Applies only when we had no prior PMS or calendar visibility and must complete on the same calendar day as notification. Rare if you share calendar access.',
   },
@@ -540,7 +540,7 @@ export default async function TurnoverCleaningPage() {
                   />
                 </div>
                 <p className="mt-4 text-sm md:text-base font-mono text-[#0C1014] max-w-3xl">
-                  Five-star cleanliness your guests notice &mdash; thanks to a cleaning crew you never will.
+                  We clean, document, and restock your rentals so you never have to manage another turnover.
                 </p>
 
                 <ul className="mt-4 space-y-3">
@@ -548,13 +548,13 @@ export default async function TurnoverCleaningPage() {
                     <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-[#2978A5]">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span><strong className="font-bold text-[#0C1014]">Photo &amp; Damage Report Every Turn</strong></span>
+                    <span><strong className="font-bold text-[#0C1014]">Cleaning, Linens, Restock &mdash; One Partner</strong></span>
                   </li>
                   <li className="flex items-start gap-3 text-sm md:text-base font-mono text-[#0C1014]">
                     <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-[#2978A5]">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span><strong className="font-bold text-[#0C1014]">Cleaning, Linens, Restock &mdash; One Partner</strong></span>
+                    <span><strong className="font-bold text-[#0C1014]">Photo &amp; Damage Report Every Turn</strong></span>
                   </li>
                   <li className="flex items-start gap-3 text-sm md:text-base font-mono text-[#0C1014]">
                     <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-[#2978A5]">
@@ -611,7 +611,7 @@ export default async function TurnoverCleaningPage() {
 
             <div className="mt-5 md:mt-8 rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] px-6 py-5 text-center shadow-sm">
               <p className="text-sm font-mono font-semibold leading-relaxed text-[#2978A5]">
-                Blue Bunny handles the entire clean, documentation, and reporting &mdash; so you can stop managing cleaners.
+                Blue Bunny handles the entire clean, documentation, and restock process &mdash; so you can stop managing cleaners.
               </p>
             </div>
           </div>
@@ -893,8 +893,8 @@ export default async function TurnoverCleaningPage() {
                 A vetted team that protects your brand
               </h2>
               <p className="mx-auto mt-5 max-w-3xl text-sm font-mono leading-relaxed text-[#0C1014] md:text-base">
-                Your cleaners have access to your properties, your guests&rsquo; belongings, and
-                your reputation. We carry general liability insurance and a janitorial bond.
+                Our cleaners have access to your properties and
+                your reputation &mdash; we don't take risks. We carry general liability insurance and a janitorial bond.
               </p>
             </header>
 

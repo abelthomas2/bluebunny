@@ -386,14 +386,12 @@ async function fetchPlaceResourceName(apiKey: string): Promise<string | null> {
 async function getReviewsData(): Promise<ReviewsData> {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
   if (!apiKey) {
-    console.error('[reviews] GOOGLE_PLACES_API_KEY is not set');
     return emptyReviewsData('Missing GOOGLE_PLACES_API_KEY.');
   }
 
   try {
     const placeResourceName = await fetchPlaceResourceName(apiKey);
     if (!placeResourceName) {
-      console.error('[reviews] Google Places search returned no matching place');
       return emptyReviewsData('Google Places search returned no matching place.');
     }
 
@@ -410,14 +408,11 @@ async function getReviewsData(): Promise<ReviewsData> {
     );
 
     if (!response.ok) {
-      const body = await response.text();
-      console.error(`[reviews] Places API ${response.status}: ${body}`);
       return emptyReviewsData(`Google Places details request failed (${response.status}).`);
     }
 
     const payload = (await response.json()) as GooglePlacesV1DetailsResponse;
     if (payload.error?.message) {
-      console.error(`[reviews] Places API error: ${payload.error.message}`);
       return emptyReviewsData(payload.error.message);
     }
 
@@ -439,8 +434,6 @@ async function getReviewsData(): Promise<ReviewsData> {
       .map((entry) => entry.normalized)
       .slice(0, REVIEWS_TO_SHOW);
 
-    console.error(`[reviews] success — rating: ${payload.rating}, reviews: ${reviews.length}`);
-
     return {
       rating: typeof payload.rating === 'number' ? payload.rating : null,
       totalRatings: typeof payload.userRatingCount === 'number' ? payload.userRatingCount : null,
@@ -448,8 +441,7 @@ async function getReviewsData(): Promise<ReviewsData> {
       reviews,
       error: reviews.length === 0 ? 'Google Places returned no review text.' : undefined,
     };
-  } catch (err) {
-    console.error(`[reviews] unexpected error: ${err}`);
+  } catch {
     return emptyReviewsData('Google Places request failed unexpectedly.');
   }
 }

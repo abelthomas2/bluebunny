@@ -6,6 +6,7 @@ import PmOnboardingForm from '@/app/components/PmOnboardingForm';
 import FaqAccordion from '@/app/components/FaqAccordion';
 import PriceCalculator from '@/app/components/PriceCalculator';
 import AddOnsFees from '@/app/components/AddOnsFees';
+import PdfViewerWrapper from '@/app/components/PdfViewerWrapper';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/app/lib/siteMetadata';
 
 type GooglePlacesV1SearchResponse = {
@@ -385,12 +386,14 @@ async function fetchPlaceResourceName(apiKey: string): Promise<string | null> {
 async function getReviewsData(): Promise<ReviewsData> {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
   if (!apiKey) {
+    console.error('[reviews] GOOGLE_PLACES_API_KEY is not set');
     return emptyReviewsData('Missing GOOGLE_PLACES_API_KEY.');
   }
 
   try {
     const placeResourceName = await fetchPlaceResourceName(apiKey);
     if (!placeResourceName) {
+      console.error('[reviews] Google Places search returned no matching place');
       return emptyReviewsData('Google Places search returned no matching place.');
     }
 
@@ -407,11 +410,14 @@ async function getReviewsData(): Promise<ReviewsData> {
     );
 
     if (!response.ok) {
+      const body = await response.text();
+      console.error(`[reviews] Places API ${response.status}: ${body}`);
       return emptyReviewsData(`Google Places details request failed (${response.status}).`);
     }
 
     const payload = (await response.json()) as GooglePlacesV1DetailsResponse;
     if (payload.error?.message) {
+      console.error(`[reviews] Places API error: ${payload.error.message}`);
       return emptyReviewsData(payload.error.message);
     }
 
@@ -433,6 +439,8 @@ async function getReviewsData(): Promise<ReviewsData> {
       .map((entry) => entry.normalized)
       .slice(0, REVIEWS_TO_SHOW);
 
+    console.error(`[reviews] success — rating: ${payload.rating}, reviews: ${reviews.length}`);
+
     return {
       rating: typeof payload.rating === 'number' ? payload.rating : null,
       totalRatings: typeof payload.userRatingCount === 'number' ? payload.userRatingCount : null,
@@ -440,7 +448,8 @@ async function getReviewsData(): Promise<ReviewsData> {
       reviews,
       error: reviews.length === 0 ? 'Google Places returned no review text.' : undefined,
     };
-  } catch {
+  } catch (err) {
+    console.error(`[reviews] unexpected error: ${err}`);
     return emptyReviewsData('Google Places request failed unexpectedly.');
   }
 }
@@ -496,7 +505,7 @@ export default async function TurnoverCleaningPage() {
       <main className="bg-white">
 
         {/* ── Section 02: Hero ── */}
-        <section id="pm-hero" className="section-anchor relative overflow-hidden pt-[5.8rem] md:pt-[7rem]">
+        <section id="pm-hero" className="section-anchor relative flex flex-col overflow-hidden pt-[5.8rem] md:min-h-dvh md:pt-[7rem]">
           <div className="absolute inset-0">
             <Image
               src="/banner4.webp"
@@ -510,8 +519,8 @@ export default async function TurnoverCleaningPage() {
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-[#0C1014]/75 via-[#0C1014]/65 to-[#0C1014]/80" />
 
-          <div className="relative px-5 pt-5 pb-12 md:pt-28 md:pb-28">
-            <div className="mx-auto grid max-w-6xl gap-8 md:gap-12 md:grid-cols-[1.1fr_1fr]">
+          <div className="relative flex flex-1 flex-col px-5 pt-5 pb-12 md:items-center md:justify-center md:py-8">
+            <div className="mx-auto grid w-full max-w-6xl gap-8 md:gap-12 md:grid-cols-[1.1fr_1fr]">
               {/* Left: headline */}
               <div className="flex flex-col rounded-3xl border border-[#E2EEF5] bg-white p-5 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:px-8 md:pt-5 md:pb-5">
                 <p className="text-xs md:text-sm font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5]">
@@ -678,32 +687,14 @@ export default async function TurnoverCleaningPage() {
               </p>
             </header>
 
-            <div className="mt-8 md:mt-12 grid gap-5 md:grid-cols-2">
-              {/* Mock report visual */}
-              <div className="rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm">
-                <div className="rounded-xl border border-[#E2EEF5] bg-[#F4F9FD] p-4">
-                  <div className="flex items-center justify-between rounded-lg bg-[#EEF6FB] px-3.5 py-2.5">
-                    <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#2978A5] md:text-[11px]">
-                      Sample Turnover Report (placeholder screenshot)
-                    </p>
-                    <span className="rounded-full bg-[#2978A5] px-2.5 py-1 text-[10px] font-bold text-white">
-                      Complete
-                    </span>
-                  </div>
-                  <div className="mt-4 space-y-3">
-                    <div className="grid grid-cols-2 gap-2.5">
-                      <div className="h-16 rounded-lg bg-[#DAE8F4] blur-[1px]" />
-                      <div className="h-16 rounded-lg bg-[#DAE8F4] blur-[1px]" />
-                    </div>
-                    <div className="h-2 rounded bg-[#DAE8F4]" />
-                    <div className="h-2 w-10/12 rounded bg-[#DAE8F4]" />
-                    <div className="h-2 w-8/12 rounded bg-[#DAE8F4]" />
-                    <div className="grid grid-cols-3 gap-2">
-                      <div className="h-11 rounded-lg bg-[#DAE8F4] blur-[0.5px]" />
-                      <div className="h-11 rounded-lg bg-[#DAE8F4] blur-[0.5px]" />
-                      <div className="h-11 rounded-lg bg-[#DAE8F4] blur-[0.5px]" />
-                    </div>
-                  </div>
+            <div className="mt-8 md:mt-12 grid items-start gap-5 md:grid-cols-2">
+              {/* Report PDF viewer */}
+              <div className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm">
+                <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
+                  Sample Turnover Report
+                </p>
+                <div className="mt-5 overflow-hidden rounded-xl">
+                  <PdfViewerWrapper src="/sample-report.pdf#zoom=page-fit" />
                 </div>
               </div>
 

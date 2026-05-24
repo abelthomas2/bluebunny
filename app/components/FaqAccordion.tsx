@@ -41,7 +41,7 @@ export default function FaqAccordion({ items, defaultVisible = 5 }: FaqAccordion
                 aria-expanded={isOpen}
               >
                 <span
-                  className={`text-base font-bold leading-snug transition-colors duration-150 md:text-lg ${
+                  className={`text-base font-bold leading-snug transition-colors duration-150 md:text-base ${
                     isOpen ? 'text-[#2978A5]' : 'text-[#0C1014]'
                   }`}
                 >
@@ -77,7 +77,7 @@ export default function FaqAccordion({ items, defaultVisible = 5 }: FaqAccordion
                 }`}
               >
                 <div className="overflow-hidden">
-                  <p className="px-6 pb-6 text-sm font-mono leading-relaxed text-[#0C1014] md:text-base">
+                  <p className="px-6 pb-6 text-sm font-mono leading-relaxed text-[#0C1014] md:text-sm">
                     {item.answer}
                   </p>
                 </div>

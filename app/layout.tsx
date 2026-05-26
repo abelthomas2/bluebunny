@@ -57,7 +57,7 @@ const jsonLd = {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Do you specialize in Airbnb and short-term rental properties?",
+          "name": "Do you specialize in short-term rental properties?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Yes — most of our clients are Airbnb and VRBO hosts managing multiple properties across the Orlando area. We built our process specifically around short-term rental turnovers: tight windows, back-to-back guests, and the documentation that protects your Superhost status."

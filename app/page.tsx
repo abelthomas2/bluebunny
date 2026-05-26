@@ -246,7 +246,7 @@ const onboardingSteps = [
 const cleanerVettingSteps = [
   {
     step: 'STR Experience Required',
-    detail: 'Short-term rental experience required. We screen for relevant background before anything else.',
+    detail: 'Short-term rental and hospitality experience required. We screen for relevant background before anything else.',
   },
   {
     step: 'Background Checked and Verified',
@@ -262,7 +262,7 @@ const cleanerVettingSteps = [
 
 const faqItems = [
   {
-    question: 'Do you specialize in Airbnb and short-term rental properties?',
+    question: 'Do you specialize in short-term rental properties?',
     answer:
       "Yes \u2014 most of our clients are Airbnb and VRBO hosts managing multiple properties across the Orlando area. We built our process specifically around short-term rental turnovers: tight windows, back-to-back guests, and the documentation that protects your Superhost status.",
   },

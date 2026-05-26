@@ -706,7 +706,7 @@ export default function PropertyInformationForm() {
             </div>
           )}
           <div>
-            <label htmlFor="hasWelcomeLights" className={lbl}>Designated welcome / arrival lights to leave on?{req}</label>
+            <label htmlFor="hasWelcomeLights" className={lbl}>Designated welcome lights to leave on?{req}</label>
             <select
               id="hasWelcomeLights" name="hasWelcomeLights" defaultValue=""
               aria-invalid={Boolean(fe.hasWelcomeLights)}

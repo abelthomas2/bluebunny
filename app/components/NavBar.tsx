@@ -10,32 +10,34 @@ type NavItem =
 
 const navItems: NavItem[] = [
   {
-    label: 'Services',
+    label: 'Why Us',
     children: [
-      { label: 'Why Us', href: '#what-pms-get' },
-      { label: 'Reporting', href: '#deliverable-report' },
-    ],
-  },
-  { label: 'Pricing', href: '#pricing' },
-  {
-    label: 'Process',
-    children: [
-      { label: 'How It Works', href: '#onboarding-steps' },
-      { label: 'Our Team', href: '#cleaner-vetting' },
+      { label: 'What You Get', href: '#what-pms-get' },
+      { label: 'Our Team',     href: '#cleaner-vetting' },
       { label: 'Testimonials', href: '#proof' },
     ],
   },
-  { label: 'FAQ', href: '#faq' },
+  {
+    label: 'Process',
+    children: [
+      { label: 'Our Process',  href: '#our-process' },
+      { label: 'How It Works', href: '#onboarding-steps' },
+    ],
+  },
+  { label: 'Reporting', href: '#deliverable-report' },
+  { label: 'Pricing',   href: '#pricing' },
+  { label: 'FAQ',       href: '#faq' },
 ];
 
 const allLinks: NavChild[] = [
-  { label: 'Why Us', href: '#what-pms-get' },
-  { label: 'Reporting', href: '#deliverable-report' },
-  { label: 'Pricing', href: '#pricing' },
+  { label: 'What You Get', href: '#what-pms-get' },
+  { label: 'Our Process',  href: '#our-process' },
+  { label: 'Reporting',    href: '#deliverable-report' },
+  { label: 'Pricing',      href: '#pricing' },
   { label: 'How It Works', href: '#onboarding-steps' },
-  { label: 'Our Team', href: '#cleaner-vetting' },
+  { label: 'Our Team',     href: '#cleaner-vetting' },
   { label: 'Testimonials', href: '#proof' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'FAQ',          href: '#faq' },
 ];
 
 export default function NavBar() {
@@ -48,7 +50,7 @@ export default function NavBar() {
     >
       <div>
         <div className="mx-auto max-w-6xl px-5">
-          <div className="flex h-[5rem] items-center justify-between md:h-[7rem]">
+          <div className="flex h-[5rem] items-center justify-between lg:h-[7rem]">
             {/* Logo */}
             <a href="#pm-hero" className="inline-flex shrink-0 items-center">
               <Image
@@ -56,15 +58,15 @@ export default function NavBar() {
                 alt="Blue Bunny Turnover Services Logo"
                 width={900}
                 height={300}
-                sizes="(min-width: 768px) 228px, 192px"
+                sizes="(min-width: 1024px) 228px, 192px"
                 priority
                 unoptimized
-                className="h-[3.7rem] w-auto origin-left scale-[1.2] -translate-x-[0.35rem] translate-y-[0px] md:h-19 md:scale-100 md:translate-x-0 md:translate-y-0"
+                className="h-[3.7rem] w-auto origin-left scale-[1.2] -translate-x-[0.35rem] translate-y-[0px] lg:h-19 lg:scale-100 lg:translate-x-0 lg:translate-y-0"
               />
             </a>
 
             {/* Desktop center nav */}
-            <nav className="hidden md:flex items-center gap-1" aria-label="Primary navigation">
+            <nav className="hidden lg:flex items-center gap-1" aria-label="Primary navigation">
               {navItems.map((item) =>
                 item.children ? (
                   <div key={item.label} className="group relative">
@@ -114,7 +116,7 @@ export default function NavBar() {
             </nav>
 
             {/* Desktop right CTAs + support line */}
-            <div className="relative hidden md:flex md:self-stretch md:flex-col md:items-end">
+            <div className="relative hidden lg:flex lg:self-stretch lg:flex-col lg:items-end">
               <div className="flex flex-1 items-center gap-2">
                 <a
                   href="tel:9047385631"
@@ -135,7 +137,7 @@ export default function NavBar() {
             </div>
 
             {/* Mobile controls */}
-            <div className="flex items-center gap-2 md:hidden">
+            <div className="flex items-center gap-2 lg:hidden">
               <button
                 type="button"
                 onClick={() => setIsOpen((o) => !o)}
@@ -169,7 +171,7 @@ export default function NavBar() {
 
         {/* Mobile expanded menu */}
         {isOpen && (
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <div className="mx-auto max-w-6xl px-5 pb-6">
               <nav className="flex flex-col gap-1 pt-3" aria-label="Mobile navigation">
                 {allLinks.map((link) => (

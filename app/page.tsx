@@ -7,6 +7,9 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 import PriceCalculator from '@/app/components/PriceCalculator';
 import AddOnsFees from '@/app/components/AddOnsFees';
 import PdfViewerWrapper from '@/app/components/PdfViewerWrapper';
+import ProcessCarousel from '@/app/components/ProcessCarousel';
+import PainPointsCarousel from '@/app/components/PainPointsCarousel';
+import ReviewsCarousel from '@/app/components/ReviewsCarousel';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/app/lib/siteMetadata';
 
 type GooglePlacesV1SearchResponse = {
@@ -69,7 +72,7 @@ const SEARCH_QUERIES = [
 ];
 const REVIEWS_REVALIDATE_SECONDS = 60 * 60 * 6;
 const REVIEWS_TO_SHOW = 3;
-const BABYSITTING_IMAGE_POSITION = '50% 65%';
+const BABYSITTING_IMAGE_POSITION = '50% 50%';
 const HERO_CARD_IMAGE_HEIGHT_MOBILE_PX = 150;
 const HERO_CARD_IMAGE_HEIGHT_DESKTOP_PX = 180;
 
@@ -99,7 +102,7 @@ const painPoints = [
         <line x1="12" y1="17" x2="12.01" y2="17" />
       </svg>
     ),
-    text: 'Your cleaner no-shows, and you find out when the guest does.',
+    text: 'Your cleaner no-shows unannounced, and you find out there\'s a problem when the guest does.',
   },
   {
     icon: (
@@ -107,7 +110,7 @@ const painPoints = [
         <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
       </svg>
     ),
-    text: "You're still texting cleaners the night before to confirm tomorrow's turns.",
+    text: "You're still personally texting cleaners the night before to confirm tomorrow's turns.",
   },
   {
     icon: (
@@ -147,13 +150,14 @@ const pmValueCards = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <polyline points="9 12 11 14 15 10" />
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 01-8 0" />
       </svg>
     ),
-    title: 'Consistent Quality',
+    title: 'Consumables, Covered',
     description:
-      'Our cleaners follow the same standardized checklist on every property, every time.',
+      'We source, deliver, and restock guest essentials through the optional Blue Bunny Consumables Program. No supply runs, no extra vendors.',
   },
   {
     icon: (
@@ -199,7 +203,7 @@ const pricingBaseRows = [
 const addOnServices = [
   { label: 'Pool cleaning', detail: '$18 / turn' },
   { label: 'Grill cleaning', detail: '$12 / turn' },
-  { label: 'Consumables restock (Blue Bunny-supplied)', detail: '$7 + $4 / bathroom', smallDetail: '$7 + $4 / BA' },
+  { label: 'Blue Bunny Consumables Program', detail: '$7 + $4 / bathroom', smallDetail: '$7 + $4 / BA' },
   { label: 'Deep clean (scheduled or as-needed)', detail: '+40% of base price', smallDetail: '+40%' },
 ];
 
@@ -242,7 +246,7 @@ const onboardingSteps = [
 const cleanerVettingSteps = [
   {
     step: 'STR Experience Required',
-    detail: 'STR and hospitality experience required. We screen for relevant background before anything else.',
+    detail: 'Short-term rental experience required. We screen for relevant background before anything else.',
   },
   {
     step: 'Background Checked and Verified',
@@ -258,9 +262,19 @@ const cleanerVettingSteps = [
 
 const faqItems = [
   {
+    question: 'Do you specialize in Airbnb and short-term rental properties?',
+    answer:
+      "Yes \u2014 most of our clients are Airbnb and VRBO hosts managing multiple properties across the Orlando area. We built our process specifically around short-term rental turnovers: tight windows, back-to-back guests, and the documentation that protects your Superhost status.",
+  },
+  {
     question: "What\u2019s your service area?",
     answer:
       'We cover a roughly 30-mile radius from Orlando, including the Disney corridor, Kissimmee, Davenport, ChampionsGate, Four Corners, Lake Buena Vista, and surrounding areas. If you manage properties in this zone, we can almost certainly reach them.',
+  },
+  {
+    question: "What if I\u2019m not happy with a clean?",
+    answer:
+      'We offer a free reclean within 5 hours of completion. Photo documentation helps us act fast.',
   },
   {
     question: 'Do you integrate with PMS platforms?',
@@ -268,29 +282,9 @@ const faqItems = [
       "We work with any platform that supports iCal export, including Guesty, Hostaway, Hospitable, Lodgify, OwnerRez, and direct Airbnb/VRBO calendars. During setup, we\u2019ll walk through the integration with your specific system.",
   },
   {
-    question: 'How far in advance do I need to schedule?',
-    answer:
-      "You don\u2019t. We sync directly with your PMS or calendar, so cleans are automatically queued as soon as a guest books. There\u2019s nothing to schedule manually. For one-off deep cleans or onboarding setup, we prefer 48 hours notice when possible, but same-day service is available.",
-  },
-  {
     question: 'Can you handle same-day turnovers?',
     answer:
       'Yes. Same-day cleans are completed within 3.5 hours of checkout. For same-day turnovers on properties with more than 3 bedrooms, we dispatch a two-cleaner team to ensure the unit is guest-ready by check-in.',
-  },
-  {
-    question: 'What happens if a guest checks out late or checks in early?',
-    answer:
-      "We notify you as soon as our cleaner arrives and encounters the situation. We\u2019ll adjust the cleaning window and keep you updated in real time. If the delay means the turn can\u2019t be completed before check-in, we\u2019ll flag it immediately so your team can coordinate with the incoming guest.",
-  },
-  {
-    question: 'Do you bring supplies?',
-    answer:
-      "Yes. Our cleaners bring all their own tools and cleaning products. If you\u2019d like us to restock guest consumables (soaps, paper goods, coffee, etc.), we offer an optional consumables program at $7 + $4 per bathroom per turn.",
-  },
-  {
-    question: 'Do you handle linens?',
-    answer:
-      "Yes. In-unit linen wash and reset is included with every standard clean using the property's washer and dryer. If appliances are broken or the service is same-day on a larger property, we handle offsite laundry for a $10 handling fee.",
   },
   {
     question: 'How do you document damage or missing items?',
@@ -303,9 +297,24 @@ const faqItems = [
       "You\u2019ll receive a completion confirmation as soon as the cleaner locks up, followed by the full property report the same day. No more texting your cleaner to ask if they\u2019re finished.",
   },
   {
-    question: "What if I\u2019m not happy with a clean?",
+    question: 'How far in advance do I need to schedule?',
     answer:
-      'We offer a free reclean within 5 hours of completion. Photo documentation helps us act fast.',
+      "You don\u2019t. We sync directly with your PMS or calendar, so cleans are automatically queued as soon as a guest books. There\u2019s nothing to schedule manually. For one-off deep cleans or onboarding setup, we prefer 48 hours notice when possible, but same-day service is available.",
+  },
+  {
+    question: 'What happens if a guest checks out late or checks in early?',
+    answer:
+      "We notify you as soon as our cleaner arrives and encounters the situation. We\u2019ll adjust the cleaning window and keep you updated in real time. If the delay means the turn can\u2019t be completed before check-in, we\u2019ll flag it immediately so your team can coordinate with the incoming guest.",
+  },
+  {
+    question: 'Do you bring supplies?',
+    answer:
+      "Yes. Our cleaners bring all their own tools and cleaning products. If you\u2019d like us to supply and restock guest consumables (soaps, paper goods, coffee, etc.), we offer the Blue Bunny Consumables Program at $7 + $4 per bathroom per turn. Client-supplied consumables are restocked at no extra charge.",
+  },
+  {
+    question: 'Do you handle linens?',
+    answer:
+      "Yes. In-unit linen wash and reset is included with every standard clean using the property's washer and dryer. If appliances are broken or the service is same-day on a larger property, we handle offsite laundry for a $10 handling fee.",
   },
 ];
 
@@ -514,7 +523,7 @@ export default async function TurnoverCleaningPage() {
           <div className="relative flex flex-1 flex-col px-5 pt-5 pb-12 md:items-center md:justify-center md:py-8">
             <div className="mx-auto grid w-full max-w-6xl gap-8 md:gap-12 md:grid-cols-[1.1fr_1fr]">
               {/* Left: headline */}
-              <div className="flex flex-col rounded-3xl border border-[#E2EEF5] bg-white p-5 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:px-8 md:pt-5 md:pb-5">
+              <div className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-5 shadow-[0_22px_65px_rgba(12,16,20,0.16)] md:px-8 md:pt-5 md:pb-5">
                 <p className="text-xs md:text-sm font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5]">
                   SERVING ORLANDO / DISNEY CORRIDOR
                 </p>
@@ -541,7 +550,7 @@ export default async function TurnoverCleaningPage() {
                   />
                 </div>
                 <p className="mt-4 text-sm md:text-base font-mono text-[#0C1014] max-w-3xl">
-                  We clean, document, and restock your rentals so you never have to manage another turnover.
+                  We clean, document, and restock your short-term rentals so you never have to manage another turnover.
                 </p>
 
                 <ul className="mt-4 space-y-3">
@@ -588,7 +597,13 @@ export default async function TurnoverCleaningPage() {
               </h2>
             </header>
 
-            <div className="mt-8 md:mt-12 grid gap-5 md:grid-cols-2">
+            {/* Mobile: carousel */}
+            <div className="md:hidden">
+              <PainPointsCarousel items={painPoints} />
+            </div>
+
+            {/* Desktop: grid */}
+            <div className="hidden md:mt-12 md:grid md:gap-5 md:grid-cols-2">
               {painPoints.map((item) => (
                 <article
                   key={item.text}
@@ -604,7 +619,7 @@ export default async function TurnoverCleaningPage() {
               ))}
             </div>
 
-            <div className="mt-5 rounded-2xl border border-[#E2EEF5] bg-white px-6 py-5 text-center shadow-sm">
+            <div className="mt-5 rounded-2xl border-2 border-[#E2EEF5] bg-white px-6 py-5 text-center shadow-sm">
               <p className="text-sm font-mono leading-relaxed text-[#0C1014]">
                 You&rsquo;re spending hours every week coordinating cleaners across your portfolio.
               </p>
@@ -633,7 +648,7 @@ export default async function TurnoverCleaningPage() {
 
             <div className="mt-8 md:mt-12 overflow-hidden rounded-2xl shadow-md">
               <Image
-                src="/babysitting.webp"
+                src="/babysitting2.jpg"
                 alt="Freshly turned over living room ready for guests"
                 width={1200}
                 height={500}
@@ -643,7 +658,7 @@ export default async function TurnoverCleaningPage() {
               />
             </div>
 
-            <div className="mt-6 md:mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-8 md:mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
               {pmValueCards.map((card) => (
                 <article
                   key={card.title}
@@ -662,10 +677,56 @@ export default async function TurnoverCleaningPage() {
           </div>
         </section>
 
-        {/* ── Section 05: Reporting Showcase ── */}
+        {/* ── Section 05: Our Process ── */}
+        <section
+          id="our-process"
+          className="section-shell section-anchor bg-[#F4F9FD]"
+        >
+          <div className="mx-auto max-w-6xl">
+            <header className="px-4 text-center md:px-0">
+              <SectionAccent />
+              <h2 className="text-3xl font-bold tracking-tight text-[#0C1014] md:text-5xl">
+                What happens on every single turn
+              </h2>
+              <p className="mx-auto mt-5 max-w-3xl text-sm font-mono leading-relaxed text-[#0C1014] md:text-base">
+                Every turnover follows the same 6-step protocol &mdash; regardless of who's working that day. The full SOP our specialists work from is
+                below.
+              </p>
+            </header>
+
+            <ProcessCarousel />
+
+            {/* SOP PDF Viewer */}
+            <div className="mt-6 flex justify-center">
+              <div className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm min-w-0 w-full md:w-1/2">
+                <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
+                  Full Cleaning SOP
+                </p>
+                <div className="mt-5 overflow-hidden rounded-xl">
+                  <PdfViewerWrapper src="/sop.pdf" downloadAs="Blue-Bunny-SOP.pdf" />
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6">
+            <div className="flex items-center gap-5 rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] px-6 py-5 shadow-sm">
+              <span aria-hidden className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#2978A5] text-white">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <p className="text-sm font-mono font-semibold leading-relaxed text-[#2978A5]">
+                Free reclean within 5 hours if the property doesn&rsquo;t meet guest-ready standards.
+              </p>
+            </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Section 06: Reporting Showcase ── */}
         <section
           id="deliverable-report"
-          className="section-shell section-anchor bg-[#F4F9FD]"
+          className="section-shell section-anchor bg-white"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -681,21 +742,21 @@ export default async function TurnoverCleaningPage() {
 
             <div className="mt-8 md:mt-12 grid items-start gap-5 md:grid-cols-2">
               {/* Report PDF viewer */}
-              <div className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm">
+              <div className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm min-w-0">
                 <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
                   Sample Turnover Report
                 </p>
                 <div className="mt-5 overflow-hidden rounded-xl">
-                  <PdfViewerWrapper src="/sample-report.pdf#zoom=page-fit" />
+                  <PdfViewerWrapper src="/sample-report.pdf" downloadAs="Blue-Bunny-Sample-Report.pdf" />
                 </div>
               </div>
 
               {/* Deliverables */}
-              <div className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm">
+              <div className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm min-w-0">
                 <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
                   Every report includes:
                 </p>
-                <ul className="mt-5 flex-1 space-y-2.5">
+                <ul className="mt-5 flex-1 space-y-3">
                   {reportDeliverables.map((item) => (
                     <li
                       key={item}
@@ -729,7 +790,7 @@ export default async function TurnoverCleaningPage() {
         {/* ── Section 06: Pricing ── */}
         <section
           id="pricing"
-          className="section-shell section-anchor bg-white"
+          className="section-shell section-anchor bg-[#F4F9FD]"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -778,18 +839,6 @@ export default async function TurnoverCleaningPage() {
 
             <PriceCalculator />
 
-            {/* Quality Guarantee */}
-            <div className="mt-5 md:mt-6 flex items-center gap-5 rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] px-6 py-5 shadow-sm">
-              <span aria-hidden className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2978A5] text-white">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </span>
-              <p className="text-sm font-mono font-semibold leading-relaxed text-[#2978A5]">
-                Free reclean within 5 hours if the property doesn&rsquo;t meet guest-ready standards.
-              </p>
-            </div>
-
             <div className="mt-6 md:mt-8 flex justify-center">
               <a
                 href="#pm-onboarding-form"
@@ -810,7 +859,7 @@ export default async function TurnoverCleaningPage() {
         {/* ── Section 07: Onboarding Steps ── */}
         <section
           id="onboarding-steps"
-          className="section-shell section-anchor bg-[#F4F9FD]"
+          className="section-shell section-anchor bg-white"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -829,10 +878,10 @@ export default async function TurnoverCleaningPage() {
                   key={step.title}
                   className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2978A5] font-mono text-sm font-bold text-white">
+                  <span className="font-mono text-lg font-bold text-[#5DAFD5]">
                     {String(index + 1).padStart(2, '0')}
-                  </div>
-                  <h3 className="mt-5 text-lg font-bold text-[#0C1014]">{step.title}</h3>
+                  </span>
+                  <h3 className="mt-2 text-lg font-bold text-[#0C1014]">{step.title}</h3>
                   <p className="mt-2 grow text-sm font-mono leading-relaxed text-[#0C1014]">
                     {step.description}
                   </p>
@@ -867,9 +916,9 @@ export default async function TurnoverCleaningPage() {
         {/* ── Section 08: Cleaner Vetting ── */}
         <section
           id="cleaner-vetting"
-          className="section-shell section-anchor bg-white"
+          className="section-shell section-anchor bg-[#F4F9FD]"
         >
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
               <SectionAccent />
               <h2 className="text-3xl font-bold tracking-tight text-[#0C1014] md:text-5xl">
@@ -902,9 +951,9 @@ export default async function TurnoverCleaningPage() {
                   key={item.step}
                   className="flex items-start gap-4 rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2978A5] font-mono text-sm font-bold text-white">
+                  <span className="font-mono text-lg font-bold text-[#5DAFD5] shrink-0">
                     {String(index + 1).padStart(2, '0')}
-                  </div>
+                  </span>
                   <div className="min-w-0">
                     <p className="font-bold text-[#0C1014]">{item.step}</p>
                     <p className="mt-1 text-sm font-mono leading-relaxed text-[#0C1014]">
@@ -916,7 +965,7 @@ export default async function TurnoverCleaningPage() {
             </ol>
 
             <div className="mt-5 md:mt-8 flex items-center gap-5 rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] px-6 py-5 shadow-sm">
-              <span aria-hidden className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2978A5] text-white">
+              <span aria-hidden className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#2978A5] text-white">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="20" x2="18" y2="10" />
                   <line x1="12" y1="20" x2="12" y2="4" />
@@ -949,7 +998,7 @@ export default async function TurnoverCleaningPage() {
         {/* ── Section 09: Social Proof ── */}
         <section
           id="proof"
-          className="section-shell section-anchor bg-[#F4F9FD]"
+          className="section-shell section-anchor bg-white"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -960,7 +1009,7 @@ export default async function TurnoverCleaningPage() {
             </header>
 
             {/* Rating bar */}
-            <div className="mt-8 md:mt-12 flex flex-col gap-5 rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm md:flex-row md:items-center md:justify-between md:px-8 md:py-6">
+            <div className="mt-8 md:mt-12 flex flex-col gap-5 rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm md:flex-row md:items-center md:justify-between">
               <div className="space-y-1.5">
                 {reviewsData.rating !== null ? (
                   <>
@@ -995,7 +1044,13 @@ export default async function TurnoverCleaningPage() {
               Recent Reviews:
             </p>
 
-            <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {/* Mobile: carousel */}
+            <div className="md:hidden">
+              <ReviewsCarousel items={reviews.slice(0, 3)} />
+            </div>
+
+            {/* Desktop: grid */}
+            <div className="hidden mt-4 md:grid md:gap-5 md:grid-cols-2 lg:grid-cols-3">
               {reviews.slice(0, 3).map((review, index) => (
                 <article
                   key={`${review.author}-${index}`}
@@ -1029,7 +1084,7 @@ export default async function TurnoverCleaningPage() {
         {/* ── Section 10: FAQ ── */}
         <section
           id="faq"
-          className="section-shell section-anchor bg-white"
+          className="section-shell section-anchor bg-[#F4F9FD]"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">

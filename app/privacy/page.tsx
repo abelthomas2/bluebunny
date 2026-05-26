@@ -1,6 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+export const metadata: Metadata = {
+  title: 'Privacy Policy | Blue Bunny Turnover Services',
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
+};
+
 const cardClass =
   "rounded-3xl border border-[#5DAFD5] bg-white p-8 md:p-10 space-y-4";
 const sectionHeadingClass = "text-2xl font-semibold text-[#0C1014]";

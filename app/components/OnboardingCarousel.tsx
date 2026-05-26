@@ -1,0 +1,67 @@
+'use client';
+
+import { useState } from 'react';
+
+type OnboardingStep = {
+  title: string;
+  description: string;
+};
+
+export default function OnboardingCarousel({ items }: { items: OnboardingStep[] }) {
+  const [idx, setIdx] = useState(0);
+  const step = items[idx];
+
+  return (
+    <div className="mt-8 mx-auto max-w-4xl px-4">
+      {/* Card with arrows overlaid on sides */}
+      <div className="relative rounded-2xl border border-[#E2EEF5] bg-white shadow-sm min-h-[13rem]">
+        {/* Left arrow — half off card edge */}
+        <button
+          onClick={() => setIdx((i) => Math.max(0, i - 1))}
+          disabled={idx === 0}
+          aria-label="Previous step"
+          className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2EEF5] bg-white text-[#0C1014] shadow-sm transition hover:bg-[#EEF6FB] disabled:opacity-20"
+        >
+          <svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden className="-translate-x-px">
+            <path d="M6 2L2 7L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+
+        {/* Content */}
+        <div className="px-10 py-7">
+          <span className="font-mono text-lg font-bold text-[#5DAFD5]">
+            {String(idx + 1).padStart(2, '0')}
+          </span>
+          <h3 className="mt-2 text-lg font-bold text-[#0C1014]">{step.title}</h3>
+          <p className="mt-2 text-sm font-mono leading-relaxed text-[#0C1014]">{step.description}</p>
+        </div>
+
+        {/* Right arrow — half off card edge */}
+        <button
+          onClick={() => setIdx((i) => Math.min(items.length - 1, i + 1))}
+          disabled={idx === items.length - 1}
+          aria-label="Next step"
+          className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2EEF5] bg-white text-[#0C1014] shadow-sm transition hover:bg-[#EEF6FB] disabled:opacity-20"
+        >
+          <svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden className="translate-x-px">
+            <path d="M2 2L6 7L2 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Dot indicators */}
+      <div className="mt-3 flex justify-center gap-2">
+        {items.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIdx(i)}
+            aria-label={`Go to step ${i + 1}`}
+            className={`h-1.5 rounded-full transition-all duration-200 ${
+              i === idx ? 'w-5 bg-[#2978A5]' : 'w-1.5 bg-[#E2EEF5] hover:bg-[#5DAFD5]'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}

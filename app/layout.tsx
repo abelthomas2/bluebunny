@@ -34,6 +34,7 @@ const jsonLd = {
       "name": "Blue Bunny Turnover Services",
       "description": "Vacation rental, Airbnb, and short-term rental cleaning for property managers in Orlando.",
       "url": "https://gobluebunny.com",
+      "image": "https://gobluebunny.com/logo-schema.png",
       "telephone": "+19047385631",
       "email": "hello@gobluebunny.com",
       "areaServed": [

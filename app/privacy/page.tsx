@@ -3,6 +3,8 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Blue Bunny Turnover Services',
+  description:
+    'Learn how Blue Bunny Turnover Services collects, uses, and protects your information when you request short-term rental cleaning services.',
   robots: {
     index: false,
     follow: false,
@@ -97,20 +99,6 @@ const ccpaRights = [
   "Right to opt out of the sale of personal information (we do not sell personal information)",
   "Right to non-discrimination for exercising these rights",
 ];
-
-export const metadata: Metadata = {
-  title: "Privacy Policy | Blue Bunny Turnover Services",
-  description:
-    "Learn how Blue Bunny Turnover Services collects, uses, and protects your information when you request short-term rental cleaning services.",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
-  },
-};
 
 export default function PrivacyPage() {
   return (

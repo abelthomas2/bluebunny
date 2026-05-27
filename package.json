@@ -14,6 +14,12 @@
     "react-dom": "^19.2.3",
     "react-pdf": "^10.4.1"
   },
+  "browserslist": [
+    "chrome >= 93",
+    "firefox >= 90",
+    "safari >= 15.4",
+    "edge >= 93"
+  ],
   "devDependencies": {
     "@netlify/plugin-nextjs": "^5.15.11",
     "@tailwindcss/postcss": "^4",

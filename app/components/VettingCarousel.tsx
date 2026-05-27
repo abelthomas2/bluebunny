@@ -17,10 +17,9 @@ export default function VettingCarousel({ items }: { items: VettingStep[] }) {
       <div className="relative rounded-2xl border border-[#E2EEF5] bg-white shadow-sm min-h-[9rem]">
         {/* Left arrow — half off card edge */}
         <button
-          onClick={() => setIdx((i) => Math.max(0, i - 1))}
-          disabled={idx === 0}
+          onClick={() => setIdx((i) => (i - 1 + items.length) % items.length)}
           aria-label="Previous"
-          className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2EEF5] bg-white text-[#0C1014] shadow-sm transition hover:bg-[#EEF6FB] disabled:opacity-20"
+          className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2EEF5] bg-white text-[#0C1014] shadow-sm transition hover:bg-[#EEF6FB]"
         >
           <svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden className="-translate-x-px">
             <path d="M6 2L2 7L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -40,10 +39,9 @@ export default function VettingCarousel({ items }: { items: VettingStep[] }) {
 
         {/* Right arrow — half off card edge */}
         <button
-          onClick={() => setIdx((i) => Math.min(items.length - 1, i + 1))}
-          disabled={idx === items.length - 1}
+          onClick={() => setIdx((i) => (i + 1) % items.length)}
           aria-label="Next"
-          className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2EEF5] bg-white text-[#0C1014] shadow-sm transition hover:bg-[#EEF6FB] disabled:opacity-20"
+          className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2EEF5] bg-white text-[#0C1014] shadow-sm transition hover:bg-[#EEF6FB]"
         >
           <svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden className="translate-x-px">
             <path d="M2 2L6 7L2 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -58,10 +56,14 @@ export default function VettingCarousel({ items }: { items: VettingStep[] }) {
             key={i}
             onClick={() => setIdx(i)}
             aria-label={`Go to standard ${i + 1}`}
-            className={`h-1.5 rounded-full transition-all duration-200 ${
-              i === idx ? 'w-5 bg-[#2978A5]' : 'w-1.5 bg-[#E2EEF5] hover:bg-[#5DAFD5]'
-            }`}
-          />
+            className="flex h-6 w-6 items-center justify-center"
+          >
+            <span
+              className={`block h-1.5 rounded-full transition-all duration-200 ${
+                i === idx ? 'w-5 bg-[#2978A5]' : 'w-1.5 bg-[#E2EEF5] hover:bg-[#5DAFD5]'
+              }`}
+            />
+          </button>
         ))}
       </div>
     </div>

@@ -82,10 +82,14 @@ export default function ProcessCarousel() {
             key={i}
             onClick={() => setIdx(i)}
             aria-label={`Go to step ${i + 1}`}
-            className={`h-1.5 rounded-full transition-all duration-200 ${
-              i === idx ? 'w-5 bg-[#2978A5]' : 'w-1.5 bg-[#E2EEF5] hover:bg-[#5DAFD5]'
-            }`}
-          />
+            className="flex h-6 w-6 items-center justify-center"
+          >
+            <span
+              className={`block h-1.5 rounded-full transition-all duration-200 ${
+                i === idx ? 'w-5 bg-[#2978A5]' : 'w-1.5 bg-[#E2EEF5] hover:bg-[#5DAFD5]'
+              }`}
+            />
+          </button>
         ))}
       </div>
     </div>

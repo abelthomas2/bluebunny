@@ -3,13 +3,14 @@ import Image from 'next/image';
 import type { CSSProperties } from 'react';
 import NavBar from '@/app/components/NavBar';
 import PmOnboardingForm from '@/app/components/PmOnboardingForm';
-import FaqAccordion from '@/app/components/FaqAccordion';
-import PriceCalculator from '@/app/components/PriceCalculator';
-import AddOnsFees from '@/app/components/AddOnsFees';
 import PdfViewerWrapper from '@/app/components/PdfViewerWrapper';
-import ProcessCarousel from '@/app/components/ProcessCarousel';
-import PainPointsCarousel from '@/app/components/PainPointsCarousel';
-import ReviewsCarousel from '@/app/components/ReviewsCarousel';
+import dynamic from 'next/dynamic';
+const FaqAccordion       = dynamic(() => import('@/app/components/FaqAccordion'));
+const PriceCalculator    = dynamic(() => import('@/app/components/PriceCalculator'));
+const AddOnsFees         = dynamic(() => import('@/app/components/AddOnsFees'));
+const ProcessCarousel    = dynamic(() => import('@/app/components/ProcessCarousel'));
+const PainPointsCarousel = dynamic(() => import('@/app/components/PainPointsCarousel'));
+const ReviewsCarousel    = dynamic(() => import('@/app/components/ReviewsCarousel'));
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/app/lib/siteMetadata';
 
 type GooglePlacesV1SearchResponse = {
@@ -461,7 +462,7 @@ function StarRow({ rating }: { rating: number }) {
   const rounded = Math.round(rating);
 
   return (
-    <div className="flex items-center gap-0.5" aria-label={`${rating.toFixed(1)} out of 5 stars`}>
+    <div role="img" className="flex items-center gap-0.5" aria-label={`${rating.toFixed(1)} out of 5 stars`}>
       {[0, 1, 2, 3, 4].map((star) => (
         <svg
           key={star}
@@ -543,10 +544,10 @@ export default async function TurnoverCleaningPage() {
                     src="/banner4.webp"
                     alt="Turnover cleaning team preparing a property"
                     fill
+                    priority
                     sizes="(min-width: 768px) 44rem, 100vw"
                     className="object-cover"
                     style={{ objectPosition: '50% 42%', transform: 'scale(1.12)' }}
-                    unoptimized
                   />
                 </div>
                 <p className="mt-4 text-sm md:text-base font-mono text-[#0C1014] max-w-3xl">
@@ -648,13 +649,12 @@ export default async function TurnoverCleaningPage() {
 
             <div className="mt-8 md:mt-12 overflow-hidden rounded-2xl shadow-md">
               <Image
-                src="/babysitting2.jpg"
+                src="/babysitting2.webp"
                 alt="Freshly turned over living room ready for guests"
                 width={1200}
                 height={500}
                 className="aspect-[2/1] w-full object-cover md:aspect-auto md:h-72"
                 style={{ objectPosition: BABYSITTING_IMAGE_POSITION }}
-                unoptimized
               />
             </div>
 

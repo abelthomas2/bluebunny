@@ -172,7 +172,14 @@ export default function PdfViewer({ src, downloadAs }: { src: string; downloadAs
               onRenderSuccess={onPageRenderSuccess}
               loading={
                 lockedHeight > 0
-                  ? <div style={{ height: lockedHeight, width: containerWidth > 0 ? (containerWidth - 32) * zoom : undefined }} />
+                  ? (
+                    <div
+                      className="flex items-center justify-center bg-[#525659]"
+                      style={{ height: lockedHeight, width: containerWidth > 0 ? (containerWidth - 32) * zoom : undefined }}
+                    >
+                      <span className="text-white/40 text-sm font-mono">Loading…</span>
+                    </div>
+                  )
                   : undefined
               }
             />

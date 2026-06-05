@@ -6,6 +6,7 @@ import PmOnboardingForm from '@/app/components/PmOnboardingForm';
 import PdfViewerWrapper from '@/app/components/PdfViewerWrapper';
 import dynamic from 'next/dynamic';
 const FaqAccordion       = dynamic(() => import('@/app/components/FaqAccordion'));
+const VideoPlayer        = dynamic(() => import('@/app/components/VideoPlayer'));
 const PriceCalculator    = dynamic(() => import('@/app/components/PriceCalculator'));
 const AddOnsFees         = dynamic(() => import('@/app/components/AddOnsFees'));
 const ProcessCarousel    = dynamic(() => import('@/app/components/ProcessCarousel'));
@@ -585,10 +586,25 @@ export default async function TurnoverCleaningPage() {
           </div>
         </section>
 
-        {/* ── Section 03: Pain Points ── */}
+        {/* ── Section 03: Promo Video ── */}
+        <section id="promo-video" className="section-shell section-anchor bg-[#F4F9FD]">
+          <div className="mx-auto max-w-6xl">
+            <header className="px-4 text-center md:px-0">
+              <SectionAccent />
+              <h2 className="text-3xl font-bold tracking-tight text-[#0C1014] md:text-5xl">
+                Smarter turnovers, clearer answers
+              </h2>
+            </header>
+            <div className="mt-8 md:mt-12">
+              <VideoPlayer />
+            </div>
+          </div>
+        </section>
+
+        {/* ── Section 04: Pain Points ── */}
         <section
           id="pain-points"
-          className="section-shell section-anchor bg-[#F4F9FD]"
+          className="section-shell section-anchor bg-white"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -634,10 +650,10 @@ export default async function TurnoverCleaningPage() {
           </div>
         </section>
 
-        {/* ── Section 04: Four Pillars ── */}
+        {/* ── Section 05: Four Pillars ── */}
         <section
           id="what-pms-get"
-          className="section-shell section-anchor bg-white"
+          className="section-shell section-anchor bg-[#F4F9FD]"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -677,10 +693,10 @@ export default async function TurnoverCleaningPage() {
           </div>
         </section>
 
-        {/* ── Section 05: Our Process ── */}
+        {/* ── Section 06: Our Process ── */}
         <section
           id="our-process"
-          className="section-shell section-anchor bg-[#F4F9FD]"
+          className="section-shell section-anchor bg-white"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -723,10 +739,10 @@ export default async function TurnoverCleaningPage() {
           </div>
         </section>
 
-        {/* ── Section 06: Reporting Showcase ── */}
+        {/* ── Section 07: Reporting Showcase ── */}
         <section
           id="deliverable-report"
-          className="section-shell section-anchor bg-white"
+          className="section-shell section-anchor bg-[#F4F9FD]"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -735,7 +751,7 @@ export default async function TurnoverCleaningPage() {
                 Turnover reporting your team can actually use
               </h2>
               <p className="mx-auto mt-5 max-w-3xl text-sm font-mono leading-relaxed text-[#0C1014] md:text-base">
-                Most cleaners text &ldquo;all done.&rdquo; You&rsquo;ll get a structured report
+                Most cleaners send a folder of photos. You&rsquo;ll get a structured report
                 with everything your team needs to act before the next guest walks in.
               </p>
             </header>
@@ -787,10 +803,10 @@ export default async function TurnoverCleaningPage() {
           </div>
         </section>
 
-        {/* ── Section 06: Pricing ── */}
+        {/* ── Section 08: Pricing ── */}
         <section
           id="pricing"
-          className="section-shell section-anchor bg-[#F4F9FD]"
+          className="section-shell section-anchor bg-white"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -856,10 +872,10 @@ export default async function TurnoverCleaningPage() {
           </div>
         </section>
 
-        {/* ── Section 07: Onboarding Steps ── */}
+        {/* ── Section 09: Onboarding Steps ── */}
         <section
           id="onboarding-steps"
-          className="section-shell section-anchor bg-white"
+          className="section-shell section-anchor bg-[#F4F9FD]"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -913,10 +929,10 @@ export default async function TurnoverCleaningPage() {
           </div>
         </section>
 
-        {/* ── Section 08: Cleaner Vetting ── */}
+        {/* ── Section 10: Cleaner Vetting ── */}
         <section
           id="cleaner-vetting"
-          className="section-shell section-anchor bg-[#F4F9FD]"
+          className="section-shell section-anchor bg-white"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -995,10 +1011,10 @@ export default async function TurnoverCleaningPage() {
           </div>
         </section>
 
-        {/* ── Section 09: Social Proof ── */}
+        {/* ── Section 11: Social Proof ── */}
         <section
           id="proof"
-          className="section-shell section-anchor bg-white"
+          className="section-shell section-anchor bg-[#F4F9FD]"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -1081,10 +1097,10 @@ export default async function TurnoverCleaningPage() {
           </div>
         </section>
 
-        {/* ── Section 10: FAQ ── */}
+        {/* ── Section 12: FAQ ── */}
         <section
           id="faq"
-          className="section-shell section-anchor bg-[#F4F9FD]"
+          className="section-shell section-anchor bg-white"
         >
           <div className="mx-auto max-w-6xl">
             <header className="px-4 text-center md:px-0">
@@ -1095,7 +1111,7 @@ export default async function TurnoverCleaningPage() {
           </div>
         </section>
 
-        {/* ── Section 11: Final CTA ── */}
+        {/* ── Section 13: Final CTA ── */}
         <section
           id="final-cta"
           className="section-shell section-anchor bg-[#5DAFD5]"

@@ -41,7 +41,9 @@ function ExpandedModal({ src, downloadAs, onClose }: { src: string; downloadAs?:
   const [pageNumber, setPageNumber] = useState(1);
   const [modalWidth, setModalWidth] = useState<number>(0);
   const [zoom, setZoom] = useState(1.0);
+  const [lockedHeight, setLockedHeight] = useState<number>(0);
   const contentRef = useRef<HTMLDivElement>(null);
+  const pageWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = contentRef.current;
@@ -114,13 +116,31 @@ function ExpandedModal({ src, downloadAs, onClose }: { src: string; downloadAs?:
           loading={<div className="flex items-center justify-center text-white/50 text-sm font-mono h-96">Loading report…</div>}
           error={<div className="h-96 flex items-center justify-center text-red-400 text-sm">Failed to load PDF.</div>}
         >
-          <Page
-            pageNumber={pageNumber}
-            width={modalWidth > 0 ? (modalWidth - 32) * zoom : undefined}
-            renderTextLayer
-            renderAnnotationLayer={false}
-            className="shadow-2xl"
-          />
+          <div ref={pageWrapRef}>
+            <Page
+              pageNumber={pageNumber}
+              width={modalWidth > 0 ? (modalWidth - 32) * zoom : undefined}
+              renderTextLayer
+              renderAnnotationLayer={false}
+              className="shadow-2xl"
+              onRenderSuccess={() => {
+                const h = pageWrapRef.current?.offsetHeight ?? 0;
+                if (h > 0) setLockedHeight(h);
+              }}
+              loading={
+                lockedHeight > 0
+                  ? (
+                    <div
+                      className="flex items-center justify-center bg-[#525659]"
+                      style={{ height: lockedHeight, width: modalWidth > 0 ? (modalWidth - 32) * zoom : undefined }}
+                    >
+                      <span className="text-white/40 text-sm font-mono">Loading…</span>
+                    </div>
+                  )
+                  : undefined
+              }
+            />
+          </div>
         </Document>
       </div>
     </div>,

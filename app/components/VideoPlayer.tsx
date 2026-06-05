@@ -98,6 +98,21 @@ export default function VideoPlayer() {
     return () => { if (hideTimerRef.current) clearTimeout(hideTimerRef.current); };
   }, []);
 
+  // Show native controls when fullscreen (desktop) so the user has a working UI
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const onFsChange = () => {
+      if (document.fullscreenElement === v) {
+        v.setAttribute('controls', '');
+      } else {
+        v.removeAttribute('controls');
+      }
+    };
+    document.addEventListener('fullscreenchange', onFsChange);
+    return () => document.removeEventListener('fullscreenchange', onFsChange);
+  }, []);
+
   const scheduleHide = useCallback(() => {
     if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
     hideTimerRef.current = setTimeout(() => setControlsVisible(false), 2500);
@@ -165,7 +180,17 @@ export default function VideoPlayer() {
 
       {/* Expand — always visible, bottom-right */}
       <button
-        onClick={(e) => { e.stopPropagation(); videoRef.current?.requestFullscreen().catch(() => {}); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          const v = videoRef.current;
+          if (!v) return;
+          const webkit = v as HTMLVideoElement & { webkitEnterFullscreen?: () => void };
+          if (webkit.webkitEnterFullscreen) {
+            webkit.webkitEnterFullscreen();
+          } else {
+            v.requestFullscreen?.().catch(() => {});
+          }
+        }}
         className="absolute bottom-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#0C1014]/60 text-white backdrop-blur-sm transition-opacity hover:opacity-70"
         aria-label="Fullscreen"
       >

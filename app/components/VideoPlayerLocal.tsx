@@ -7,9 +7,8 @@ function fmt(s: number): string {
   return `${m}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
 }
 
-const VIDEO_URL =
-  'https://archive.org/download/bluebunnyturnoverspromovid/final%20video%204.mov';
-const POSTER_URL = '/thumbnail.jpg';
+const VIDEO_URL   = '/video.mp4';
+const POSTER_URL  = '/thumbnail.jpg';
 
 function PlayIcon() {
   return (
@@ -83,84 +82,22 @@ function UnmuteIcon() {
   );
 }
 
-export default function VideoPlayer({
-  onVideoRef,
-  externalVideoRef,
-}: {
-  onVideoRef?: (el: HTMLVideoElement | null) => void;
-  externalVideoRef?: React.RefObject<HTMLVideoElement>;
-} = {}) {
-  // When externalVideoRef is provided the <video> element lives outside this
-  // component (at section level). We use it directly for all controls.
-  const internalVideoRef = useRef<HTMLVideoElement>(null);
-  const videoRef = externalVideoRef ?? internalVideoRef;
-
+export default function VideoPlayerLocal() {
+  const videoRef    = useRef<HTMLVideoElement>(null);
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [playing, setPlaying] = useState(false);
-  const [started, setStarted] = useState(false);
-  const [muted,   setMuted]   = useState(true);
+  const [playing,         setPlaying]         = useState(false);
+  const [started,         setStarted]         = useState(false);
+  const [muted,           setMuted]           = useState(true);
   const [controlsVisible, setControlsVisible] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration,    setDuration]    = useState(0);
+  const [currentTime,     setCurrentTime]     = useState(0);
+  const [duration,        setDuration]        = useState(0);
 
-  // onVideoRef callback — only when no external ref
   useEffect(() => {
-    if (externalVideoRef) return;
-    onVideoRef?.(internalVideoRef.current);
-    return () => { onVideoRef?.(null); };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Autoplay + hideTimer cleanup — skip autoplay when video is owned externally
-  useEffect(() => {
-    if (!externalVideoRef) {
-      internalVideoRef.current?.play().catch(() => {});
-    }
+    videoRef.current?.play().catch(() => {});
     return () => { if (hideTimerRef.current) clearTimeout(hideTimerRef.current); };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // When using external video, sync all playback state via event listeners
-  useEffect(() => {
-    if (!externalVideoRef) return;
-    const v = externalVideoRef.current;
-    if (!v) return;
-
-    const onPlay    = () => setPlaying(true);
-    const onPlaying = () => { setPlaying(true); setStarted(true); };
-    const onPause   = () => setPlaying(false);
-    const onEnded   = () => setPlaying(false);
-    const onTime    = () => setCurrentTime(v.currentTime);
-    const onMeta    = () => setDuration(v.duration);
-    const onVolume  = () => setMuted(v.muted);
-
-    v.addEventListener('play',           onPlay);
-    v.addEventListener('playing',        onPlaying);
-    v.addEventListener('pause',          onPause);
-    v.addEventListener('ended',          onEnded);
-    v.addEventListener('timeupdate',     onTime);
-    v.addEventListener('loadedmetadata', onMeta);
-    v.addEventListener('volumechange',   onVolume);
-
-    // Sync initial state (video may already be playing when this effect runs)
-    if (!v.paused && v.readyState >= 3) { setPlaying(true); setStarted(true); }
-    if (v.duration)  setDuration(v.duration);
-    setCurrentTime(v.currentTime);
-    setMuted(v.muted);
-
-    return () => {
-      v.removeEventListener('play',           onPlay);
-      v.removeEventListener('playing',        onPlaying);
-      v.removeEventListener('pause',          onPause);
-      v.removeEventListener('ended',          onEnded);
-      v.removeEventListener('timeupdate',     onTime);
-      v.removeEventListener('loadedmetadata', onMeta);
-      v.removeEventListener('volumechange',   onVolume);
-    };
-  }, [externalVideoRef]);
-
-  // Show native controls when fullscreen
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
@@ -173,8 +110,6 @@ export default function VideoPlayer({
     };
     document.addEventListener('fullscreenchange', onFsChange);
     return () => document.removeEventListener('fullscreenchange', onFsChange);
-  // videoRef is stable — safe to omit from deps
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const scheduleHide = useCallback(() => {
@@ -193,7 +128,7 @@ export default function VideoPlayer({
     if (!v) return;
     if (v.paused) { v.play(); } else { v.pause(); }
     scheduleHide();
-  }, [scheduleHide, videoRef]);
+  }, [scheduleHide]);
 
   const handleSkip = useCallback((seconds: number) => (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -201,7 +136,7 @@ export default function VideoPlayer({
     if (!v) return;
     v.currentTime = Math.max(0, Math.min(v.duration || 0, v.currentTime + seconds));
     scheduleHide();
-  }, [scheduleHide, videoRef]);
+  }, [scheduleHide]);
 
   const handleMute = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -209,7 +144,7 @@ export default function VideoPlayer({
     if (!v) return;
     v.muted = !v.muted;
     setMuted(v.muted);
-  }, [videoRef]);
+  }, []);
 
   return (
     <div
@@ -219,28 +154,24 @@ export default function VideoPlayer({
       onMouseEnter={handleVideoTap}
       onMouseLeave={() => { if (hideTimerRef.current) clearTimeout(hideTimerRef.current); setControlsVisible(false); }}
     >
-      {/* Internal <video> — only rendered when no externalVideoRef */}
-      {!externalVideoRef && (
-        <video
-          ref={internalVideoRef}
-          src={VIDEO_URL}
-          poster={POSTER_URL}
-          playsInline
-          muted
-          loop
-          preload="none"
-          className="h-full w-full object-cover"
-          onPlay={() => setPlaying(true)}
-          onPlaying={() => setStarted(true)}
-          onPause={() => setPlaying(false)}
-          onEnded={() => setPlaying(false)}
-          onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
-          onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
-        />
-      )}
+      <video
+        ref={videoRef}
+        src={VIDEO_URL}
+        poster={POSTER_URL}
+        playsInline
+        muted
+        loop
+        preload="auto"
+        className="h-full w-full object-cover"
+        onPlay={() => setPlaying(true)}
+        onPlaying={() => setStarted(true)}
+        onPause={() => setPlaying(false)}
+        onEnded={() => setPlaying(false)}
+        onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
+        onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+      />
 
-      {/* Poster overlay — holds until `playing` fires, covering the brief
-          transparent gap between play() being called and the first frame */}
+      {/* Poster overlay — holds until the first playing frame */}
       {!started && (
         <img
           src={POSTER_URL}

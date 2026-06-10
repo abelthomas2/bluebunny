@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { track } from './analytics';
 
@@ -87,8 +88,8 @@ const PHOTOS: Photo[] = [
 const ROOM_ORDER = [
   'Entry & Dining',
   'Living Area',
-  'Kitchen',
   'Master Bedroom',
+  'Kitchen',
   'Bathroom',
   'Balcony',
   'Restock & Lockup',
@@ -106,15 +107,12 @@ function Thumb({ photo, onOpen }: { photo: Photo; onOpen: (file: string) => void
         isFlag ? 'ring-2 ring-[#DC2726]/60' : 'border border-[#E2EEF5]'
       }`}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={`${BASE}/${photo.file}`}
         alt={photo.alt}
-        width={1200}
-        height={900}
-        loading="lazy"
-        decoding="async"
-        className="h-full w-full object-cover transition duration-200 group-hover:scale-[1.02]"
+        fill
+        sizes="(max-width: 640px) calc(50vw - 2.5rem), (max-width: 768px) calc(33vw - 2.5rem), (max-width: 1280px) calc(33vw - 5rem), 380px"
+        className="object-cover transition duration-200 group-hover:scale-[1.02]"
       />
       {isFlag ? (
         <span className="absolute bottom-1.5 right-1.5 rounded bg-[#DC2726] px-1.5 py-0.5 text-[9px] font-mono font-semibold uppercase tracking-wider text-white">
@@ -260,7 +258,7 @@ export default function PhotoAlbum() {
     <div ref={albumRef} className="mt-8 md:mt-12">
       {/* Room selector — show one room's photos at a time */}
       <div
-        className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:flex-wrap md:px-0"
+        className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:flex-wrap md:justify-center md:px-0"
         role="tablist"
         aria-label="Photo album rooms"
       >
@@ -336,10 +334,12 @@ export default function PhotoAlbum() {
               </svg>
             </button>
 
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={`${BASE}/${current.file}`}
               alt={current.alt}
+              width={1500}
+              height={1125}
+              sizes="(max-width: 768px) 100vw, 85vw"
               className="max-h-full max-w-full rounded-lg object-contain"
             />
 

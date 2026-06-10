@@ -22,11 +22,12 @@ export function track(event: SampleEvent, props?: Props): void {
   const w = window as typeof window & {
     plausible?: (event: string, options?: { props?: Props }) => void;
     dataLayer?: Array<Record<string, unknown>>;
+    gtag?: (...args: unknown[]) => void;
   };
 
   try {
     w.plausible?.(event, props ? { props } : undefined);
-    w.dataLayer?.push({ event, ...(props ?? {}) });
+    w.gtag?.('event', event, props ?? {});
   } catch {
     /* analytics must never break the page */
   }

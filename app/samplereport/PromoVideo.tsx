@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { track } from './analytics';
 
@@ -192,7 +193,7 @@ export default function PromoVideo() {
         src={VIDEO_SRC}
         poster={POSTER_SRC}
         playsInline
-        preload="metadata"
+        preload="none"
         className="h-full w-full object-cover"
         onPlay={() => {
           setPlaying(true);
@@ -215,11 +216,14 @@ export default function PromoVideo() {
 
       {/* Poster overlay — holds until first frame renders */}
       {!started && (
-        <img
+        <Image
           src={POSTER_SRC}
           alt=""
+          fill
+          priority
+          sizes="(max-width: 768px) 100vw, 50vw"
           aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          className="pointer-events-none object-cover"
         />
       )}
 

@@ -83,6 +83,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+@media (min-width: 768px) {
+  .banner-position-desktop {
+    object-position: 0% 0% !important;
+  }
+}
+
 /* Custom scrollbar styling */
 ::-webkit-scrollbar {
   width: 0px;

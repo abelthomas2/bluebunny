@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import FaqAccordion from '@/app/components/FaqAccordion';
 import SampleHeader from './SampleHeader';
 import StickyCtaBar from './StickyCtaBar';
@@ -17,7 +18,7 @@ const GOOGLE_REVIEWS_URL =
   'https://www.google.com/search?q=Blue+Bunny+Turnover+Services+Orlando+reviews';
 
 const OG_DESCRIPTION =
-  'Every timestamped photo from a Blue Bunny turnover — as-found to guest-ready in 2 hr 7 min, plus the maintenance flag our software wrote up.';
+  'A real vacation rental turnover from arrival to lockup — 41 timestamped before & after photos, a maintenance flag, and the full report in 30 minutes.';
 const OG_TITLE = 'Blue Bunny — Full Turnover Photo Album (Sample Report)';
 
 const HERO_META =
@@ -26,7 +27,7 @@ const HERO_META =
 // ▼▼▼ TWEAK ME ▼▼▼ Desktop-only gap between the navbar and the top of the hero
 // card. Try values like '2rem', '4rem', '64px', '6rem' until it looks right.
 // (Mobile spacing is unaffected.)
-const HERO_TOP_GAP_DESKTOP = '10rem';
+const HERO_TOP_GAP_DESKTOP = '4rem';
 
 const VIDEO_CAPTION =
   "First — three minutes on how the report you're holding gets made.";
@@ -79,7 +80,7 @@ const PILOT_SUPPORT = [
 ];
 
 const REVIEW_QUOTE =
-  'Love that they send us detailed reports after every clean — gives us great peace of mind.';
+  'Love that they send us detailed reports after every clean, gives us great peace of mind.';
 
 const FAQ_ITEMS = [
   {
@@ -107,12 +108,12 @@ const FAQ_ITEMS = [
 // ── Metadata (build spec §10) ─────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL('https://gobluebunny.com'),
-  title: 'Sample Turnover Report — Full Photo Album | Blue Bunny Turnover Services',
+  title: 'Sample Turnover Report — Full Photo Album | Blue Bunny',
   description: OG_DESCRIPTION,
   robots: {
-    index: false,
-    follow: false,
-    googleBot: { index: false, follow: false },
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
   },
   openGraph: {
     title: OG_TITLE,
@@ -265,12 +266,12 @@ export default async function SampleReportPage({
             </header>
 
             <div className="mt-8 overflow-hidden rounded-2xl border-2 border-[#DC2726]/30 bg-white shadow-sm md:mt-10 md:grid md:grid-cols-[40%_60%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/samplereport/flag-baseboard.jpg"
                 alt="Bathroom, maintenance flag, 11:13 AM — baseboard separating from wall near tub apron"
                 width={1200}
                 height={900}
+                sizes="(max-width: 768px) 100vw, 40vw"
                 className="aspect-[4/3] w-full object-cover md:aspect-auto md:h-full"
               />
               <div className="p-5 md:p-6">
@@ -289,7 +290,7 @@ export default async function SampleReportPage({
               </div>
             </div>
 
-            <p className="mx-auto mt-6 max-w-3xl px-4 font-mono text-sm leading-relaxed text-[#0C1014] md:px-0 md:text-base">
+            <p className="mt-6 px-2 font-mono text-sm leading-relaxed text-[#0C1014] md:mx-auto md:max-w-3xl md:px-0 md:text-base">
               {FLAG_BODY}
             </p>
           </div>
@@ -352,8 +353,8 @@ export default async function SampleReportPage({
         <section id="pilot" className="section-shell section-anchor bg-[#F4F9FD]">
           <div className="mx-auto max-w-6xl">
             <div className="rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] p-5 shadow-sm md:p-8">
-              <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-                <div>
+              <div className="grid gap-8 lg:grid-cols-2" style={{ alignItems: 'stretch' }}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <Eyebrow>No contracts. No commitments.</Eyebrow>
                   <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#0C1014] md:text-4xl">
                     Pilot us on 3–5 properties.
@@ -369,12 +370,33 @@ export default async function SampleReportPage({
                       </li>
                     ))}
                   </ul>
+                  <div style={{ flex: '1 1 0%' }} aria-hidden />
+                  <p className="mt-6 hidden font-mono text-xs leading-relaxed text-[#0C1014]/80 lg:block lg:text-sm">
+                    Prefer to talk first?{' '}
+                    <TrackedLink
+                      href={`tel:${PHONE_TEL}`}
+                      event="cta_call_tap"
+                      eventProps={{ location: 'talk-first' }}
+                      className="font-semibold text-[#2978A5] transition hover:text-[#0C1014]"
+                    >
+                      Call or text {PHONE_DISPLAY}
+                    </TrackedLink>{' '}
+                    — you&apos;ll reach Abel, the owner, not a call center. Or email{' '}
+                    <a
+                      href={`mailto:${EMAIL}`}
+                      className="font-semibold text-[#2978A5] transition hover:text-[#0C1014]"
+                    >
+                      {EMAIL}
+                    </a>
+                    .
+                  </p>
                 </div>
 
-                <PilotForm wave={wave} />
+                <div><PilotForm wave={wave} /></div>
               </div>
 
-              <p className="mt-6 font-mono text-xs leading-relaxed text-[#0C1014]/80 md:text-sm">
+              {/* Mobile: paragraph below the form */}
+              <p className="mt-6 font-mono text-xs leading-relaxed text-[#0C1014]/80 lg:hidden">
                 Prefer to talk first?{' '}
                 <TrackedLink
                   href={`tel:${PHONE_TEL}`}

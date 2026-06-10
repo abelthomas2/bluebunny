@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 // rVFC isn't in every TS lib.dom version — narrow locally so tsc stays happy.
@@ -131,11 +132,13 @@ export default function AmbientVideoBackground({
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
       {/* SSR / pre-JS fallback only — replaced by the canvas (which paints this
           same poster) as soon as it loads, so the steady background is the canvas. */}
-      <img
+      <Image
         src={posterUrl}
         alt=""
-        fetchPriority="high"
-        className="absolute inset-0 h-full w-full scale-125 object-cover blur-2xl brightness-110 saturate-[1.8] transition-opacity duration-300 transform-gpu will-change-transform"
+        fill
+        priority
+        sizes="100vw"
+        className="scale-125 object-cover blur-2xl brightness-110 saturate-[1.8] transition-opacity duration-300 transform-gpu will-change-transform"
         style={{ opacity: revealCanvas ? 0 : 1 }}
       />
       {/* The single visible ambient layer: poster first, then live video frames

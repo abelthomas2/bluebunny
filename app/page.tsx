@@ -72,7 +72,6 @@ const SEARCH_QUERIES = [
 ];
 const REVIEWS_REVALIDATE_SECONDS = 60 * 60 * 6;
 const REVIEWS_TO_SHOW = 3;
-const BABYSITTING_IMAGE_POSITION = '0% 42%';
 
 const fallbackReviews: Review[] = [
   {
@@ -185,10 +184,11 @@ const pmValueCards = [
 ];
 
 const reportDeliverables = [
-  'Before/after photos by room',
-  'Damage and maintenance flags',
-  'Missing inventory and low supplies',
-  'Completion confirmation with lockup time',
+  'Before & after photos, every room',
+  'Damage & maintenance flags with severity rating',
+  'Low-supply alerts with restock counts',
+  'Linen condition & towel inventory',
+  'Lockup confirmation with timestamp',
   'Action items for your team',
 ];
 
@@ -574,8 +574,9 @@ export default async function TurnoverCleaningPage() {
                 alt="Turnover cleaning team preparing a property"
                 width={1200}
                 height={500}
-                className="aspect-[2/1] w-full object-cover md:aspect-auto md:h-72"
-                style={{ objectPosition: BABYSITTING_IMAGE_POSITION, transform: 'scale(1.15)' }}
+                sizes="(max-width: 768px) 100vw, 1200px"
+                className="aspect-[2/1] w-full object-cover md:aspect-auto md:h-72 banner-position-desktop"
+                style={{ objectPosition: '0% 40%', transform: 'scale(1.15)', transformOrigin: 'top center' }}
               />
             </div>
 
@@ -617,9 +618,9 @@ export default async function TurnoverCleaningPage() {
 
             <ProcessCarousel />
 
-            {/* SOP PDF Viewer */}
-            <div className="mt-6 flex justify-center">
-              <div className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm min-w-0 w-full md:w-1/2">
+            {/* SOP PDF Viewer + Guarantee */}
+            <div className="mt-6 grid items-start gap-5 md:grid-cols-2">
+              <div className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm min-w-0">
                 <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
                   Full Cleaning SOP
                 </p>
@@ -627,20 +628,50 @@ export default async function TurnoverCleaningPage() {
                   <PdfViewerWrapper src="/sop.pdf" downloadAs="Blue-Bunny-SOP.pdf" />
                 </div>
               </div>
+              <div className="rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] shadow-sm">
+                {/* Mobile: compact single-line banner */}
+                <div className="flex items-center gap-4 px-6 py-5 md:hidden">
+                  <span aria-hidden className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#2978A5] text-white">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
+                  <p className="text-sm font-mono font-semibold leading-relaxed text-[#2978A5]">
+                    Free reclean within 5 hours if the property doesn&rsquo;t meet guest-ready standards.
+                  </p>
+                </div>
+                {/* Desktop: expanded card */}
+                <div className="hidden flex-col p-6 md:flex">
+                  <div className="flex items-center gap-4">
+                    <span aria-hidden className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#2978A5] text-white">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </span>
+                    <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5]">Our guarantee</p>
+                  </div>
+                  <h3 className="mt-4 text-xl font-bold tracking-tight text-[#0C1014] md:text-2xl">
+                    Free reclean within 5 hours if the property doesn&rsquo;t meet guest-ready standards.
+                  </h3>
+                  <p className="mt-4 font-mono text-sm leading-relaxed text-[#0C1014]">
+                    Every turn is photo-documented from arrival to lockup. If something isn&rsquo;t right, we have the photos to know exactly what happened — and we come back to fix it, no questions asked.
+                  </p>
+                  <ul className="mt-5 space-y-3">
+                    {[
+                      'Call or text us — we respond immediately',
+                      'Dispatch within the hour',
+                      'No charge, no paperwork, no back-and-forth',
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-3 font-mono text-sm text-[#0C1014]">
+                        <span aria-hidden className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#5DAFD5]" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
 
-            <div className="mt-6">
-            <div className="flex items-center gap-5 rounded-2xl border-2 border-[#5DAFD5]/50 bg-[#F0F9FF] px-6 py-5 shadow-sm">
-              <span aria-hidden className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#2978A5] text-white">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </span>
-              <p className="text-sm font-mono font-semibold leading-relaxed text-[#2978A5]">
-                Free reclean within 5 hours if the property doesn&rsquo;t meet guest-ready standards.
-              </p>
-            </div>
-            </div>
           </div>
         </section>
 
@@ -702,6 +733,12 @@ export default async function TurnoverCleaningPage() {
                   className="mt-5 hidden w-fit items-center rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
                 >
                   Request Onboarding
+                </a>
+                <a
+                  href="/samplereport"
+                  className="mt-4 font-mono text-sm font-semibold text-[#2978A5] transition hover:text-[#0C1014]"
+                >
+                  Follow this turn from arrival to lockup →
                 </a>
               </div>
             </div>
@@ -857,8 +894,8 @@ export default async function TurnoverCleaningPage() {
                 alt="Blue Bunny vetted cleaning team at work"
                 width={1200}
                 height={500}
+                sizes="(max-width: 768px) 100vw, 1200px"
                 className="aspect-[2/1] w-full object-cover object-[center_47%] md:aspect-auto md:h-72"
-                unoptimized
               />
             </div>
 
@@ -899,20 +936,6 @@ export default async function TurnoverCleaningPage() {
               </p>
             </div>
 
-            <div className="mt-6 md:mt-8 flex justify-center">
-              <a
-                href="#pm-onboarding-form"
-                className="rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:hidden"
-              >
-                Request Onboarding
-              </a>
-              <a
-                href="#pm-hero"
-                className="hidden rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
-              >
-                Request Onboarding
-              </a>
-            </div>
           </div>
         </section>
 

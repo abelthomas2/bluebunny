@@ -11,7 +11,32 @@ type FormErrors = Partial<Record<FieldKey, string>>;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PHONE_DIGITS = 10;
 
-export default function PmOnboardingForm() {
+type PmOnboardingFormProps = {
+  /** Small letter-spaced label above the heading. Pass '' to hide it. */
+  eyebrow?: string;
+  heading?: string;
+  /** Idle submit-button label (becomes "Sending..." / "Try Again" on state change). */
+  submitLabel?: string;
+  /** Hidden field value used by the backend to label the lead. */
+  leadType?: string;
+  /** Extra hidden fields forwarded to the endpoint (e.g. campaign source/wave). */
+  hiddenFields?: Record<string, string>;
+  successTitle?: string;
+  successMessage?: string;
+  /** Fired once after a successful submission (e.g. analytics). */
+  onSubmitSuccess?: () => void;
+};
+
+export default function PmOnboardingForm({
+  eyebrow = 'Get Started',
+  heading = 'Request Onboarding',
+  submitLabel = 'Get Started',
+  leadType = 'PM Onboarding - Turnover Cleaning Page',
+  hiddenFields,
+  successTitle = 'Thanks!',
+  successMessage = "We'll reach out as soon as possible.",
+  onSubmitSuccess,
+}: PmOnboardingFormProps = {}) {
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FormErrors>({});
@@ -74,6 +99,7 @@ export default function PmOnboardingForm() {
       formElement.reset();
       setFieldErrors({});
       setFormStatus('success');
+      onSubmitSuccess?.();
     } catch (error) {
       console.error(error);
       const message = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
@@ -83,7 +109,7 @@ export default function PmOnboardingForm() {
   };
 
   const isSubmitting = formStatus === 'submitting';
-  const buttonLabel = isSubmitting ? 'Sending...' : formStatus === 'error' ? 'Try Again' : 'Get Started';
+  const buttonLabel = isSubmitting ? 'Sending...' : formStatus === 'error' ? 'Try Again' : submitLabel;
 
   return (
     <div
@@ -93,16 +119,22 @@ export default function PmOnboardingForm() {
       {/* Form content — always rendered to lock card height; hidden on success */}
       <div className={formStatus === 'success' ? 'invisible' : ''}>
         <div className="mb-4 md:mb-5">
-          <p className="text-xs md:text-sm font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5]">
-            Get Started
-          </p>
+          {eyebrow && (
+            <p className="text-xs md:text-sm font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5]">
+              {eyebrow}
+            </p>
+          )}
           <h3 className="mt-2 text-3xl md:text-4xl font-semibold text-[#0C1014]">
-            Request Onboarding
+            {heading}
           </h3>
         </div>
 
         <form className="space-y-4" onSubmit={handleSubmit} noValidate>
-          <input type="hidden" name="leadType" value="PM Onboarding - Turnover Cleaning Page" />
+          <input type="hidden" name="leadType" value={leadType} />
+          {hiddenFields &&
+            Object.entries(hiddenFields).map(([name, value]) => (
+              <input key={name} type="hidden" name={name} value={value} />
+            ))}
 
           <div className="grid gap-3 md:grid-cols-2">
             <div className="md:col-span-2">
@@ -243,9 +275,9 @@ export default function PmOnboardingForm() {
               />
             </svg>
           </div>
-          <h3 className="mt-5 text-2xl font-semibold text-[#0C1014]">Thanks!</h3>
+          <h3 className="mt-5 text-2xl font-semibold text-[#0C1014]">{successTitle}</h3>
           <p className="mt-2 max-w-sm text-sm font-mono text-[#0C1014]">
-            We&apos;ll reach out as soon as possible.
+            {successMessage}
           </p>
         </div>
       )}

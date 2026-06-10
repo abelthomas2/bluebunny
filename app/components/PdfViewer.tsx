@@ -252,11 +252,16 @@ export default function PdfViewer({ src, downloadAs }: { src: string; downloadAs
         <div className="justify-self-end flex items-center gap-2">
           <button
             onClick={() => setExpanded(true)}
-            className="rounded px-2 py-1 text-sm text-white hover:bg-white/10 transition"
+            className="rounded p-1.5 text-white hover:bg-white/10 transition"
             aria-label="Expand PDF"
             title="Expand"
           >
-            ⤢
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+              <polyline points="15 3 21 3 21 9" />
+              <polyline points="9 21 3 21 3 15" />
+              <line x1="21" y1="3" x2="14" y2="10" />
+              <line x1="3" y1="21" x2="10" y2="14" />
+            </svg>
           </button>
           <a
             href={file}

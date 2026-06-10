@@ -73,6 +73,16 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Tweakable desktop-only gap above the sample-report hero card.
+   The value comes from the inline --hero-top-gap variable set in
+   app/samplereport/page.tsx (HERO_TOP_GAP_DESKTOP). Unlayered so it wins
+   over the base pt-5 utility at >=768px. */
+@media (min-width: 768px) {
+  .hero-top-gap {
+    padding-top: var(--hero-top-gap, 4rem);
+  }
+}
+
 /* Custom scrollbar styling */
 ::-webkit-scrollbar {
   width: 0px;

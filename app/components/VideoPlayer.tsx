@@ -7,8 +7,7 @@ function fmt(s: number): string {
   return `${m}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
 }
 
-const VIDEO_URL =
-  'https://archive.org/download/bluebunnyturnoverspromovid/final%20video%204.mov';
+const VIDEO_URL = '/video.mp4';
 const POSTER_URL = '/thumbnail.jpg';
 
 function PlayIcon() {
@@ -99,7 +98,8 @@ export default function VideoPlayer({
 
   const [playing, setPlaying] = useState(false);
   const [started, setStarted] = useState(false);
-  const [muted,   setMuted]   = useState(true);
+  const [muted,   setMuted]   = useState(false);
+  const srcLoadedRef = useRef(false);
   const [controlsVisible, setControlsVisible] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration,    setDuration]    = useState(0);
@@ -112,13 +112,9 @@ export default function VideoPlayer({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Autoplay + hideTimer cleanup — skip autoplay when video is owned externally
+  // hideTimer cleanup only — no autoplay.
   useEffect(() => {
-    if (!externalVideoRef) {
-      internalVideoRef.current?.play().catch(() => {});
-    }
     return () => { if (hideTimerRef.current) clearTimeout(hideTimerRef.current); };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // When using external video, sync all playback state via event listeners
@@ -182,15 +178,35 @@ export default function VideoPlayer({
     hideTimerRef.current = setTimeout(() => setControlsVisible(false), 2500);
   }, []);
 
-  const handleVideoTap = useCallback(() => {
+  // Mouse: show on any movement, stay until the pointer leaves. Touch: show on tap, auto-hide.
+  // pointermove bubbles from children and fires continuously, so controls can never get
+  // stuck hidden the way onMouseEnter (fires once) could when a button appears under the cursor.
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    setControlsVisible(true);
+    if (e.pointerType === 'mouse') {
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    } else {
+      scheduleHide();
+    }
+  }, [scheduleHide]);
+
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    if (e.pointerType === 'mouse') return;
     setControlsVisible(true);
     scheduleHide();
   }, [scheduleHide]);
+
+  const handlePointerLeave = useCallback((e: React.PointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    setControlsVisible(false);
+  }, []);
 
   const handlePlayPause = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     const v = videoRef.current;
     if (!v) return;
+    if (!srcLoadedRef.current) { srcLoadedRef.current = true; v.src = VIDEO_URL; }
     if (v.paused) { v.play(); } else { v.pause(); }
     scheduleHide();
   }, [scheduleHide, videoRef]);
@@ -215,19 +231,16 @@ export default function VideoPlayer({
     <div
       className="relative w-full cursor-pointer overflow-hidden rounded-2xl shadow-lg"
       style={{ aspectRatio: '16/9' }}
-      onClick={handleVideoTap}
-      onMouseEnter={handleVideoTap}
-      onMouseLeave={() => { if (hideTimerRef.current) clearTimeout(hideTimerRef.current); setControlsVisible(false); }}
+      onPointerMove={handlePointerMove}
+      onPointerDown={handlePointerDown}
+      onPointerLeave={handlePointerLeave}
     >
       {/* Internal <video> — only rendered when no externalVideoRef */}
       {!externalVideoRef && (
         <video
           ref={internalVideoRef}
-          src={VIDEO_URL}
           poster={POSTER_URL}
           playsInline
-          muted
-          loop
           preload="none"
           className="h-full w-full object-cover"
           onPlay={() => setPlaying(true)}
@@ -239,8 +252,7 @@ export default function VideoPlayer({
         />
       )}
 
-      {/* Poster overlay — holds until `playing` fires, covering the brief
-          transparent gap between play() being called and the first frame */}
+      {/* Poster overlay — holds until first frame renders */}
       {!started && (
         <img
           src={POSTER_URL}
@@ -250,73 +262,101 @@ export default function VideoPlayer({
         />
       )}
 
-      {/* Time — always visible, top-left */}
+      {/* Before first play: always-visible centered play button — only element shown */}
+      {!started && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            const v = videoRef.current;
+            if (!v) return;
+            if (!srcLoadedRef.current) { srcLoadedRef.current = true; v.src = VIDEO_URL; }
+            v.play().catch(() => {});
+          }}
+          aria-label="Play video"
+          className="absolute inset-0 z-10 flex items-center justify-center"
+        >
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#5DAFD5]/90 text-white shadow-lg md:h-20 md:w-20">
+            <PlayIcon />
+          </span>
+        </button>
+      )}
+
+      {/* Everything below only renders after playback starts */}
+
+      {/* Time — top-left */}
       {duration > 0 && (
         <span className="absolute top-3 left-4 z-10 font-mono text-xs text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.6)]">
           {fmt(currentTime)} / {fmt(duration)}
         </span>
       )}
 
-      {/* Expand — always visible, bottom-right */}
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          const v = videoRef.current;
-          if (!v) return;
-          const webkit = v as HTMLVideoElement & { webkitEnterFullscreen?: () => void };
-          if (webkit.webkitEnterFullscreen) {
-            webkit.webkitEnterFullscreen();
-          } else {
-            v.requestFullscreen?.().catch(() => {});
-          }
-        }}
-        className="absolute bottom-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#0C1014]/60 text-white backdrop-blur-sm transition-opacity hover:opacity-70"
-        aria-label="Fullscreen"
-      >
-        <ExpandIcon />
-      </button>
-
-      {/* Mute — always visible, top-right */}
-      <button
-        onClick={handleMute}
-        className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#0C1014]/60 text-white backdrop-blur-sm transition-opacity hover:opacity-70"
-        aria-label={muted ? 'Unmute' : 'Mute'}
-      >
-        {muted ? <MuteIcon /> : <UnmuteIcon />}
-      </button>
-
-      {/* Centre controls — shown on tap */}
-      <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-center gap-10 transition-opacity duration-200"
-        style={{ opacity: controlsVisible ? 1 : 0 }}
-      >
+      {/* Expand — bottom-right */}
+      {started && (
         <button
-          onClick={handleSkip(-10)}
-          className="transform-gpu text-white transition-opacity hover:opacity-70"
-          style={{ pointerEvents: controlsVisible ? 'auto' : 'none' }}
-          aria-label="Rewind 10 seconds"
+          onClick={(e) => {
+            e.stopPropagation();
+            const v = videoRef.current;
+            if (!v) return;
+            const webkit = v as HTMLVideoElement & { webkitEnterFullscreen?: () => void };
+            if (webkit.webkitEnterFullscreen) {
+              webkit.webkitEnterFullscreen();
+            } else {
+              v.requestFullscreen?.().catch(() => {});
+            }
+          }}
+          className="absolute bottom-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#0C1014]/60 text-white backdrop-blur-sm transition-opacity hover:opacity-70"
+          aria-label="Fullscreen"
         >
-          <SkipBackIcon />
+          <ExpandIcon />
         </button>
+      )}
 
+      {/* Mute — top-right */}
+      {started && (
         <button
-          onClick={handlePlayPause}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#5DAFD5]/90 text-white shadow-lg md:h-20 md:w-20"
-          style={{ pointerEvents: controlsVisible ? 'auto' : 'none' }}
-          aria-label={playing ? 'Pause' : 'Play'}
+          onClick={handleMute}
+          className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#0C1014]/60 text-white backdrop-blur-sm transition-opacity hover:opacity-70"
+          aria-label={muted ? 'Unmute' : 'Mute'}
         >
-          {playing ? <PauseIcon /> : <PlayIcon />}
+          {muted ? <MuteIcon /> : <UnmuteIcon />}
         </button>
+      )}
 
-        <button
-          onClick={handleSkip(10)}
-          className="transform-gpu text-white transition-opacity hover:opacity-70"
-          style={{ pointerEvents: controlsVisible ? 'auto' : 'none' }}
-          aria-label="Skip forward 10 seconds"
+      {/* Centre controls — visibility driven by pointer activity (works for mouse + touch) */}
+      {started && (
+        <div
+          className="pointer-events-none absolute inset-0 flex items-center justify-center gap-10 transition-opacity duration-200"
+          style={{ opacity: controlsVisible ? 1 : 0 }}
         >
-          <SkipForwardIcon />
-        </button>
-      </div>
+          <button
+            onClick={handleSkip(-10)}
+            className="transform-gpu text-white transition-opacity hover:opacity-70"
+            style={{ pointerEvents: controlsVisible ? 'auto' : 'none' }}
+            aria-label="Rewind 10 seconds"
+          >
+            <SkipBackIcon />
+          </button>
+
+          <button
+            onClick={handlePlayPause}
+            className="flex h-14 w-14 items-center justify-center rounded-full bg-[#5DAFD5]/90 text-white shadow-lg md:h-20 md:w-20"
+            style={{ pointerEvents: controlsVisible ? 'auto' : 'none' }}
+            aria-label={playing ? 'Pause' : 'Play'}
+          >
+            {playing ? <PauseIcon /> : <PlayIcon />}
+          </button>
+
+          <button
+            onClick={handleSkip(10)}
+            className="transform-gpu text-white transition-opacity hover:opacity-70"
+            style={{ pointerEvents: controlsVisible ? 'auto' : 'none' }}
+            aria-label="Skip forward 10 seconds"
+          >
+            <SkipForwardIcon />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

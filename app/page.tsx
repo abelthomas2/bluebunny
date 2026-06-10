@@ -570,13 +570,13 @@ export default async function TurnoverCleaningPage() {
 
             <div className="mt-8 md:mt-12 overflow-hidden rounded-2xl shadow-md">
               <Image
-                src="/banner4.webp"
+                src="/babysitting2.webp"
                 alt="Turnover cleaning team preparing a property"
                 width={1200}
                 height={500}
                 sizes="(max-width: 768px) 100vw, 1200px"
-                className="aspect-[2/1] w-full object-cover md:aspect-auto md:h-72 banner-position-desktop"
-                style={{ objectPosition: '0% 40%', transform: 'scale(1.15)', transformOrigin: 'top center' }}
+                className="aspect-[2/1] w-full object-cover md:aspect-auto md:h-72"
+                style={{ objectPosition: '50% 50%' }}
               />
             </div>
 

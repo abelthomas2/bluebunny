@@ -77,9 +77,11 @@ h1, h2, h3, h4, h5, h6 {
    The value comes from the inline --hero-top-gap variable set in
    app/samplereport/page.tsx (HERO_TOP_GAP_DESKTOP). Unlayered so it wins
    over the base pt-5 utility at >=768px. */
-@media (min-width: 768px) {
-  .hero-top-gap {
-    padding-top: var(--hero-top-gap, 4rem);
+/* Desktop override for sample-report hero top padding (navbar is lg:h-[7rem] = 7rem).
+   !important beats the mobile inline paddingTop style. */
+@media (min-width: 1024px) {
+  .hero-section-pt-desktop {
+    padding-top: 9rem !important; /* 7rem navbar + 2rem gap */
   }
 }
 

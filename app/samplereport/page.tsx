@@ -24,10 +24,9 @@ const OG_TITLE = 'Blue Bunny — Full Turnover Photo Album (Sample Report)';
 const HERO_META =
   '1847 Champions Gate Blvd, Davenport, FL · 1 BR / 1 BA · Turned April 28, 2026 · On-site 11:05 AM – 1:12 PM';
 
-// ▼▼▼ TWEAK ME ▼▼▼ Desktop-only gap between the navbar and the top of the hero
-// card. Try values like '2rem', '4rem', '64px', '6rem' until it looks right.
-// (Mobile spacing is unaffected.)
-const HERO_TOP_GAP_DESKTOP = '4rem';
+// ▼▼▼ TWEAK ME ▼▼▼ Gap between navbar and hero card (navbar = 4rem mobile, 5rem desktop)
+const HERO_TOP_GAP_MOBILE  = '7rem'; // navbar 5rem + py-8 2rem
+const HERO_TOP_GAP_DESKTOP = '9rem';   // 9 - 5 = 4rem visible gap on desktop
 
 const VIDEO_CAPTION =
   "First — three minutes on how the report you're holding gets made.";
@@ -119,13 +118,13 @@ export const metadata: Metadata = {
     title: OG_TITLE,
     description: OG_DESCRIPTION,
     type: 'website',
-    images: [{ url: '/samplereport/og-sample-report.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/newbannerforbothpages.png', width: 2400, height: 1257 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: OG_TITLE,
     description: OG_DESCRIPTION,
-    images: ['/samplereport/og-sample-report.jpg'],
+    images: ['/newbannerforbothpages.png'],
   },
 };
 
@@ -169,6 +168,7 @@ export default async function SampleReportPage({
 
   return (
     <div className="bg-[#F4F9FD]">
+      <style>{`@media(min-width:1024px){#top{padding-top:${HERO_TOP_GAP_DESKTOP}!important}}`}</style>
       <SmoothScroll />
       <SampleHeader />
 
@@ -176,12 +176,10 @@ export default async function SampleReportPage({
         {/* 1 — Confirmation hero */}
         <section
           id="top"
-          className="section-anchor bg-[#F4F9FD] px-5 pt-[5.8rem] pb-12 md:pt-[7rem] md:pb-16"
+          className="section-anchor bg-[#F4F9FD] px-5 md:pb-16"
+          style={{ paddingTop: HERO_TOP_GAP_MOBILE, paddingBottom: '2rem' }}
         >
-          <div
-            className="mx-auto max-w-6xl pt-5 hero-top-gap"
-            style={{ '--hero-top-gap': HERO_TOP_GAP_DESKTOP } as React.CSSProperties}
-          >
+          <div className="mx-auto max-w-6xl">
             <div className="rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm md:p-8">
               <Eyebrow>Sample Report · Full Photo Album</Eyebrow>
               <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#0C1014] md:text-4xl">
@@ -444,7 +442,7 @@ export default async function SampleReportPage({
             </blockquote>
 
             <p className="text-center font-mono text-xs text-[#0C1014] md:text-sm">
-              Insured · Bonded · Background-checked cleaners
+              Insured · Bonded · Vetted cleaners
             </p>
             <p className="text-center font-mono text-xs leading-relaxed text-[#0C1014]/70 md:text-sm">
               Serving the Orlando / Disney corridor — Kissimmee, Davenport, ChampionsGate, Four

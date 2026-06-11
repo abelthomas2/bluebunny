@@ -283,7 +283,7 @@ export default function PhotoAlbum() {
         })}
       </div>
 
-      <div className="mt-5">
+      <div className="mt-2">
         <RoomBlock key={activeRoom} room={activeRoom} onOpen={openLightbox} />
       </div>
 

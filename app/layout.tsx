@@ -19,6 +19,20 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: "/favicon.ico",
   },
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: 'https://gobluebunny.com',
+    siteName: 'Blue Bunny Turnover Services',
+    images: [{ url: '/newbannerforbothpages.png', width: 2400, height: 1257 }],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ['/newbannerforbothpages.png'],
+  },
 };
 
 export const viewport: Viewport = {
@@ -37,7 +51,7 @@ const jsonLd = {
       "name": "Blue Bunny Turnover Services",
       "description": "Vacation rental, Airbnb, and short-term rental cleaning for property managers in Orlando.",
       "url": "https://gobluebunny.com",
-      "image": "https://gobluebunny.com/logo-schema.png",
+      "image": "https://gobluebunny.com/newbannerforbothpages.png",
       "telephone": "+19047385631",
       "email": "hello@gobluebunny.com",
       "areaServed": [

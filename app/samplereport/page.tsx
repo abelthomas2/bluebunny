@@ -18,7 +18,8 @@ const GOOGLE_REVIEWS_URL =
 
 const OG_DESCRIPTION =
   'A real vacation rental turnover from arrival to lockup — 41 timestamped before & after photos, a maintenance flag, and the full report in 30 minutes.';
-const OG_TITLE = 'Blue Bunny — Full Turnover Photo Album (Sample Report)';
+// Single source of truth for the page title — homepage style: "<phrase> | Blue Bunny".
+const PAGE_TITLE = 'Sample Turnover Report | Blue Bunny';
 
 const HERO_META =
   '1847 Champions Gate Blvd, Davenport, FL · 1 BR / 1 BA · Turned April 28, 2026 · On-site 11:05 AM – 1:12 PM';
@@ -106,7 +107,7 @@ const FAQ_ITEMS = [
 // ── Metadata (build spec §10) ─────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL('https://gobluebunny.com'),
-  title: 'Sample Turnover Report — Full Photo Album | Blue Bunny',
+  title: PAGE_TITLE,
   description: OG_DESCRIPTION,
   robots: {
     index: true,
@@ -114,14 +115,14 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   openGraph: {
-    title: OG_TITLE,
+    title: PAGE_TITLE,
     description: OG_DESCRIPTION,
     type: 'website',
     images: [{ url: '/newbannerforbothpages.png', width: 2400, height: 1257 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: OG_TITLE,
+    title: PAGE_TITLE,
     description: OG_DESCRIPTION,
     images: ['/newbannerforbothpages.png'],
   },

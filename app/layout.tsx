@@ -12,6 +12,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://gobluebunny.com'),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   icons: {

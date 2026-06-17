@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import NavBar from '@/app/components/NavBar';
 import Hero from '@/app/components/Hero';
+import TrackedLink from '@/app/components/TrackedLink';
 import PdfViewerWrapper from '@/app/components/PdfViewerWrapper';
 import dynamic from 'next/dynamic';
 const FaqAccordion       = dynamic(() => import('@/app/components/FaqAccordion'));
@@ -719,27 +720,30 @@ export default async function TurnoverCleaningPage() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-6 text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
-                  Delivered 30 minutes post-turn.
-                </p>
-                <a
+                <TrackedLink
                   href="#pm-onboarding-form"
-                  className="mt-5 inline-flex w-fit items-center rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:hidden"
+                  event="cta_onboarding_tap"
+                  eventProps={{ location: 'what_pms_get' }}
+                  className="mt-6 inline-flex w-fit items-center rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:hidden"
                 >
                   Request Onboarding
-                </a>
-                <a
+                </TrackedLink>
+                <TrackedLink
                   href="#pm-hero"
-                  className="mt-5 hidden w-fit items-center rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
+                  event="cta_onboarding_tap"
+                  eventProps={{ location: 'what_pms_get' }}
+                  className="mt-6 hidden w-fit items-center rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
                 >
                   Request Onboarding
-                </a>
-                <a
+                </TrackedLink>
+                <TrackedLink
                   href="/samplereport"
-                  className="mt-4 font-mono text-sm font-semibold text-[#2978A5] transition hover:text-[#0C1014]"
+                  event="sample_report_tap"
+                  eventProps={{ location: 'what_pms_get' }}
+                  className="mt-6 font-mono text-sm font-semibold text-[#2978A5] transition hover:text-[#0C1014]"
                 >
                   Follow this turn from arrival to lockup →
-                </a>
+                </TrackedLink>
               </div>
             </div>
           </div>
@@ -798,18 +802,22 @@ export default async function TurnoverCleaningPage() {
             <PriceCalculator />
 
             <div className="mt-6 md:mt-8 flex justify-center">
-              <a
+              <TrackedLink
                 href="#pm-onboarding-form"
+                event="cta_onboarding_tap"
+                eventProps={{ location: 'pricing' }}
                 className="rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:hidden"
               >
                 Request Onboarding
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink
                 href="#pm-hero"
+                event="cta_onboarding_tap"
+                eventProps={{ location: 'pricing' }}
                 className="hidden rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
               >
                 Request Onboarding
-              </a>
+              </TrackedLink>
             </div>
           </div>
         </section>
@@ -848,25 +856,31 @@ export default async function TurnoverCleaningPage() {
             </div>
 
             <div className="mt-6 md:mt-8 flex flex-wrap justify-center gap-3">
-              <a
+              <TrackedLink
                 href="#pm-onboarding-form"
+                event="cta_onboarding_tap"
+                eventProps={{ location: 'onboarding_steps' }}
                 className="rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:hidden"
               >
                 Request Onboarding
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink
                 href="#pm-hero"
+                event="cta_onboarding_tap"
+                eventProps={{ location: 'onboarding_steps' }}
                 className="hidden rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
               >
                 Request Onboarding
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink
                 href="tel:9047385631"
+                event="cta_call_tap"
+                eventProps={{ location: 'onboarding_steps' }}
                 className="rounded-full border border-[#0C1014]/20 bg-white px-6 py-3 text-sm font-semibold text-[#0C1014] shadow-sm transition hover:bg-[#0C1014] hover:text-white"
               >
                 <span className="min-[376px]:hidden">Call: (904) 738-5631</span>
                 <span className="hidden min-[376px]:inline">Call/Text: (904) 738-5631</span>
-              </a>
+              </TrackedLink>
             </div>
           </div>
         </section>
@@ -974,14 +988,15 @@ export default async function TurnoverCleaningPage() {
                   </>
                 )}
               </div>
-              <a
+              <TrackedLink
                 href={reviewsData.reviewsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                event="reviews_link_tap"
                 className="inline-flex w-full justify-center rounded-full bg-[#2978A5] px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#0C1014] md:w-auto"
               >
                 View all Google reviews
-              </a>
+              </TrackedLink>
             </div>
 
             <p className="mt-5 md:mt-8 pl-2 text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
@@ -1064,25 +1079,31 @@ export default async function TurnoverCleaningPage() {
             </p>
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <a
+              <TrackedLink
                 href="#pm-onboarding-form"
+                event="cta_onboarding_tap"
+                eventProps={{ location: 'final_cta' }}
                 className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#5DAFD5] shadow-sm transition hover:bg-[#0C1014] hover:text-white md:hidden"
               >
                 Request Onboarding
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink
                 href="#pm-hero"
+                event="cta_onboarding_tap"
+                eventProps={{ location: 'final_cta' }}
                 className="hidden rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#5DAFD5] shadow-sm transition hover:bg-[#0C1014] hover:text-white md:inline-flex"
               >
                 Request Onboarding
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink
                 href="tel:9047385631"
+                event="cta_call_tap"
+                eventProps={{ location: 'final_cta' }}
                 className="rounded-full border border-[#0C1014] bg-[#0C1014] px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-[#0C1014]"
               >
                 <span className="min-[376px]:hidden">Call: (904) 738-5631</span>
                 <span className="hidden min-[376px]:inline">Call/Text: (904) 738-5631</span>
-              </a>
+              </TrackedLink>
             </div>
 
             <p className="mt-6 text-xs font-mono text-white">
@@ -1111,12 +1132,22 @@ export default async function TurnoverCleaningPage() {
           </div>
 
           <div className="flex flex-col gap-2 text-sm font-mono text-white/75">
-            <a href="tel:9047385631" className="transition hover:text-[#5DAFD5]">
+            <TrackedLink
+              href="tel:9047385631"
+              event="cta_call_tap"
+              eventProps={{ location: 'footer' }}
+              className="transition hover:text-[#5DAFD5]"
+            >
               (904) 738-5631
-            </a>
-            <a href="mailto:hello@gobluebunny.com" className="transition hover:text-[#5DAFD5]">
+            </TrackedLink>
+            <TrackedLink
+              href="mailto:hello@gobluebunny.com"
+              event="cta_email_tap"
+              eventProps={{ location: 'footer' }}
+              className="transition hover:text-[#5DAFD5]"
+            >
               hello@gobluebunny.com
-            </a>
+            </TrackedLink>
             <a href="/privacy" className="transition hover:text-[#5DAFD5]">
               Privacy Policy
             </a>

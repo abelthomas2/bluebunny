@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { track } from '@/app/lib/analytics';
 
 const steps = [
   {
@@ -39,13 +40,22 @@ export default function ProcessCarousel() {
   const [idx, setIdx] = useState(0);
   const step = steps[idx];
 
+  // Fire once when the visitor first navigates the carousel — a content-engagement signal.
+  const engaged = useRef(false);
+  const markEngaged = () => {
+    if (!engaged.current) {
+      engaged.current = true;
+      track('carousel_advance', { carousel: 'process' });
+    }
+  };
+
   return (
     <div className="mt-8 md:mt-12 mx-auto max-w-4xl px-4">
       {/* Card with arrows overlaid on sides */}
       <div className="relative rounded-2xl border border-[#E2EEF5] bg-white shadow-sm min-h-[21rem] md:min-h-[13rem]">
         {/* Left arrow — half off card edge */}
         <button
-          onClick={() => setIdx((i) => Math.max(0, i - 1))}
+          onClick={() => { markEngaged(); setIdx((i) => Math.max(0, i - 1)); }}
           disabled={idx === 0}
           aria-label="Previous step"
           className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2EEF5] bg-white text-[#0C1014] shadow-sm transition hover:bg-[#EEF6FB] disabled:opacity-20"
@@ -64,7 +74,7 @@ export default function ProcessCarousel() {
 
         {/* Right arrow — half off card edge */}
         <button
-          onClick={() => setIdx((i) => Math.min(steps.length - 1, i + 1))}
+          onClick={() => { markEngaged(); setIdx((i) => Math.min(steps.length - 1, i + 1)); }}
           disabled={idx === steps.length - 1}
           aria-label="Next step"
           className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2EEF5] bg-white text-[#0C1014] shadow-sm transition hover:bg-[#EEF6FB] disabled:opacity-20"
@@ -80,7 +90,7 @@ export default function ProcessCarousel() {
         {steps.map((_, i) => (
           <button
             key={i}
-            onClick={() => setIdx(i)}
+            onClick={() => { markEngaged(); setIdx(i); }}
             aria-label={`Go to step ${i + 1}`}
             className="flex h-6 w-6 items-center justify-center"
           >

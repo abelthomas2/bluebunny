@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { track } from '@/app/lib/analytics';
 
 type NavChild = { label: string; href: string };
 type NavItem =
@@ -120,12 +121,14 @@ export default function NavBar() {
               <div className="flex flex-1 items-center gap-2">
                 <a
                   href="tel:9047385631"
+                  onClick={() => track('cta_call_tap', { location: 'nav' })}
                   className="whitespace-nowrap rounded-full border border-[#0C1014]/20 bg-white px-4 py-2 text-sm font-semibold text-[#0C1014] transition hover:bg-[#0C1014] hover:text-white"
                 >
                   Call/Text: (904) 738-5631
                 </a>
                 <a
                   href="#pm-hero"
+                  onClick={() => track('cta_onboarding_tap', { location: 'nav' })}
                   className="whitespace-nowrap rounded-full border border-[#0C1014] bg-[#2978A5] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0C1014]"
                 >
                   Request Onboarding
@@ -186,13 +189,14 @@ export default function NavBar() {
                 ))}
                 <a
                   href="tel:9047385631"
+                  onClick={() => track('cta_call_tap', { location: 'nav' })}
                   className="mt-2 rounded-full border border-[#0C1014]/20 bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#0C1014] transition hover:bg-[#0C1014] hover:text-white"
                 >
                   Call/Text: (904) 738-5631
                 </a>
                 <a
                   href="#pm-onboarding-form"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => { track('cta_onboarding_tap', { location: 'nav' }); setIsOpen(false); }}
                   className="mt-1 rounded-full border border-[#0C1014] bg-[#2978A5] px-4 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-[#0C1014]"
                 >
                   Request Onboarding

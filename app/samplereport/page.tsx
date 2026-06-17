@@ -2,12 +2,11 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import FaqAccordion from '@/app/components/FaqAccordion';
 import SampleHeader from './SampleHeader';
-import StickyCtaBar from './StickyCtaBar';
 import SmoothScroll from './SmoothScroll';
-import VideoPlayer from '@/app/components/VideoPlayer';
+import TrackedVideo from './TrackedVideo';
 import PhotoAlbum from './PhotoAlbum';
 import PilotForm from './PilotForm';
-import TrackedLink from './TrackedLink';
+import TrackedLink from '@/app/components/TrackedLink';
 
 // ── Constants ───────────────────────────────────────────────────────────────
 const PHONE_DISPLAY = '(904) 738-5631';
@@ -205,7 +204,7 @@ export default async function SampleReportPage({
               {VIDEO_CAPTION}
             </p>
             <div className="mt-5">
-              <VideoPlayer />
+              <TrackedVideo />
             </div>
             <p className="mt-4 text-center">
               <a
@@ -380,12 +379,14 @@ export default async function SampleReportPage({
                       Call or text {PHONE_DISPLAY}
                     </TrackedLink>{' '}
                     — you&apos;ll reach Abel, the owner, not a call center. Or email{' '}
-                    <a
+                    <TrackedLink
                       href={`mailto:${EMAIL}`}
+                      event="cta_email_tap"
+                      eventProps={{ location: 'talk-first' }}
                       className="font-semibold text-[#2978A5] transition hover:text-[#0C1014]"
                     >
                       {EMAIL}
-                    </a>
+                    </TrackedLink>
                     .
                   </p>
                 </div>
@@ -405,12 +406,14 @@ export default async function SampleReportPage({
                   Call or text {PHONE_DISPLAY}
                 </TrackedLink>{' '}
                 — you&apos;ll reach Abel, the owner, not a call center. Or email{' '}
-                <a
+                <TrackedLink
                   href={`mailto:${EMAIL}`}
+                  event="cta_email_tap"
+                  eventProps={{ location: 'talk-first' }}
                   className="font-semibold text-[#2978A5] transition hover:text-[#0C1014]"
                 >
                   {EMAIL}
-                </a>
+                </TrackedLink>
                 .
               </p>
             </div>
@@ -481,20 +484,28 @@ export default async function SampleReportPage({
           </div>
 
           <div className="flex flex-col gap-2 font-mono text-sm text-white/75">
-            <a href={`tel:${PHONE_TEL}`} className="transition hover:text-[#5DAFD5]">
+            <TrackedLink
+              href={`tel:${PHONE_TEL}`}
+              event="cta_call_tap"
+              eventProps={{ location: 'footer' }}
+              className="transition hover:text-[#5DAFD5]"
+            >
               {PHONE_DISPLAY}
-            </a>
-            <a href={`mailto:${EMAIL}`} className="transition hover:text-[#5DAFD5]">
+            </TrackedLink>
+            <TrackedLink
+              href={`mailto:${EMAIL}`}
+              event="cta_email_tap"
+              eventProps={{ location: 'footer' }}
+              className="transition hover:text-[#5DAFD5]"
+            >
               {EMAIL}
-            </a>
+            </TrackedLink>
             <a href="/privacy" className="transition hover:text-[#5DAFD5]">
               Privacy Policy
             </a>
           </div>
         </div>
       </footer>
-
-      <StickyCtaBar />
     </div>
   );
 }

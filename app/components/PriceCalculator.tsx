@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { track } from '@/app/lib/analytics';
 
 const BASE_FEE = 50;
 const PER_BEDROOM = 19;
@@ -70,7 +71,17 @@ export default function PriceCalculator() {
   const [bathrooms, setBathrooms] = useState(2);
   const [selected, setSelected] = useState<Set<AddOnId>>(new Set());
 
+  // Fire once when the visitor first engages the estimator — a high-intent signal.
+  const firedUse = useRef(false);
+  function markUse() {
+    if (!firedUse.current) {
+      firedUse.current = true;
+      track('calculator_use');
+    }
+  }
+
   function toggle(id: AddOnId) {
+    markUse();
     setSelected((prev) => {
       const next = new Set(prev);
       if (next.has(id)) {
@@ -116,8 +127,8 @@ export default function PriceCalculator() {
         <div>
           <p className="mb-3 text-sm font-bold text-[#0C1014]">How many bedrooms and bathrooms?</p>
           <div className="flex flex-wrap gap-8">
-            <Stepper label="Bedrooms" value={bedrooms} min={1} max={10} onChange={setBedrooms} />
-            <Stepper label="Bathrooms" value={bathrooms} min={1} max={10} onChange={setBathrooms} />
+            <Stepper label="Bedrooms" value={bedrooms} min={1} max={10} onChange={(n) => { markUse(); setBedrooms(n); }} />
+            <Stepper label="Bathrooms" value={bathrooms} min={1} max={10} onChange={(n) => { markUse(); setBathrooms(n); }} />
           </div>
         </div>
 

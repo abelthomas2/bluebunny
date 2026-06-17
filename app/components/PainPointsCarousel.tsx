@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { ReactNode } from 'react';
+import { track } from '@/app/lib/analytics';
 
 type PainPointItem = {
   icon: ReactNode;
@@ -12,13 +13,21 @@ export default function PainPointsCarousel({ items }: { items: PainPointItem[] }
   const [idx, setIdx] = useState(0);
   const item = items[idx];
 
+  const engaged = useRef(false);
+  const markEngaged = () => {
+    if (!engaged.current) {
+      engaged.current = true;
+      track('carousel_advance', { carousel: 'pain_points' });
+    }
+  };
+
   return (
     <div className="mt-8 mx-auto max-w-4xl px-4">
       {/* Card with arrows overlaid on sides */}
       <div className="relative rounded-2xl border border-[#E2EEF5] bg-white shadow-sm min-h-[7rem]">
         {/* Left arrow — half off card edge */}
         <button
-          onClick={() => setIdx((i) => (i - 1 + items.length) % items.length)}
+          onClick={() => { markEngaged(); setIdx((i) => (i - 1 + items.length) % items.length); }}
           aria-label="Previous"
           className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2EEF5] bg-white text-[#0C1014] shadow-sm transition hover:bg-[#EEF6FB]"
         >
@@ -37,7 +46,7 @@ export default function PainPointsCarousel({ items }: { items: PainPointItem[] }
 
         {/* Right arrow — half off card edge */}
         <button
-          onClick={() => setIdx((i) => (i + 1) % items.length)}
+          onClick={() => { markEngaged(); setIdx((i) => (i + 1) % items.length); }}
           aria-label="Next"
           className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2EEF5] bg-white text-[#0C1014] shadow-sm transition hover:bg-[#EEF6FB]"
         >
@@ -52,7 +61,7 @@ export default function PainPointsCarousel({ items }: { items: PainPointItem[] }
         {items.map((_, i) => (
           <button
             key={i}
-            onClick={() => setIdx(i)}
+            onClick={() => { markEngaged(); setIdx(i); }}
             aria-label={`Go to item ${i + 1}`}
             className="flex h-6 w-6 items-center justify-center"
           >

@@ -196,6 +196,7 @@ export default function PhotoAlbum() {
   const selectRoom = useCallback((room: string) => {
     setActiveRoom(room);
     setOpenIndex(null); // close any open viewer so indices stay valid
+    track('album_room_select', { room });
   }, []);
 
   const openLightbox = useCallback(

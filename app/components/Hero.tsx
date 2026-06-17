@@ -4,6 +4,7 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import PmOnboardingForm from '@/app/components/PmOnboardingForm';
 import AmbientVideoBackground from '@/app/components/AmbientVideoBackground';
+import { useVideoTracking } from '@/app/lib/useVideoTracking';
 
 const VideoPlayer = dynamic(() => import('@/app/components/VideoPlayer'));
 
@@ -12,6 +13,9 @@ export default function Hero() {
   // onVideoRef callback, then fed to the ambient background so the glow is
   // drawn from the exact same playing element (perfectly synced).
   const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null);
+
+  // Same element feeds the ambient background and the analytics hook.
+  useVideoTracking(videoEl, 'home_hero');
 
   return (
     <section id="pm-hero" className="section-anchor relative flex flex-col overflow-hidden pt-[5.8rem] md:min-h-dvh md:pt-[7rem]">
@@ -61,7 +65,7 @@ export default function Hero() {
           </div>
 
           {/* Right: form */}
-          <PmOnboardingForm />
+          <PmOnboardingForm trackingName="pm_onboarding" />
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { track } from '@/app/lib/analytics';
 
 type FaqItem = {
   question: string;
@@ -36,7 +37,11 @@ export default function FaqAccordion({ items, defaultVisible = 5 }: FaqAccordion
             >
               <button
                 type="button"
-                onClick={() => setOpenIndex((current) => (current === index ? -1 : index))}
+                onClick={() => {
+                  const willOpen = openIndex !== index;
+                  if (willOpen) track('faq_open', { question: item.question });
+                  setOpenIndex(willOpen ? index : -1);
+                }}
                 className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                 aria-expanded={isOpen}
               >
@@ -91,7 +96,10 @@ export default function FaqAccordion({ items, defaultVisible = 5 }: FaqAccordion
         <div className="mt-5 text-center">
           <button
             type="button"
-            onClick={() => setShowAll((v) => !v)}
+            onClick={() => {
+              if (!showAll) track('faq_show_more');
+              setShowAll((v) => !v);
+            }}
             className="inline-flex items-center gap-2 rounded-full border border-[#E2EEF5] bg-white px-5 py-2.5 text-sm font-semibold text-[#2978A5] shadow-sm transition hover:border-[#5DAFD5]/40 hover:text-[#0C1014]"
           >
             {showAll ? 'Show fewer questions' : `Show ${items.length - defaultVisible} more questions`}

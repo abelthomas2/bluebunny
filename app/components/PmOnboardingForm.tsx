@@ -1,6 +1,7 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
+import { track } from '@/app/lib/analytics';
 
 const LEAD_ENDPOINT = '/api/leads';
 
@@ -25,6 +26,11 @@ type PmOnboardingFormProps = {
   successMessage?: string;
   /** Fired once after a successful submission (e.g. analytics). */
   onSubmitSuccess?: () => void;
+  /**
+   * When set, the form fires form_start / form_error / form_submit analytics
+   * tagged with this name (e.g. 'pm_onboarding', 'pilot').
+   */
+  trackingName?: string;
 };
 
 export default function PmOnboardingForm({
@@ -36,10 +42,20 @@ export default function PmOnboardingForm({
   successTitle = 'Thanks!',
   successMessage = "We'll reach out as soon as possible.",
   onSubmitSuccess,
+  trackingName,
 }: PmOnboardingFormProps = {}) {
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FormErrors>({});
+
+  // Fire form_start once, on the first field interaction.
+  const startedRef = useRef(false);
+  const handleFirstFocus = () => {
+    if (trackingName && !startedRef.current) {
+      startedRef.current = true;
+      track('form_start', { form: trackingName });
+    }
+  };
 
   const validateForm = (formData: FormData) => {
     const errors: FormErrors = {};
@@ -78,6 +94,7 @@ export default function PmOnboardingForm({
 
     if (!validateForm(formData)) {
       setFormStatus('error');
+      if (trackingName) track('form_error', { form: trackingName, reason: 'validation' });
       return;
     }
 
@@ -99,12 +116,14 @@ export default function PmOnboardingForm({
       formElement.reset();
       setFieldErrors({});
       setFormStatus('success');
+      if (trackingName) track('form_submit', { form: trackingName });
       onSubmitSuccess?.();
     } catch (error) {
       console.error(error);
       const message = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
       setErrorMessage(message);
       setFormStatus('error');
+      if (trackingName) track('form_error', { form: trackingName, reason: 'submit' });
     }
   };
 
@@ -129,7 +148,7 @@ export default function PmOnboardingForm({
           </h3>
         </div>
 
-        <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+        <form className="space-y-4" onSubmit={handleSubmit} onFocus={handleFirstFocus} noValidate>
           <input type="hidden" name="leadType" value={leadType} />
           {hiddenFields &&
             Object.entries(hiddenFields).map(([name, value]) => (

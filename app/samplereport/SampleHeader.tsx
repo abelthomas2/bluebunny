@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import TrackedLink from './TrackedLink';
+import TrackedLink from '@/app/components/TrackedLink';
 
 const PHONE_DISPLAY = '(904) 738-5631';
 const PHONE_TEL = 'tel:9047385631';
@@ -45,12 +45,14 @@ export default function SampleHeader() {
                 >
                   gobluebunny.com
                 </a>
-                <a
+                <TrackedLink
                   href={PHONE_TEL}
+                  event="cta_call_tap"
+                  eventProps={{ location: 'sample_header' }}
                   className="whitespace-nowrap rounded-full border border-[#0C1014]/20 bg-white px-4 py-2 text-sm font-semibold text-[#0C1014] transition hover:bg-[#0C1014] hover:text-white"
                 >
                   Call/Text: {PHONE_DISPLAY}
-                </a>
+                </TrackedLink>
                 <TrackedLink
                   href="#pilot"
                   event="cta_pilot_tap"
@@ -98,12 +100,14 @@ export default function SampleHeader() {
                 >
                   gobluebunny.com
                 </a>
-                <a
+                <TrackedLink
                   href={PHONE_TEL}
+                  event="cta_call_tap"
+                  eventProps={{ location: 'sample_header' }}
                   className="mt-2 rounded-full border border-[#0C1014]/20 bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#0C1014] transition hover:bg-[#0C1014] hover:text-white"
                 >
                   Call/Text: {PHONE_DISPLAY}
-                </a>
+                </TrackedLink>
                 <TrackedLink
                   href="#pilot"
                   event="cta_pilot_tap"

@@ -1,7 +1,6 @@
 'use client';
 
 import PmOnboardingForm from '@/app/components/PmOnboardingForm';
-import { track } from './analytics';
 
 // Pilot request form (build spec §3.7): reuses the exact main-site form component and
 // /api/leads endpoint, with sample-report copy, the campaign hidden fields, and the
@@ -21,7 +20,7 @@ export default function PilotForm({ wave }: { wave?: string }) {
       hiddenFields={hiddenFields}
       successTitle="Got it."
       successMessage="We'll call or text you within one business day to set up a 15-minute fit check."
-      onSubmitSuccess={() => track('form_submit')}
+      trackingName="pilot"
     />
   );
 }

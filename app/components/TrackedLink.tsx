@@ -1,15 +1,16 @@
 'use client';
 
 import type { AnchorHTMLAttributes, MouseEvent } from 'react';
-import { track, type SampleEvent } from './analytics';
+import { track, type AnalyticsEvent } from '@/app/lib/analytics';
 
 type TrackedLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
-  event?: SampleEvent;
+  event?: AnalyticsEvent;
   eventProps?: Record<string, string | number>;
 };
 
 // Plain anchor that fires an analytics event on click. Used for every tracked CTA
-// (call/text, pilot, PDF download) so links keep working with JS disabled.
+// (call/text/email, onboarding, pilot, sample-report, PDF download) so links keep
+// working with JS disabled.
 export default function TrackedLink({
   event,
   eventProps,

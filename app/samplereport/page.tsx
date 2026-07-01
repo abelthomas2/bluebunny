@@ -264,22 +264,23 @@ export default async function SampleReportPage({
             </header>
 
             <div className="mt-8 overflow-hidden rounded-2xl border-2 border-[#DC2726]/30 bg-white shadow-sm md:mt-10 md:grid md:grid-cols-[40%_60%]">
-              <Image
-                src="/samplereport/flag-baseboard.jpg"
-                alt="Bathroom, maintenance flag, 11:13 AM — baseboard separating from wall near tub apron"
-                width={1200}
-                height={900}
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="aspect-[4/3] w-full object-cover md:aspect-auto md:h-full"
-              />
-              <div className="p-5 md:p-6">
+              <div className="relative aspect-[4/3] w-full md:aspect-auto md:h-72">
+                <Image
+                  src="/samplereport/flag-baseboard.jpg"
+                  alt="Bathroom, maintenance flag, 11:13 AM — baseboard separating from wall near tub apron"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-5 md:flex md:flex-col md:justify-center md:p-6">
                 <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#DC2726]">
                   Maintenance flag
                 </p>
-                <h3 className="mt-1.5 text-lg font-bold text-[#0C1014]">
+                <h3 className="mt-1.5 text-lg font-bold text-[#0C1014] md:text-xl">
                   Baseboard separation — Bathroom
                 </h3>
-                <p className="mt-3 font-mono text-sm leading-relaxed text-[#0C1014]">
+                <p className="mt-3 font-mono text-sm leading-relaxed text-[#0C1014] md:text-base">
                   {FLAG_ASSESSMENT}
                 </p>
                 <p className="mt-3 font-mono text-xs text-[#0C1014]/60">
@@ -288,7 +289,7 @@ export default async function SampleReportPage({
               </div>
             </div>
 
-            <p className="mt-6 px-2 font-mono text-sm leading-relaxed text-[#0C1014] md:mx-auto md:max-w-3xl md:px-0 md:text-base">
+            <p className="mt-6 px-4 text-center font-mono text-sm leading-relaxed text-[#0C1014] md:mx-auto md:max-w-3xl md:px-0 md:text-base">
               {FLAG_BODY}
             </p>
           </div>
@@ -445,10 +446,10 @@ export default async function SampleReportPage({
               </footer>
             </blockquote>
 
-            <p className="text-center font-mono text-xs text-[#0C1014] md:text-sm">
+            <p className="mx-auto max-w-3xl px-4 text-center font-mono text-xs text-[#0C1014] md:px-0 md:text-sm">
               Insured · Bonded · Vetted cleaners
             </p>
-            <p className="text-center font-mono text-xs leading-relaxed text-[#0C1014]/70 md:text-sm">
+            <p className="mx-auto max-w-3xl px-4 text-center font-mono text-xs leading-relaxed text-[#0C1014]/70 md:px-0 md:text-sm">
               Serving the Orlando / Disney corridor — Kissimmee, Davenport, ChampionsGate, Four
               Corners, Lake Buena Vista
             </p>
@@ -467,7 +468,7 @@ export default async function SampleReportPage({
       </main>
 
       {/* 10 — Footer */}
-      <footer className="border-t border-white/5 bg-[#0C1014] px-5 pb-28 pt-12 text-white md:pb-12">
+      <footer className="border-t border-white/5 bg-[#0C1014] px-5 py-12 text-white">
         <div className="mx-auto flex max-w-6xl flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div>
             <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#5DAFD5] md:text-sm">

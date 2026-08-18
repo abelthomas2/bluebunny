@@ -129,6 +129,7 @@ export default function PmOnboardingForm({
 
   const isSubmitting = formStatus === 'submitting';
   const buttonLabel = isSubmitting ? 'Sending...' : formStatus === 'error' ? 'Try Again' : submitLabel;
+  const callLocation = trackingName ? `${trackingName}_form` : 'form';
 
   return (
     <div
@@ -264,13 +265,27 @@ export default function PmOnboardingForm({
             )}
           </div>
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full rounded-xl bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] disabled:cursor-not-allowed disabled:opacity-75"
-          >
-            {buttonLabel}
-          </button>
+          <div>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full rounded-xl bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] disabled:cursor-not-allowed disabled:opacity-75"
+            >
+              {buttonLabel}
+            </button>
+
+            {/* Quiet alternative to submitting — a text link, deliberately not a second CTA button. */}
+            <p className="mt-2.5 text-center text-xs md:text-sm font-mono text-[#0C1014]/70">
+              Prefer to talk?{' '}
+              <a
+                href="tel:9047385631"
+                onClick={() => track('cta_call_tap', { location: callLocation })}
+                className="whitespace-nowrap font-semibold text-[#2978A5] underline decoration-[#2978A5]/40 underline-offset-4 transition hover:text-[#0C1014] hover:decoration-[#0C1014]/50"
+              >
+                Call/text (904) 738-5631
+              </a>
+            </p>
+          </div>
 
           {errorMessage && <p className="text-sm font-mono text-red-600">{errorMessage}</p>}
         </form>

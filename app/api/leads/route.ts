@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { stampPropertySubmission } from '@/app/lib/propertyForms';
 import { checkRateLimit } from '@/app/lib/rateLimiter';
 
 export const runtime = 'nodejs';
@@ -58,7 +59,7 @@ export async function POST(request: Request) {
       return response;
     }
 
-    const formData = await request.formData();
+    const formData = stampPropertySubmission(await request.formData());
     const response = await fetch(FORM_ENDPOINT, {
       method: 'POST',
       headers: {

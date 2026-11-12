@@ -48,7 +48,14 @@ export default function PropertyInformationFormPage() {
             <p className="mx-auto mt-5 max-w-3xl text-sm font-mono leading-relaxed text-[#0C1014] md:text-base">
               Complete this form before your first scheduled turnover. Enter your contact details
               once, then add each property; you can send several in one submission. Keep this
-              information current — notify Blue Bunny promptly of any changes.
+              information current: use the{' '}
+              <Link
+                href="/property-update-form"
+                className="font-semibold text-[#2978A5] underline decoration-[#2978A5]/40 underline-offset-4 transition hover:text-[#0C1014]"
+              >
+                Property Update Form
+              </Link>{' '}
+              to tell Blue Bunny about any change.
             </p>
           </div>
 

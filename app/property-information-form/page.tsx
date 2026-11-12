@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import PropertyInformationForm from '@/app/components/PropertyInformationForm';
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function PropertyInformationFormPage() {
       <header className="bg-[#5DAFD5] px-5">
         <div className="mx-auto max-w-4xl">
           <div className="flex h-[5rem] items-center md:h-[7rem]">
-            <a href="/">
+            <Link href="/">
               <Image
                 src="/banner-logo3.webp"
                 alt="Blue Bunny Turnover Services"
@@ -30,7 +31,7 @@ export default function PropertyInformationFormPage() {
                 unoptimized
                 className="h-[3.7rem] w-auto origin-left scale-[1.2] -translate-x-[0.35rem] md:h-19 md:scale-100 md:translate-x-0"
               />
-            </a>
+            </Link>
           </div>
         </div>
       </header>

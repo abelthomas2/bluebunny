@@ -12,82 +12,8 @@ const ProcessCarousel    = dynamic(() => import('@/app/components/ProcessCarouse
 const PainPointsCarousel = dynamic(() => import('@/app/components/PainPointsCarousel'));
 const ReviewsCarousel    = dynamic(() => import('@/app/components/ReviewsCarousel'));
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/app/lib/siteMetadata';
-
-type GooglePlacesV1SearchResponse = {
-  places?: Array<{
-    name?: string;
-  }>;
-  error?: {
-    message?: string;
-  };
-};
-
-type GooglePlacesV1Review = {
-  rating?: number;
-  relativePublishTimeDescription?: string;
-  publishTime?: string;
-  text?: {
-    text?: string;
-  };
-  originalText?: {
-    text?: string;
-  };
-  authorAttribution?: {
-    displayName?: string;
-  };
-};
-
-type GooglePlacesV1DetailsResponse = {
-  rating?: number;
-  userRatingCount?: number;
-  googleMapsUri?: string;
-  reviews?: GooglePlacesV1Review[];
-  error?: {
-    message?: string;
-  };
-};
-
-type Review = {
-  author: string;
-  rating: number;
-  text: string;
-  relativeTime: string;
-};
-
-type ReviewsData = {
-  rating: number | null;
-  totalRatings: number | null;
-  reviewsUrl: string;
-  reviews: Review[];
-  error?: string;
-};
-
-const BUSINESS_QUERY =
-  process.env.GOOGLE_BUSINESS_QUERY ?? 'Blue Bunny Turnover Services Orlando';
-const DEFAULT_REVIEWS_URL = `https://www.google.com/search?q=${encodeURIComponent(`${BUSINESS_QUERY} reviews`)}`;
-const SEARCH_QUERIES = [
-  BUSINESS_QUERY,
-  'Blue Bunny Rental Cleaners Orlando',
-  'Blue Bunny Turnover Services Orlando',
-  'Blue Bunny Turnover Services',
-];
-const REVIEWS_REVALIDATE_SECONDS = 60 * 60 * 6;
-const REVIEWS_TO_SHOW = 3;
-
-const fallbackReviews: Review[] = [
-  {
-    author: 'Google review placeholder',
-    rating: 5,
-    text: 'Google reviews will display here after API credentials are configured.',
-    relativeTime: 'Placeholder',
-  },
-  {
-    author: 'Google review placeholder',
-    rating: 5,
-    text: 'This block is reserved for your top operator-focused reviews.',
-    relativeTime: 'Placeholder',
-  },
-];
+import { GOOGLE_RATING, GOOGLE_RATING_COUNT, REVIEWS_URL, reviews, type ReviewCard } from '@/app/lib/reviews';
+import { formatTimeAgo } from '@/app/lib/timeAgo';
 
 // ─── Section data ─────────────────────────────────────────────────────────────
 
@@ -190,7 +116,6 @@ const reportDeliverables = [
   'Low-supply alerts with restock counts',
   'Linen condition & towel inventory',
   'Lockup confirmation with timestamp',
-  'Action items for your team',
 ];
 
 const pricingBaseRows = [
@@ -317,143 +242,6 @@ const faqItems = [
   },
 ];
 
-// ─── Google Places helpers ────────────────────────────────────────────────────
-
-function emptyReviewsData(error?: string): ReviewsData {
-  return {
-    rating: null,
-    totalRatings: null,
-    reviewsUrl: DEFAULT_REVIEWS_URL,
-    reviews: [],
-    error,
-  };
-}
-
-function clampReviewText(text: string, maxLength = 240): string {
-  if (text.length <= maxLength) return text;
-  return `${text.slice(0, maxLength).trimEnd()}...`;
-}
-
-function normalizeReview(review: GooglePlacesV1Review): Review | null {
-  const author = review.authorAttribution?.displayName?.trim();
-  const text = (review.originalText?.text ?? review.text?.text)?.trim();
-  const rating = review.rating;
-
-  if (!author || !text || typeof rating !== 'number') {
-    return null;
-  }
-
-  return {
-    author,
-    rating,
-    text: clampReviewText(text),
-    relativeTime: review.relativePublishTimeDescription?.trim() ?? 'Google review',
-  };
-}
-
-async function fetchPlaceResourceName(apiKey: string): Promise<string | null> {
-  if (process.env.GOOGLE_PLACE_ID) {
-    const placeId = process.env.GOOGLE_PLACE_ID.trim();
-    return placeId.startsWith('places/') ? placeId : `places/${placeId}`;
-  }
-
-  for (const query of SEARCH_QUERIES) {
-    const response = await fetch('https://places.googleapis.com/v1/places:searchText', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Goog-Api-Key': apiKey,
-        'X-Goog-FieldMask': 'places.name,error',
-      },
-      body: JSON.stringify({
-        textQuery: query,
-        maxResultCount: 1,
-        languageCode: 'en',
-      }),
-      next: { revalidate: REVIEWS_REVALIDATE_SECONDS },
-    });
-
-    if (!response.ok) {
-      continue;
-    }
-
-    const payload = (await response.json()) as GooglePlacesV1SearchResponse;
-    if (payload.error?.message) {
-      continue;
-    }
-
-    const placeName = payload.places?.[0]?.name ?? null;
-    if (placeName) {
-      return placeName;
-    }
-  }
-
-  return null;
-}
-
-async function getReviewsData(): Promise<ReviewsData> {
-  const apiKey = process.env.GOOGLE_PLACES_API_KEY;
-  if (!apiKey) {
-    return emptyReviewsData('Missing GOOGLE_PLACES_API_KEY.');
-  }
-
-  try {
-    const placeResourceName = await fetchPlaceResourceName(apiKey);
-    if (!placeResourceName) {
-      return emptyReviewsData('Google Places search returned no matching place.');
-    }
-
-    const response = await fetch(
-      `https://places.googleapis.com/v1/${placeResourceName}?languageCode=en`,
-      {
-        headers: {
-          'X-Goog-Api-Key': apiKey,
-          'X-Goog-FieldMask':
-            'rating,userRatingCount,reviews,googleMapsUri,reviews.rating,reviews.relativePublishTimeDescription,reviews.publishTime,reviews.text,reviews.originalText,reviews.authorAttribution',
-        },
-        next: { revalidate: REVIEWS_REVALIDATE_SECONDS },
-      },
-    );
-
-    if (!response.ok) {
-      return emptyReviewsData(`Google Places details request failed (${response.status}).`);
-    }
-
-    const payload = (await response.json()) as GooglePlacesV1DetailsResponse;
-    if (payload.error?.message) {
-      return emptyReviewsData(payload.error.message);
-    }
-
-    const reviews = (payload.reviews ?? [])
-      .map((review, index) => ({
-        normalized: normalizeReview(review),
-        publishedAtMs: Date.parse(review.publishTime ?? ''),
-        index,
-      }))
-      .filter(
-        (entry): entry is { normalized: Review; publishedAtMs: number; index: number } =>
-          entry.normalized !== null,
-      )
-      .sort((a, b) => {
-        const aTime = Number.isFinite(a.publishedAtMs) ? a.publishedAtMs : -1;
-        const bTime = Number.isFinite(b.publishedAtMs) ? b.publishedAtMs : -1;
-        return bTime - aTime || a.index - b.index;
-      })
-      .map((entry) => entry.normalized)
-      .slice(0, REVIEWS_TO_SHOW);
-
-    return {
-      rating: typeof payload.rating === 'number' ? payload.rating : null,
-      totalRatings: typeof payload.userRatingCount === 'number' ? payload.userRatingCount : null,
-      reviewsUrl: payload.googleMapsUri ?? DEFAULT_REVIEWS_URL,
-      reviews,
-      error: reviews.length === 0 ? 'Google Places returned no review text.' : undefined,
-    };
-  } catch {
-    return emptyReviewsData('Google Places request failed unexpectedly.');
-  }
-}
-
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function StarRow({ rating }: { rating: number }) {
@@ -493,9 +281,12 @@ export const metadata: Metadata = {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default async function TurnoverCleaningPage() {
-  const reviewsData = await getReviewsData();
-  const reviews = reviewsData.reviews.length > 0 ? reviewsData.reviews : fallbackReviews;
+export default function TurnoverCleaningPage() {
+  // "Time ago" labels are rendered here (build time) and refreshed on the client.
+  const reviewCards: ReviewCard[] = reviews.map((review) => ({
+    ...review,
+    postedLabel: formatTimeAgo(review.date),
+  }));
 
   return (
     <div className="min-h-screen bg-[#0C1014]">
@@ -612,7 +403,7 @@ export default async function TurnoverCleaningPage() {
                 What happens on every single turn
               </h2>
               <p className="mx-auto mt-5 max-w-3xl text-sm font-mono leading-relaxed text-[#0C1014] md:text-base">
-                Every turnover follows the same 6-step protocol &mdash; regardless of who's working that day. The full SOP our specialists work from is
+                Every turnover follows the same 6-step protocol &mdash; regardless of who&rsquo;s working that day. The full SOP our specialists work from is
                 below.
               </p>
             </header>
@@ -898,7 +689,7 @@ export default async function TurnoverCleaningPage() {
               </h2>
               <p className="mx-auto mt-5 max-w-3xl text-sm font-mono leading-relaxed text-[#0C1014] md:text-base">
                 Our cleaners have access to your properties and
-                your reputation &mdash; we don't take risks. We carry general liability insurance and a janitorial bond.
+                your reputation &mdash; we don&rsquo;t take risks. We carry general liability insurance and a janitorial bond.
               </p>
             </header>
 
@@ -969,27 +760,27 @@ export default async function TurnoverCleaningPage() {
             {/* Rating bar */}
             <div className="mt-8 md:mt-12 flex flex-col gap-5 rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm md:flex-row md:items-center md:justify-between">
               <div className="space-y-1.5">
-                {reviewsData.rating !== null ? (
+                {GOOGLE_RATING !== null ? (
                   <>
-                    <StarRow rating={reviewsData.rating} />
+                    <StarRow rating={GOOGLE_RATING} />
                     <p className="text-xl font-bold text-[#0C1014]">
-                      {reviewsData.rating.toFixed(1)} Google rating
-                      {reviewsData.totalRatings !== null
-                        ? ` · ${reviewsData.totalRatings} reviews`
+                      {GOOGLE_RATING.toFixed(1)} Google rating
+                      {GOOGLE_RATING_COUNT !== null
+                        ? ` · ${GOOGLE_RATING_COUNT} reviews`
                         : ''}
                     </p>
                   </>
                 ) : (
                   <>
-                    <p className="text-lg font-bold text-[#0C1014]">Google ratings module</p>
+                    <p className="text-lg font-bold text-[#0C1014]">Rated on Google</p>
                     <p className="text-sm font-mono text-[#0C1014]">
-                      Live rating/count appear here when Google data is available.
+                      See what hosts and operators say about working with us.
                     </p>
                   </>
                 )}
               </div>
               <TrackedLink
-                href={reviewsData.reviewsUrl}
+                href={REVIEWS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 event="reviews_link_tap"
@@ -1003,40 +794,8 @@ export default async function TurnoverCleaningPage() {
               Recent Reviews:
             </p>
 
-            {/* Mobile: carousel */}
-            <div className="md:hidden">
-              <ReviewsCarousel items={reviews.slice(0, 3)} />
-            </div>
-
-            {/* Desktop: grid */}
-            <div className="hidden mt-4 md:grid md:gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {reviews.slice(0, 3).map((review, index) => (
-                <article
-                  key={`${review.author}-${index}`}
-                  className="flex flex-col rounded-2xl border border-[#E2EEF5] bg-white p-6 shadow-sm"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="font-bold text-[#0C1014]">
-                        <span className="hidden md:inline lg:hidden">
-                          {review.author.length > 12 ? `${review.author.slice(0, 12)}…` : review.author}
-                        </span>
-                        <span className="inline md:hidden lg:inline">
-                          {review.author.length > 18 ? `${review.author.slice(0, 18)}...` : review.author}
-                        </span>
-                      </p>
-                      <p className="mt-0.5 text-xs font-mono text-[#0C1014]/75">
-                        {review.relativeTime}
-                      </p>
-                    </div>
-                    <StarRow rating={review.rating} />
-                  </div>
-                  <p className="mt-3 grow text-sm font-mono leading-relaxed text-[#0C1014]">
-                    &ldquo;{review.text}&rdquo;
-                  </p>
-                </article>
-              ))}
-            </div>
+            {/* Carousel at every width: 1 card per page on mobile, 2 at md, 3 at lg */}
+            <ReviewsCarousel items={reviewCards} />
           </div>
         </section>
 

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/app/lib/siteMetadata";
 import "./globals.css";
@@ -9,6 +10,29 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+// Monospace fallback for non-Apple devices. Menlo (what the site was designed on)
+// is Apple's build of DejaVu Sans Mono, so this is the same design self-hosted.
+// Apple devices match Menlo first and never download it (see globals.css).
+const dejavuMono = localFont({
+  src: [
+    { path: "./fonts/DejaVuSansMono.woff", weight: "400", style: "normal" },
+    { path: "./fonts/DejaVuSansMono-Bold.woff", weight: "700", style: "normal" },
+  ],
+  variable: "--font-dejavu-mono",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false,
+  // The files are subset to Latin; declaring that range means browsers that
+  // already matched Menlo never fetch them for emoji or other non-Latin glyphs.
+  declarations: [
+    {
+      prop: "unicode-range",
+      value:
+        "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+2022, U+FEFF, U+FFFD",
+    },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -174,7 +198,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} antialiased bg-[#06080C]`}>
+      <body className={`${geistSans.variable} ${dejavuMono.variable} antialiased bg-[#06080C]`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/*
+  Hardcoded monospace: Menlo, the font the site was designed on (Mac + iPhone).
+  Menlo can't be shipped as a web font, so devices without it get DejaVu Sans Mono,
+  the open-source font Menlo is built from, self-hosted via layout.tsx.
+*/
+@theme inline {
+  --font-mono: Menlo, var(--font-dejavu-mono), monospace;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #0C1014;

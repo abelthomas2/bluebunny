@@ -164,21 +164,20 @@ export default function PdfViewer({ src, downloadAs }: { src: string; downloadAs
     const el = containerRef.current;
     if (!el) return;
     const observer = new ResizeObserver(([entry]) => {
-      setContainerWidth(entry.contentRect.width);
+      const width = entry.contentRect.width;
+      // Reset locked height on the first real measurement so we re-lock at the
+      // correct width (handles mobile where the container starts at 0 width).
+      if (prevContainerWidth.current === 0 && width > 0) {
+        setLockedHeight(0);
+      }
+      prevContainerWidth.current = width;
+      setContainerWidth(width);
     });
     observer.observe(el);
+    prevContainerWidth.current = el.clientWidth;
     setContainerWidth(el.clientWidth);
     return () => observer.disconnect();
   }, []);
-
-  // Reset locked height on the first real measurement so we re-lock at the
-  // correct width (handles mobile where containerWidth starts at 0).
-  useEffect(() => {
-    if (prevContainerWidth.current === 0 && containerWidth > 0) {
-      setLockedHeight(0);
-    }
-    prevContainerWidth.current = containerWidth;
-  }, [containerWidth]);
 
   const onDocumentLoadSuccess = useCallback(({ numPages }: { numPages: number }) => {
     setNumPages(numPages);

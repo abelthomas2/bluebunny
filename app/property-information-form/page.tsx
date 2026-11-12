@@ -36,17 +36,18 @@ export default function PropertyInformationFormPage() {
         </div>
       </header>
 
-      <main className="min-h-screen bg-[#F4F9FD] px-5 pt-10 pb-12 md:pt-14 md:pb-16">
+      <main className="section-shell min-h-screen bg-[#F4F9FD]">
         <div className="mx-auto max-w-4xl">
           <div className="mb-8 px-4 text-center md:mb-12 md:px-0">
-            <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5]">
+            <p className="text-xs font-mono font-semibold uppercase tracking-[0.3em] text-[#2978A5] md:text-sm">
               Onboarding
             </p>
-            <h1 className="mt-2 text-3xl md:text-4xl font-semibold leading-tight text-[#0C1014] text-balance">
+            <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#0C1014] text-balance md:text-5xl">
               Property Information Form
             </h1>
-            <p className="mt-4 mx-auto max-w-xl text-sm md:text-base font-mono text-[#0C1014]/60 leading-relaxed">
-              Complete this form for each property before your first scheduled turnover. Keep this
+            <p className="mx-auto mt-5 max-w-3xl text-sm font-mono leading-relaxed text-[#0C1014] md:text-base">
+              Complete this form before your first scheduled turnover. Enter your contact details
+              once, then add each property; you can send several in one submission. Keep this
               information current — notify Blue Bunny promptly of any changes.
             </p>
           </div>

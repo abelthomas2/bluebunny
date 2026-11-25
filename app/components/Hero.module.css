@@ -1,0 +1,438 @@
+/*
+  Home page hero, from the design file (Blue Bunny design board, picked 24 Nov 2026).
+  Below 1024 px: "Staggered" in Labels' colors. The banner4 photo in a band, the headline on two white plates,
+  then the lead, the two buttons, the trust ribbon and the pilot form.
+  From 1024 px: "Fade", version 2. The herotesthq photo dissolving into Mist behind the copy, the pilot form as
+  one wide card across the bottom, and the trust ribbon under the hero.
+  Everything here is scoped to this component; nothing leaks into the rest of the page.
+*/
+
+.hero {
+  background: #F4F9FD;
+  color: #0C1014;
+  font-family: var(--font-geist-sans), 'Helvetica Neue', Arial, sans-serif;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  /* "#pm-hero" links (the logo) always land at the very top of the page. */
+  scroll-margin-top: 100vh;
+}
+
+.mono {
+  font-family: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+}
+
+.desktopOnly {
+  display: none;
+}
+
+/* ================= phone and small windows ================= */
+
+/* The band keeps the design's 390 x 256 proportion at every width, so the crop is the approved one. */
+.band {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 390 / 256;
+  background: #E2EEF5;
+}
+
+.bandPhoto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  display: block;
+}
+
+.chip {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  margin: 0;
+}
+
+.chip span {
+  display: inline-block;
+  background: #5DAFD5;
+  color: #0C1014;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.bandTitle {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  font-weight: 700;
+  /* 30 px from a 390 px phone up, as designed. Narrower phones scale it down so the longer plate always keeps
+     room to spare: Safari draws this bold text a few percent wider than Chrome does. */
+  font-size: clamp(20px, calc(8.38vw - 2.68px), 30px);
+  line-height: normal;
+  letter-spacing: -0.02em;
+  color: #0C1014;
+  pointer-events: none;
+}
+
+.plateTop {
+  position: absolute;
+  left: 12px;
+  top: 46px;
+}
+
+.plateBottom {
+  position: absolute;
+  right: 12px;
+  bottom: 14px;
+}
+
+/* each plate is one line of the headline and never breaks */
+.plate {
+  display: inline;
+  white-space: nowrap;
+  background: #FFFFFF;
+  color: #0C1014;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 3px 8px;
+  line-height: 1.36;
+}
+
+.rest {
+  padding: 14px 20px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.leadMobile {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.checks li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 1.45;
+  color: #0C1014;
+}
+
+.checks svg {
+  color: #2978A5;
+}
+
+.checksMobile {
+  margin-top: 12px;
+  gap: 8px;
+}
+
+.checksMobile li {
+  font-size: 15px;
+}
+
+.checksMobile svg {
+  margin-top: 2px;
+}
+
+/* The two buttons share a row from 385 px (as on the design's 390 px phone) and stack below that, the same in
+   every browser. Their side padding is 4 px under the design's because they grow to fill the row anyway: on a
+   390 px phone they come out exactly as designed, with room to spare for Safari's slightly wider text. */
+.ctaRow {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (min-width: 385px) {
+  .ctaRow {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .ctaPilot,
+  .ctaCall {
+    flex: 1 0 auto;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btnPrimary {
+  background: #2978A5;
+  color: #FFFFFF;
+  border: 1px solid #2978A5;
+}
+
+.btnPrimary:hover {
+  background: #1D5F8A;
+  border-color: #1D5F8A;
+}
+
+.btnSecondary {
+  background: #FFFFFF;
+  color: #0C1014;
+  border: 1px solid #5E6E7B;
+}
+
+.btnSecondary:hover {
+  border-color: #0C1014;
+}
+
+.ctaPilot {
+  padding: 0 14px;
+}
+
+.ctaCall {
+  padding: 0 10px;
+  font-size: 14.5px;
+}
+
+.ribbonMobile {
+  background: #FFFFFF;
+  border-top: 1px solid #E2EEF5;
+  border-bottom: 1px solid #E2EEF5;
+  padding: 10px 20px;
+}
+
+.ribbonMobileList {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 640px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 12px;
+}
+
+.ribbonMobileList li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: #0C1014;
+}
+
+.ribbonIcon {
+  color: #2978A5;
+}
+
+/* Tablets: the headline plates grow with the band. */
+@media (min-width: 600px) and (max-width: 1023.98px) {
+  .bandTitle {
+    font-size: clamp(30px, 5vw, 44px);
+  }
+}
+
+/* ================= desktop ================= */
+/*
+  The design's numbers, unchanged. His face stays 871 px into the text column at every width and his head clears
+  the header. Up to a 1596 px window the photo is 1000 px wide; from there to 1747 px it grows, up to 1150 px, just
+  enough to reach the window's right edge, and the band and the form card move down with it. On wider windows it
+  stops growing and its right edge fades into Mist. A Mist veil pinned to the text column fades the photo in.
+*/
+@media (min-width: 1024px) {
+  .mobileOnly {
+    display: none;
+  }
+
+  .desktopOnly {
+    display: block;
+  }
+
+  .hero {
+    /* positioned on desktop only: on phones the next section must paint over the form card's shadow, as in the design */
+    position: relative;
+    overflow: hidden;
+    padding: calc(0.494 * clamp(1000px, calc((50% - 295px) * 1.988072), 1150px)) 24px 66px;
+  }
+
+  .photo {
+    position: absolute;
+    top: -1.25px;
+    left: calc(max(24px, 50% - 576px) + 871px - 0.497 * clamp(1000px, calc((50% - 295px) * 1.988072), 1150px));
+    width: clamp(1000px, calc((50% - 295px) * 1.988072), 1150px);
+    /* the band ends at 560 px x the photo's growth */
+    clip-path: inset(0 0 calc(0.4444% - 1.25px) 0);
+  }
+
+  .photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+  }
+
+  .veil {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: calc(max(24px, 50% - 576px) + 785.6px);
+    background: linear-gradient(
+      to right,
+      #F4F9FD calc(100% - 309.6px),
+      rgba(244, 249, 253, 0.45) calc(100% - 176px),
+      rgba(244, 249, 253, 0) 100%
+    );
+  }
+
+  /* 560 px in the design; 600 here so the headline's first line has room in Safari too. The lead keeps 560. */
+  .copy {
+    position: absolute;
+    left: max(24px, calc(50% - 576px));
+    top: 52px;
+    width: 600px;
+  }
+
+  .eyebrow {
+    margin: 0;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #1D5F8A;
+  }
+
+  .title {
+    margin: 12px 0 0;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    color: #0C1014;
+  }
+
+  .lead {
+    margin: 16px 0 0;
+    font-size: 19px;
+    line-height: 1.5;
+    max-width: 560px;
+  }
+
+  .leadLine {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .checksDesktop {
+    margin-top: 20px;
+    gap: 9px;
+  }
+
+  .checksDesktop li {
+    font-size: 16.5px;
+  }
+
+  .checksDesktop svg {
+    margin-top: 3px;
+  }
+
+  .talk {
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .talk svg {
+    color: #2978A5;
+  }
+
+  .talk p {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .talkLink {
+    font-weight: 600;
+    color: #1D5F8A;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .talkLink:hover {
+    color: #0C1014;
+  }
+}
+
+/* Wider than 1747 px the photo has stopped growing and no longer reaches the edge: its right edge fades into Mist. */
+@media (min-width: 1747px) {
+  .photo {
+    -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 0), #000 78px);
+    mask-image: linear-gradient(to left, rgba(0, 0, 0, 0), #000 78px);
+  }
+}
+
+/* ---------- trust ribbon under the desktop hero ---------- */
+.ribbonDesktop {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .ribbonDesktop {
+    display: block;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2EEF5;
+    padding: 20px 24px;
+    line-height: normal;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.ribbonDesktopList {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1152px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 24px;
+}
+
+.ribbonDesktopList li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #0C1014;
+  white-space: nowrap;
+}
+
+/* ---------- keyboard focus ---------- */
+.btn:focus-visible,
+.talkLink:focus-visible {
+  outline: 2px solid #1D5F8A;
+  outline-offset: 2px;
+}

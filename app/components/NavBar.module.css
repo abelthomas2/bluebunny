@@ -1,0 +1,291 @@
+/*
+  Site header, from the design file (Blue Bunny design board, Nov 2026).
+  Phone and small windows: the 80 px bar with the logo and a round menu button, and the full-screen menu.
+  From 1152 px wide: the 112 px bar with the nav, the two pill buttons and the support line.
+  The desktop bar needs about 1103 px to sit on one line in Chrome and a little more in Safari, which draws the
+  text slightly wider; below 1152 px the phone bar takes over.
+  Everything here is scoped to this component; nothing leaks into the rest of the page.
+*/
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #5DAFD5;
+  color: #0C1014;
+  padding-top: env(safe-area-inset-top, 0px);
+  font-family: var(--font-geist-sans), 'Helvetica Neue', Arial, sans-serif;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+}
+
+/* ---------- logo ---------- */
+.logoLink {
+  display: block;
+  flex: none;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.logo {
+  display: block;
+  flex: none;
+  max-width: none;
+}
+
+.logoLarge {
+  height: 58px;
+  width: 245.8px;
+}
+
+.logoSmall {
+  height: 42px;
+  width: 178px;
+}
+
+/* ---------- phone bar ---------- */
+.mobileBar {
+  height: 80px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.roundButton {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1px solid #0C1014;
+  color: #0C1014;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.roundButton:hover {
+  background: #EEF6FB;
+}
+
+/* ---------- desktop bar ---------- */
+.desktopBar {
+  display: none;
+}
+
+.desktopInner {
+  max-width: 1152px;
+  margin: 0 auto;
+  min-height: 112px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 10px 0;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.navLink {
+  padding: 10px 14px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #0C1014;
+  text-decoration: none;
+  border-radius: 8px;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+.navLink:hover {
+  text-decoration-line: underline;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.actionsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.support {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #0C1014;
+}
+
+@media (min-width: 1152px) {
+  .mobileBar {
+    display: none;
+  }
+
+  .desktopBar {
+    display: block;
+    padding: 0 24px;
+  }
+}
+
+/* ---------- pill buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btnInk {
+  background: #0C1014;
+  color: #FFFFFF;
+  border: 1px solid #0C1014;
+}
+
+.btnInk:hover {
+  background: #1D5F8A;
+  border-color: #1D5F8A;
+}
+
+.btnWhite {
+  background: #FFFFFF;
+  color: #0C1014;
+  border: 1px solid #0C1014;
+}
+
+.btnWhite:hover {
+  background: #EEF6FB;
+}
+
+.btnHeaderCall {
+  height: 44px;
+  padding: 0 18px;
+}
+
+.btnHeaderPilot {
+  height: 44px;
+  padding: 0 20px;
+}
+
+.btnFull {
+  display: flex;
+  width: 100%;
+}
+
+/* ---------- full-screen menu (phone) ---------- */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: #5DAFD5;
+  color: #0C1014;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.menuTop {
+  height: 80px;
+  flex: none;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menuNav {
+  padding: 8px 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* 52 px plus the rule, as in the design */
+  box-sizing: content-box;
+  min-height: 52px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #0C1014;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(12, 16, 20, 0.16);
+}
+
+.menuLink:hover span {
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.menuActions {
+  padding: 22px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menuSupport {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  color: #0C1014;
+}
+
+/* On tablets and small desktop windows the links and buttons keep a phone-like width instead of stretching. */
+@media (min-width: 600px) {
+  .menuNav,
+  .menuActions {
+    max-width: 600px;
+  }
+}
+
+/* The bunny peeks up from the bottom edge; on short screens it follows the buttons instead of covering them. */
+.menuFill {
+  flex: 1 1 auto;
+  min-height: 24px;
+}
+
+.menuPeek {
+  padding: 0 20px;
+}
+
+/* ---------- keyboard focus ---------- */
+.logoLink:focus-visible,
+.roundButton:focus-visible,
+.navLink:focus-visible,
+.btn:focus-visible,
+.menuLink:focus-visible {
+  outline: 2px solid #0C1014;
+  outline-offset: 2px;
+}

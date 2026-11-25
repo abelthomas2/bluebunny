@@ -1,0 +1,16 @@
+/* The peeking bunny: clipped at the brand rule's line (see BunnyPeek.tsx), flush against the edge below it. */
+.peek {
+  flex: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.end {
+  justify-content: flex-end;
+}
+
+.peek img {
+  display: block;
+  max-width: none;
+}

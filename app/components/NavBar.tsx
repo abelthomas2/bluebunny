@@ -1,214 +1,220 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { track } from '@/app/lib/analytics';
+import { Icon } from '@/app/components/BrandIcons';
+import { FORM_ANCHOR, PHONE_DISPLAY, PHONE_TEL, SUPPORT_HOURS, TOP_ANCHOR } from '@/app/lib/brand';
+import BunnyPeek from '@/app/components/BunnyPeek';
+import s from './NavBar.module.css';
 
-type NavChild = { label: string; href: string };
-type NavItem =
-  | { label: string; href: string; children?: undefined }
-  | { label: string; href?: undefined; children: NavChild[] };
-
-const navItems: NavItem[] = [
-  {
-    label: 'Why Us',
-    children: [
-      { label: 'What You Get', href: '#what-pms-get' },
-      { label: 'Our Team',     href: '#cleaner-vetting' },
-      { label: 'Testimonials', href: '#proof' },
-    ],
-  },
-  {
-    label: 'Process',
-    children: [
-      { label: 'Our Process',  href: '#our-process' },
-      { label: 'How It Works', href: '#onboarding-steps' },
-    ],
-  },
+// Header and phone menu from the design file. The labels are the design's; each link points at the
+// section the page has today, so nothing dead-ends while the rest of the page is being replaced.
+const NAV_LINKS = [
   { label: 'Reporting', href: '#deliverable-report' },
-  { label: 'Pricing',   href: '#pricing' },
-  { label: 'FAQ',       href: '#faq' },
+  { label: 'Process', href: '#our-process' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Team', href: '#cleaner-vetting' },
+  { label: 'FAQ', href: '#faq' },
 ];
 
-const allLinks: NavChild[] = [
-  { label: 'What You Get', href: '#what-pms-get' },
-  { label: 'Our Process',  href: '#our-process' },
-  { label: 'Reporting',    href: '#deliverable-report' },
-  { label: 'Pricing',      href: '#pricing' },
-  { label: 'How It Works', href: '#onboarding-steps' },
-  { label: 'Our Team',     href: '#cleaner-vetting' },
-  { label: 'Testimonials', href: '#proof' },
-  { label: 'FAQ',          href: '#faq' },
+const MENU_LINKS = [
+  { label: 'What you get', href: '#what-pms-get' },
+  { label: 'Reporting', href: '#deliverable-report' },
+  { label: 'Our process', href: '#our-process' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Our team', href: '#cleaner-vetting' },
+  { label: 'Reviews', href: '#proof' },
+  { label: 'How it starts', href: '#onboarding-steps' },
+  { label: 'FAQ', href: '#faq' },
 ];
+
+// Must match the breakpoint in NavBar.module.css.
+const DESKTOP_QUERY = '(min-width: 1152px)';
+
+function Logo({ large }: { large?: boolean }) {
+  return (
+    <Image
+      src="/blue-bunny-logo.svg"
+      alt="Blue Bunny Turnover Services"
+      width={large ? 246 : 178}
+      height={large ? 58 : 42}
+      unoptimized
+      loading="eager"
+      className={`${s.logo} ${large ? s.logoLarge : s.logoSmall}`}
+    />
+  );
+}
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  const closeMenu = (returnFocus: boolean) => {
+    setIsOpen(false);
+    if (returnFocus) menuButtonRef.current?.focus();
+  };
+
+  // While the menu is open: the page behind it doesn't scroll, Escape closes it, Tab stays inside it,
+  // and it closes itself if the window grows to the desktop header.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const root = document.documentElement;
+    const previousOverflow = root.style.overflow;
+    root.style.overflow = 'hidden';
+    closeButtonRef.current?.focus();
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setIsOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (event.key !== 'Tab' || !panelRef.current) return;
+      const focusables = Array.from(
+        panelRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'),
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      if (!panelRef.current.contains(active)) {
+        event.preventDefault();
+        first.focus();
+      } else if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    const desktop = window.matchMedia(DESKTOP_QUERY);
+    const onWiden = () => {
+      if (desktop.matches) setIsOpen(false);
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    desktop.addEventListener('change', onWiden);
+    return () => {
+      root.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', onKeyDown);
+      desktop.removeEventListener('change', onWiden);
+    };
+  }, [isOpen]);
 
   return (
-    <header
-      className="fixed inset-x-0 top-0 z-50 bg-[#5DAFD5]/95 backdrop-blur-md"
-      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
-    >
-      <div>
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="flex h-[5rem] items-center justify-between lg:h-[7rem]">
-            {/* Logo */}
-            <a href="#pm-hero" className="inline-flex shrink-0 items-center">
-              <Image
-                src="/banner-logo3.webp"
-                alt="Blue Bunny Turnover Services Logo"
-                width={900}
-                height={300}
-                sizes="(min-width: 1024px) 228px, 192px"
-                priority
-                unoptimized
-                className="h-[3.7rem] w-auto origin-left scale-[1.2] -translate-x-[0.35rem] translate-y-[0px] lg:h-19 lg:scale-100 lg:translate-x-0 lg:translate-y-0"
-              />
-            </a>
+    <header className={s.header}>
+      {/* Phone and small windows */}
+      <div className={s.mobileBar}>
+        <a href={TOP_ANCHOR} className={s.logoLink}>
+          <Logo />
+        </a>
+        <button
+          ref={menuButtonRef}
+          type="button"
+          className={s.roundButton}
+          onClick={() => setIsOpen(true)}
+          aria-label="Open menu"
+          aria-expanded={isOpen}
+          aria-controls="site-menu"
+        >
+          <Icon name="menu" size={20} strokeWidth={2} />
+        </button>
+      </div>
 
-            {/* Desktop center nav */}
-            <nav className="hidden lg:flex items-center gap-1" aria-label="Primary navigation">
-              {navItems.map((item) =>
-                item.children ? (
-                  <div key={item.label} className="group relative">
-                    <button
-                      type="button"
-                      className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-semibold text-[#0C1014] transition hover:text-white"
-                    >
-                      {item.label}
-                      <svg
-                        width="10"
-                        height="10"
-                        viewBox="0 0 10 10"
-                        fill="none"
-                        className="mt-px transition-transform duration-200 group-hover:rotate-180"
-                      >
-                        <path
-                          d="M2 3.5L5 6.5L8 3.5"
-                          stroke="currentColor"
-                          strokeWidth="1.75"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </button>
-                    <div className="invisible absolute left-0 top-full z-50 mt-1 min-w-[10rem] rounded-xl border border-[#E2EEF5] bg-white py-1.5 opacity-0 shadow-lg transition-all duration-150 group-hover:visible group-hover:opacity-100">
-                      {item.children.map((child) => (
-                        <a
-                          key={child.href}
-                          href={child.href}
-                          className="block px-4 py-2.5 text-sm font-semibold text-[#0C1014] transition hover:bg-[#EEF6FB] hover:text-[#2978A5]"
-                        >
-                          {child.label}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className="rounded-md px-3 py-2 text-sm font-semibold text-[#0C1014] transition hover:text-white"
-                  >
-                    {item.label}
-                  </a>
-                )
-              )}
-            </nav>
-
-            {/* Desktop right CTAs + support line */}
-            <div className="relative hidden lg:flex lg:self-stretch lg:flex-col lg:items-end">
-              <div className="flex flex-1 items-center gap-2">
-                <a
-                  href="tel:9047385631"
-                  onClick={() => track('cta_call_tap', { location: 'nav' })}
-                  className="whitespace-nowrap rounded-full border border-[#0C1014]/20 bg-white px-4 py-2 text-sm font-semibold text-[#0C1014] transition hover:bg-[#0C1014] hover:text-white"
-                >
-                  Call/Text: (904) 738-5631
-                </a>
-                <a
-                  href="#pm-hero"
-                  onClick={() => track('cta_onboarding_tap', { location: 'nav' })}
-                  className="whitespace-nowrap rounded-full border border-[#0C1014] bg-[#2978A5] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0C1014]"
-                >
-                  Request Onboarding
-                </a>
-              </div>
-              <p className="absolute bottom-[0.75rem] right-1 text-right text-xs font-mono font-semibold text-[#0C1014]">
-                Daily support 8 AM – 7 PM ET
-              </p>
-            </div>
-
-            {/* Mobile controls */}
-            <div className="flex items-center gap-2 lg:hidden">
-              <button
-                type="button"
-                onClick={() => setIsOpen((o) => !o)}
-                aria-label={isOpen ? 'Close menu' : 'Open menu'}
-                aria-expanded={isOpen}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#0C1014]/20 bg-white text-[#0C1014]"
+      {/* Desktop */}
+      <div className={s.desktopBar}>
+        <div className={s.desktopInner}>
+          <a href={TOP_ANCHOR} className={s.logoLink}>
+            <Logo large />
+          </a>
+          <nav className={s.nav} aria-label="Primary">
+            {NAV_LINKS.map((link) => (
+              <a key={link.href} href={link.href} className={s.navLink}>
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <div className={s.actions}>
+            <div className={s.actionsRow}>
+              <a
+                href={PHONE_TEL}
+                onClick={() => track('cta_call_tap', { location: 'nav' })}
+                className={`${s.btn} ${s.btnWhite} ${s.btnHeaderCall}`}
               >
-                {isOpen ? (
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-                    <path
-                      d="M2 2L14 14M14 2L2 14"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                ) : (
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-                    <path
-                      d="M2 4H14M2 8H14M2 12H14"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                )}
-              </button>
+                Call or text {PHONE_DISPLAY}
+              </a>
+              <a
+                href={FORM_ANCHOR}
+                onClick={() => track('cta_onboarding_tap', { location: 'nav' })}
+                className={`${s.btn} ${s.btnInk} ${s.btnHeaderPilot}`}
+              >
+                Start a pilot
+              </a>
             </div>
+            <p className={`${s.support} ${s.mono}`}>{SUPPORT_HOURS}</p>
           </div>
         </div>
-
-        {/* Mobile expanded menu */}
-        {isOpen && (
-          <div className="lg:hidden">
-            <div className="mx-auto max-w-6xl px-5 pb-6">
-              <nav className="flex flex-col gap-1 pt-3" aria-label="Mobile navigation">
-                {allLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="rounded-xl px-3 py-2.5 text-sm font-semibold text-[#0C1014] transition hover:bg-[#0C1014]/10"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <a
-                  href="tel:9047385631"
-                  onClick={() => track('cta_call_tap', { location: 'nav' })}
-                  className="mt-2 rounded-full border border-[#0C1014]/20 bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#0C1014] transition hover:bg-[#0C1014] hover:text-white"
-                >
-                  Call/Text: (904) 738-5631
-                </a>
-                <a
-                  href="#pm-onboarding-form"
-                  onClick={() => { track('cta_onboarding_tap', { location: 'nav' }); setIsOpen(false); }}
-                  className="mt-1 rounded-full border border-[#0C1014] bg-[#2978A5] px-4 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-[#0C1014]"
-                >
-                  Request Onboarding
-                </a>
-              </nav>
-              <p className="mt-3 text-center text-xs font-mono font-semibold text-[#0C1014]">
-                Daily support 8 AM - 7 PM ET
-              </p>
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Phone menu: covers the screen, the design's "Menu open" frame */}
+      {isOpen && (
+        <div id="site-menu" ref={panelRef} className={s.menu} role="dialog" aria-modal="true" aria-label="Menu">
+          <div className={s.menuTop}>
+            <a href={TOP_ANCHOR} className={s.logoLink} onClick={() => closeMenu(false)}>
+              <Logo />
+            </a>
+            <button
+              ref={closeButtonRef}
+              type="button"
+              className={s.roundButton}
+              onClick={() => closeMenu(true)}
+              aria-label="Close menu"
+            >
+              <Icon name="x" size={20} strokeWidth={2} />
+            </button>
+          </div>
+
+          <nav className={s.menuNav} aria-label="Menu">
+            {MENU_LINKS.map((link) => (
+              <a key={link.label} href={link.href} className={s.menuLink} onClick={() => closeMenu(false)}>
+                <span>{link.label}</span>
+                <Icon name="arrow" size={18} />
+              </a>
+            ))}
+          </nav>
+
+          <div className={s.menuActions}>
+            <a
+              href={FORM_ANCHOR}
+              onClick={() => {
+                track('cta_onboarding_tap', { location: 'nav' });
+                closeMenu(false);
+              }}
+              className={`${s.btn} ${s.btnInk} ${s.btnFull}`}
+            >
+              Start a pilot
+            </a>
+            <a
+              href={PHONE_TEL}
+              onClick={() => track('cta_call_tap', { location: 'nav' })}
+              className={`${s.btn} ${s.btnWhite} ${s.btnFull}`}
+            >
+              Call or text {PHONE_DISPLAY}
+            </a>
+            <p className={`${s.menuSupport} ${s.mono}`}>{SUPPORT_HOURS}</p>
+          </div>
+
+          <div className={s.menuFill} aria-hidden="true" />
+          <BunnyPeek align="end" className={s.menuPeek} />
+        </div>
+      )}
     </header>
   );
 }

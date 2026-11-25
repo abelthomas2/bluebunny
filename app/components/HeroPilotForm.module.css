@@ -1,0 +1,678 @@
+/*
+  The pilot form in the hero, from the design file: a card on phones, one wide card across the bottom of the
+  desktop hero. Also its states from the design: errors, could not send, and request received (on phones
+  "request received" is its own screen under the header, as in the design's phone frame).
+  One form serves both layouts, so the page never has two forms or duplicate ids.
+*/
+
+.wrap {
+  padding: 22px 20px 36px;
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: normal;
+  /* lands just under the 80 px header */
+  scroll-margin-top: 88px;
+}
+
+.card {
+  background: #FFFFFF;
+  border: 1px solid #E2EEF5;
+  border-radius: 16px;
+  box-shadow: 0 18px 44px rgba(12, 16, 20, 0.12);
+  padding: 22px;
+  color: #0C1014;
+}
+
+.mono {
+  font-family: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+}
+
+.label {
+  margin: 0;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #1D5F8A;
+}
+
+.heading {
+  margin: 8px 0 6px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #0C1014;
+}
+
+.sub {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #5E6E7B;
+}
+
+/* ---------- fields ---------- */
+.form {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+  gap: 14px;
+  align-items: start;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.fieldLabel {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* as in the design's error and could-not-send frames */
+.formHasErrors .fieldLabel,
+.formFailed .fieldLabel {
+  line-height: 18.9px;
+}
+
+.required {
+  color: #1D5F8A;
+}
+
+.input {
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid #5E6E7B;
+  padding: 0 14px;
+  font-family: var(--font-geist-sans), 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  color: #0C1014;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input::placeholder {
+  color: #5E6E7B;
+  opacity: 1;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #2978A5;
+  box-shadow: 0 0 0 3px rgba(41, 120, 165, 0.22);
+}
+
+.input[aria-invalid='true'] {
+  border: 2px solid #DC2726;
+  /* the thicker border would push the text 1 px right; keep it in line with the other fields */
+  padding-left: 13px;
+}
+
+.input[aria-invalid='true']:focus {
+  box-shadow: 0 0 0 3px rgba(220, 39, 38, 0.18);
+}
+
+/* Sits in line with the text fields: the same 14 px inset and the same gray as their placeholders until a size is
+   picked, and a light chevron set in from the edge (drawn, so every browser shows the same one). */
+.select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 44px;
+  text-overflow: ellipsis;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpolyline points='1.5 1.75 6 6.25 10.5 1.75' fill='none' stroke='%230C1014' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px 8px;
+  cursor: pointer;
+}
+
+/* "Select one" is only a prompt: gray like the other placeholders until a size is chosen */
+.select:invalid {
+  color: #5E6E7B;
+}
+
+.select[aria-invalid='true'] {
+  background-position: right 15px center;
+}
+
+.select option {
+  color: #0C1014;
+}
+
+.error {
+  margin: 0;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: #DC2726;
+  font-weight: 500;
+}
+
+.error svg {
+  margin-top: 1px;
+}
+
+/* ---------- consent, send ---------- */
+.consent {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.consentLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+/* Drawn to match Chrome's own checkbox (the design file's look), so Safari shows the same box and tick. The box is
+   painted, not bordered, so the error outline stays square like Chrome's. */
+.checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  flex: none;
+  border: 0;
+  border-radius: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='0.5' y='0.5' width='19' height='19' rx='1.5' fill='white' stroke='%23767676'/%3E%3C/svg%3E") center / 20px 20px no-repeat;
+  cursor: pointer;
+}
+
+.checkbox:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='2' fill='%232978A5'/%3E%3Cpolyline points='4,10 8,14 15.9,4' fill='none' stroke='white' stroke-width='3.3' stroke-linecap='butt' stroke-linejoin='miter'/%3E%3C/svg%3E");
+}
+
+.checkbox[aria-invalid='true'] {
+  outline: 2px solid #DC2726;
+  outline-offset: 2px;
+}
+
+.banner {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 2px solid #DC2726;
+  border-radius: 12px;
+  background: #FFFFFF;
+  padding: 14px 16px;
+}
+
+.banner svg {
+  color: #DC2726;
+  margin-top: 1px;
+}
+
+.bannerText {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.submit {
+  height: 52px;
+  border-radius: 999px;
+  background: #2978A5;
+  color: #FFFFFF;
+  border: 0;
+  font-family: var(--font-geist-sans), 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.submit:hover {
+  background: #1D5F8A;
+}
+
+.submit:disabled {
+  cursor: progress;
+  opacity: 0.75;
+}
+
+.note {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #5E6E7B;
+  text-align: center;
+}
+
+/* ---------- request received ---------- */
+.sentIntro {
+  min-width: 0;
+}
+
+.receivedRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.checkdot {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #2978A5;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.sentTitle {
+  margin: 14px 0 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #0C1014;
+}
+
+.sentTitle:focus {
+  outline: none;
+}
+
+.sentLead {
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.sentMain {
+  min-width: 0;
+}
+
+.steps {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.step {
+  border: 1px solid #E2EEF5;
+  border-radius: 12px;
+  padding: 11px 14px;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.stepNumber {
+  font-weight: 600;
+  font-size: 14px;
+  color: #2978A5;
+}
+
+.stepText {
+  display: block;
+  min-width: 0;
+}
+
+.stepTitle {
+  display: block;
+  font-size: 15.5px;
+  font-weight: 600;
+}
+
+.stepBody {
+  display: block;
+  margin-top: 2px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #0C1014;
+}
+
+.sentActions {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btnPrimary {
+  background: #2978A5;
+  color: #FFFFFF;
+  border: 1px solid #2978A5;
+}
+
+.btnPrimary:hover {
+  background: #1D5F8A;
+  border-color: #1D5F8A;
+}
+
+.btnSecondary {
+  background: #FFFFFF;
+  color: #0C1014;
+  border: 1px solid #5E6E7B;
+}
+
+.btnSecondary:hover {
+  border-color: #0C1014;
+}
+
+/* ================= desktop: one wide card across the bottom of the hero ================= */
+@media (min-width: 1024px) {
+  .wrap {
+    position: relative;
+    max-width: 1152px;
+    padding: 0;
+    scroll-margin-top: 100px;
+  }
+
+  .card {
+    padding: 26px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 36px;
+    align-items: flex-start;
+  }
+
+  .intro,
+  .sentIntro {
+    flex: 0 0 300px;
+    min-width: 0;
+  }
+
+  .label {
+    font-size: 13px;
+  }
+
+  .heading {
+    font-size: 28px;
+    white-space: nowrap;
+  }
+
+  /* fields, then (if sending failed) the banner, then consent | note + button on one row */
+  .form {
+    margin-top: 0;
+    flex: 1 1 0;
+    min-width: min(100%, 700px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'fields fields'
+      'consent actions';
+    row-gap: 14px;
+    column-gap: 0;
+    align-items: center;
+  }
+
+  .formFailed {
+    grid-template-areas:
+      'fields fields'
+      'banner banner'
+      'consent actions';
+  }
+
+  .formHasErrors {
+    align-items: start;
+  }
+
+  .fields {
+    grid-area: fields;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    align-items: start;
+  }
+
+  .pair {
+    display: contents;
+  }
+
+  .consent {
+    grid-area: consent;
+  }
+
+  .banner {
+    grid-area: banner;
+  }
+
+  /* the note sits left of the button, centred on it */
+  .actions {
+    grid-area: actions;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 16px;
+    margin-left: 20px;
+  }
+
+  /* 250 px wide as in the design, and wider if a browser draws the first line wider than that */
+  .note {
+    min-width: 250px;
+    font-size: 13.5px;
+    line-height: 1.4;
+    text-align: right;
+  }
+
+  .noteLine {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .submit {
+    flex: none;
+    width: auto;
+    padding: 0 30px;
+    white-space: nowrap;
+  }
+
+  .receivedLabel {
+    font-size: 12px;
+  }
+
+  .sentTitle {
+    font-size: 28px;
+    text-wrap: balance;
+    scroll-margin-top: 140px;
+  }
+
+  .sentMain {
+    flex: 1 1 0;
+    min-width: min(100%, 700px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .steps {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .step {
+    display: block;
+    padding: 14px 16px;
+  }
+
+  .stepTitle {
+    margin-top: 6px;
+  }
+
+  .stepBody {
+    margin-top: 4px;
+  }
+
+  .sentActions {
+    margin-top: 0;
+    justify-content: flex-end;
+  }
+
+  .btn {
+    display: inline-flex;
+    width: auto;
+  }
+}
+
+/* Under the 112 px desktop header */
+@media (min-width: 1152px) {
+  .wrap {
+    scroll-margin-top: 132px;
+  }
+}
+
+/* ================= phones and tablets: "request received" fills the screen under the 80 px header ================= */
+@media (max-width: 1023.98px) {
+  .wrapSent {
+    display: flex;
+    flex-direction: column;
+    padding: 28px 20px 0;
+    min-height: calc(100vh - 80px);
+    min-height: calc(100svh - 80px);
+    scroll-margin-top: 80px;
+  }
+
+  .cardSent {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  /* 32 px as designed; on screens narrower than the 390 px frame it shrinks just enough to keep the
+     design's two lines ("Thanks. We'll reach out" is 10.82 times the font size wide) */
+  .sentTitle {
+    font-size: min(32px, calc((100vw - 40px) / 10.9));
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .sentLead {
+    margin-top: 12px;
+    font-size: 17px;
+  }
+
+  .steps {
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .step {
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(12, 16, 20, 0.06);
+    padding: 14px 16px;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .stepNumber {
+    font-size: 15px;
+    padding-top: 2px;
+  }
+
+  .stepTitle {
+    font-size: 17px;
+    line-height: 1.3;
+  }
+
+  .stepBody {
+    margin-top: 3px;
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+
+  .sentActions {
+    margin-top: 20px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .btn {
+    height: 48px;
+  }
+
+  /* the bunny peeks up from the bottom edge; on short screens it follows the buttons */
+  .sentFill {
+    flex: 1 1 auto;
+    min-height: 24px;
+  }
+
+
+  .onDesktop {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .onPhone {
+    display: none;
+  }
+}
+
+/* ---------- keyboard focus ---------- */
+.submit:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid #1D5F8A;
+  outline-offset: 2px;
+}
+
+.checkbox:focus-visible {
+  outline: 2px solid #1D5F8A;
+  outline-offset: 2px;
+}

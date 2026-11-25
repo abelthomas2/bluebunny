@@ -14,6 +14,7 @@ const ReviewsCarousel    = dynamic(() => import('@/app/components/ReviewsCarouse
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/app/lib/siteMetadata';
 import { GOOGLE_RATING, GOOGLE_RATING_COUNT, REVIEWS_URL, reviews, type ReviewCard } from '@/app/lib/reviews';
 import { formatTimeAgo } from '@/app/lib/timeAgo';
+import { geistMono } from '@/app/lib/fonts';
 
 // ─── Section data ─────────────────────────────────────────────────────────────
 
@@ -289,7 +290,7 @@ export default function TurnoverCleaningPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-[#0C1014]">
+    <div className={`min-h-screen bg-[#0C1014] ${geistMono.variable}`}>
       {/* ── Section 01: Navigation ── */}
       <NavBar />
 
@@ -520,7 +521,7 @@ export default function TurnoverCleaningPage() {
                   Request Onboarding
                 </TrackedLink>
                 <TrackedLink
-                  href="#pm-hero"
+                  href="#pm-onboarding-form"
                   event="cta_onboarding_tap"
                   eventProps={{ location: 'what_pms_get' }}
                   className="mt-6 hidden w-fit items-center rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
@@ -602,7 +603,7 @@ export default function TurnoverCleaningPage() {
                 Request Onboarding
               </TrackedLink>
               <TrackedLink
-                href="#pm-hero"
+                href="#pm-onboarding-form"
                 event="cta_onboarding_tap"
                 eventProps={{ location: 'pricing' }}
                 className="hidden rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
@@ -656,7 +657,7 @@ export default function TurnoverCleaningPage() {
                 Request Onboarding
               </TrackedLink>
               <TrackedLink
-                href="#pm-hero"
+                href="#pm-onboarding-form"
                 event="cta_onboarding_tap"
                 eventProps={{ location: 'onboarding_steps' }}
                 className="hidden rounded-full bg-[#2978A5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0C1014] md:inline-flex"
@@ -847,7 +848,7 @@ export default function TurnoverCleaningPage() {
                 Request Onboarding
               </TrackedLink>
               <TrackedLink
-                href="#pm-hero"
+                href="#pm-onboarding-form"
                 event="cta_onboarding_tap"
                 eventProps={{ location: 'final_cta' }}
                 className="hidden rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#5DAFD5] shadow-sm transition hover:bg-[#0C1014] hover:text-white md:inline-flex"
